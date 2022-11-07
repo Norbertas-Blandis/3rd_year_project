@@ -7,18 +7,53 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F45B0AAB290181F800D24BFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F45B0AAA290181F800D24BFF /* GoogleService-Info.plist */; };
 		F478C63828E889000090292F /* firstTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63728E889000090292F /* firstTestApp.swift */; };
-		F478C63A28E889000090292F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63928E889000090292F /* ContentView.swift */; };
+		F478C63A28E889000090292F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63928E889000090292F /* LoginView.swift */; };
 		F478C63C28E889010090292F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F478C63B28E889010090292F /* Assets.xcassets */; };
 		F478C63F28E889010090292F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F478C63E28E889010090292F /* Preview Assets.xcassets */; };
+		F49810E72916830200680568 /* Lesson1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49810E62916830200680568 /* Lesson1View.swift */; };
+		F49810E92916830F00680568 /* Lesson2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49810E82916830F00680568 /* Lesson2View.swift */; };
+		F49810EB29168DF100680568 /* Quiz2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49810EA29168DF100680568 /* Quiz2View.swift */; };
+		F49810ED29168E1300680568 /* Quiz3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49810EC29168E1300680568 /* Quiz3View.swift */; };
+		F49EFBE4290B1BBB00B32086 /* Lesson0View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49EFBE3290B1BBB00B32086 /* Lesson0View.swift */; };
+		F49EFBE7290B352A00B32086 /* Quiz0View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49EFBE6290B352A00B32086 /* Quiz0View.swift */; };
+		F4F04A132906D93F00DD05D9 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A122906D93F00DD05D9 /* ImagePicker.swift */; };
+		F4F04A162906E84700DD05D9 /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A152906E84700DD05D9 /* LandingPage.swift */; };
+		F4F04A182906EC4200DD05D9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A172906EC4200DD05D9 /* ProfileView.swift */; };
+		F4F04A1A2906ED2800DD05D9 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A192906ED2800DD05D9 /* MainPageView.swift */; };
+		F4F04A1D2907DF8800DD05D9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F4F04A1C2907DF8800DD05D9 /* FirebaseAuth */; };
+		F4F04A1F2907DF8800DD05D9 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F4F04A1E2907DF8800DD05D9 /* FirebaseFirestoreSwift */; };
+		F4F04A212907DF8800DD05D9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F4F04A202907DF8800DD05D9 /* FirebaseStorage */; };
+		F4F04A23290894A000DD05D9 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A22290894A000DD05D9 /* QuizView.swift */; };
+		F4F04A262909133200DD05D9 /* QuizManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A252909133200DD05D9 /* QuizManager.swift */; };
+		F4F04A28290913CD00DD05D9 /* QuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A27290913CD00DD05D9 /* QuizModel.swift */; };
+		F4F04A2B2909174700DD05D9 /* QuizOptionGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A2A2909174700DD05D9 /* QuizOptionGridView.swift */; };
+		F4F04A2D290926E600DD05D9 /* QuizCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A2C290926E600DD05D9 /* QuizCompletedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F45B0AAA290181F800D24BFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F478C63428E889000090292F /* firstTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firstTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F478C63728E889000090292F /* firstTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstTestApp.swift; sourceTree = "<group>"; };
-		F478C63928E889000090292F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F478C63928E889000090292F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F478C63B28E889010090292F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F478C63E28E889010090292F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F49810E62916830200680568 /* Lesson1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson1View.swift; sourceTree = "<group>"; };
+		F49810E82916830F00680568 /* Lesson2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson2View.swift; sourceTree = "<group>"; };
+		F49810EA29168DF100680568 /* Quiz2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz2View.swift; sourceTree = "<group>"; };
+		F49810EC29168E1300680568 /* Quiz3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz3View.swift; sourceTree = "<group>"; };
+		F49EFBE3290B1BBB00B32086 /* Lesson0View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson0View.swift; sourceTree = "<group>"; };
+		F49EFBE6290B352A00B32086 /* Quiz0View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz0View.swift; sourceTree = "<group>"; };
+		F4F04A122906D93F00DD05D9 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		F4F04A152906E84700DD05D9 /* LandingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
+		F4F04A172906EC4200DD05D9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F4F04A192906ED2800DD05D9 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
+		F4F04A22290894A000DD05D9 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		F4F04A252909133200DD05D9 /* QuizManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManager.swift; sourceTree = "<group>"; };
+		F4F04A27290913CD00DD05D9 /* QuizModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModel.swift; sourceTree = "<group>"; };
+		F4F04A2A2909174700DD05D9 /* QuizOptionGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizOptionGridView.swift; sourceTree = "<group>"; };
+		F4F04A2C290926E600DD05D9 /* QuizCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCompletedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +61,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4F04A1D2907DF8800DD05D9 /* FirebaseAuth in Frameworks */,
+				F4F04A1F2907DF8800DD05D9 /* FirebaseFirestoreSwift in Frameworks */,
+				F4F04A212907DF8800DD05D9 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -35,6 +73,11 @@
 		F478C62B28E889000090292F = {
 			isa = PBXGroup;
 			children = (
+				F49EFBE5290B351C00B32086 /* Quizes */,
+				F49EFBE2290B1BA800B32086 /* Lessons */,
+				F4F04A292909172C00DD05D9 /* UIComponents */,
+				F4F04A242909131A00DD05D9 /* Models */,
+				F4F04A142906E82100DD05D9 /* LandingPage */,
 				F478C63628E889000090292F /* firstTest */,
 				F478C63528E889000090292F /* Products */,
 			);
@@ -52,8 +95,10 @@
 			isa = PBXGroup;
 			children = (
 				F478C63728E889000090292F /* firstTestApp.swift */,
-				F478C63928E889000090292F /* ContentView.swift */,
+				F478C63928E889000090292F /* LoginView.swift */,
+				F45B0AAA290181F800D24BFF /* GoogleService-Info.plist */,
 				F478C63B28E889010090292F /* Assets.xcassets */,
+				F4F04A122906D93F00DD05D9 /* ImagePicker.swift */,
 				F478C63D28E889010090292F /* Preview Content */,
 			);
 			path = firstTest;
@@ -65,6 +110,55 @@
 				F478C63E28E889010090292F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F49EFBE2290B1BA800B32086 /* Lessons */ = {
+			isa = PBXGroup;
+			children = (
+				F49EFBE3290B1BBB00B32086 /* Lesson0View.swift */,
+				F49810E62916830200680568 /* Lesson1View.swift */,
+				F49810E82916830F00680568 /* Lesson2View.swift */,
+			);
+			path = Lessons;
+			sourceTree = "<group>";
+		};
+		F49EFBE5290B351C00B32086 /* Quizes */ = {
+			isa = PBXGroup;
+			children = (
+				F49EFBE6290B352A00B32086 /* Quiz0View.swift */,
+				F49810EA29168DF100680568 /* Quiz2View.swift */,
+				F49810EC29168E1300680568 /* Quiz3View.swift */,
+			);
+			path = Quizes;
+			sourceTree = "<group>";
+		};
+		F4F04A142906E82100DD05D9 /* LandingPage */ = {
+			isa = PBXGroup;
+			children = (
+				F4F04A152906E84700DD05D9 /* LandingPage.swift */,
+				F4F04A172906EC4200DD05D9 /* ProfileView.swift */,
+				F4F04A192906ED2800DD05D9 /* MainPageView.swift */,
+				F4F04A22290894A000DD05D9 /* QuizView.swift */,
+			);
+			path = LandingPage;
+			sourceTree = "<group>";
+		};
+		F4F04A242909131A00DD05D9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F4F04A252909133200DD05D9 /* QuizManager.swift */,
+				F4F04A27290913CD00DD05D9 /* QuizModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F4F04A292909172C00DD05D9 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				F4F04A2A2909174700DD05D9 /* QuizOptionGridView.swift */,
+				F4F04A2C290926E600DD05D9 /* QuizCompletedView.swift */,
+			);
+			path = UIComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +177,11 @@
 			dependencies = (
 			);
 			name = firstTest;
+			packageProductDependencies = (
+				F4F04A1C2907DF8800DD05D9 /* FirebaseAuth */,
+				F4F04A1E2907DF8800DD05D9 /* FirebaseFirestoreSwift */,
+				F4F04A202907DF8800DD05D9 /* FirebaseStorage */,
+			);
 			productName = firstTest;
 			productReference = F478C63428E889000090292F /* firstTest.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +210,9 @@
 				Base,
 			);
 			mainGroup = F478C62B28E889000090292F;
+			packageReferences = (
+				F4F04A1B2907DF8800DD05D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = F478C63528E889000090292F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +229,7 @@
 			files = (
 				F478C63F28E889010090292F /* Preview Assets.xcassets in Resources */,
 				F478C63C28E889010090292F /* Assets.xcassets in Resources */,
+				F45B0AAB290181F800D24BFF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +240,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F478C63A28E889000090292F /* ContentView.swift in Sources */,
+				F49810EB29168DF100680568 /* Quiz2View.swift in Sources */,
+				F49EFBE7290B352A00B32086 /* Quiz0View.swift in Sources */,
+				F4F04A262909133200DD05D9 /* QuizManager.swift in Sources */,
+				F4F04A132906D93F00DD05D9 /* ImagePicker.swift in Sources */,
+				F4F04A2B2909174700DD05D9 /* QuizOptionGridView.swift in Sources */,
+				F49810E92916830F00680568 /* Lesson2View.swift in Sources */,
+				F478C63A28E889000090292F /* LoginView.swift in Sources */,
+				F4F04A1A2906ED2800DD05D9 /* MainPageView.swift in Sources */,
+				F49810E72916830200680568 /* Lesson1View.swift in Sources */,
+				F4F04A28290913CD00DD05D9 /* QuizModel.swift in Sources */,
+				F49810ED29168E1300680568 /* Quiz3View.swift in Sources */,
+				F4F04A182906EC4200DD05D9 /* ProfileView.swift in Sources */,
+				F4F04A23290894A000DD05D9 /* QuizView.swift in Sources */,
+				F4F04A2D290926E600DD05D9 /* QuizCompletedView.swift in Sources */,
+				F4F04A162906E84700DD05D9 /* LandingPage.swift in Sources */,
 				F478C63828E889000090292F /* firstTestApp.swift in Sources */,
+				F49EFBE4290B1BBB00B32086 /* Lesson0View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +385,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"firstTest/Preview Content\"";
+				DEVELOPMENT_TEAM = 3CD57Q5Z69;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -295,6 +414,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"firstTest/Preview Content\"";
+				DEVELOPMENT_TEAM = 3CD57Q5Z69;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -337,6 +457,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F4F04A1B2907DF8800DD05D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F4F04A1C2907DF8800DD05D9 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F04A1B2907DF8800DD05D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		F4F04A1E2907DF8800DD05D9 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F04A1B2907DF8800DD05D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		F4F04A202907DF8800DD05D9 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4F04A1B2907DF8800DD05D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F478C62C28E889000090292F /* Project object */;
 }
