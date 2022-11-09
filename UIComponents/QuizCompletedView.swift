@@ -19,11 +19,11 @@ struct QuizCompletedView: View {
                     .font(.system(size: 32, weight: .bold))
                     .multilineTextAlignment(.center)
                     .padding()
-                NavigationLink(destination: MainPageView()) {
-                    HStack{
-                        Text("Go to main menu")
-                    }.background(.gray).foregroundColor(.white).padding(.vertical, 9)
-                }
+//                NavigationLink(destination: MainPageView()) {
+//                    HStack{
+//                        Text("Go to main menu")
+//                    }.background(.gray).foregroundColor(.white).padding(.vertical, 9)
+//                }
                 Spacer()
             }
         }

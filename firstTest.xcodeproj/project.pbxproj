@@ -18,6 +18,9 @@
 		F49810ED29168E1300680568 /* Quiz3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49810EC29168E1300680568 /* Quiz3View.swift */; };
 		F49EFBE4290B1BBB00B32086 /* Lesson0View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49EFBE3290B1BBB00B32086 /* Lesson0View.swift */; };
 		F49EFBE7290B352A00B32086 /* Quiz0View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49EFBE6290B352A00B32086 /* Quiz0View.swift */; };
+		F4A4ACD32919AAA20012522F /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD22919AAA20012522F /* LessonModel.swift */; };
+		F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD42919AB190012522F /* LessonManager.swift */; };
+		F4A4ACD72919AD760012522F /* LessonSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD62919AD760012522F /* LessonSelectView.swift */; };
 		F4F04A132906D93F00DD05D9 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A122906D93F00DD05D9 /* ImagePicker.swift */; };
 		F4F04A162906E84700DD05D9 /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A152906E84700DD05D9 /* LandingPage.swift */; };
 		F4F04A182906EC4200DD05D9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A172906EC4200DD05D9 /* ProfileView.swift */; };
@@ -45,6 +48,9 @@
 		F49810EC29168E1300680568 /* Quiz3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz3View.swift; sourceTree = "<group>"; };
 		F49EFBE3290B1BBB00B32086 /* Lesson0View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson0View.swift; sourceTree = "<group>"; };
 		F49EFBE6290B352A00B32086 /* Quiz0View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz0View.swift; sourceTree = "<group>"; };
+		F4A4ACD22919AAA20012522F /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
+		F4A4ACD42919AB190012522F /* LessonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonManager.swift; sourceTree = "<group>"; };
+		F4A4ACD62919AD760012522F /* LessonSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSelectView.swift; sourceTree = "<group>"; };
 		F4F04A122906D93F00DD05D9 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F4F04A152906E84700DD05D9 /* LandingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
 		F4F04A172906EC4200DD05D9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -139,6 +145,7 @@
 				F4F04A172906EC4200DD05D9 /* ProfileView.swift */,
 				F4F04A192906ED2800DD05D9 /* MainPageView.swift */,
 				F4F04A22290894A000DD05D9 /* QuizView.swift */,
+				F4A4ACD62919AD760012522F /* LessonSelectView.swift */,
 			);
 			path = LandingPage;
 			sourceTree = "<group>";
@@ -148,6 +155,8 @@
 			children = (
 				F4F04A252909133200DD05D9 /* QuizManager.swift */,
 				F4F04A27290913CD00DD05D9 /* QuizModel.swift */,
+				F4A4ACD22919AAA20012522F /* LessonModel.swift */,
+				F4A4ACD42919AB190012522F /* LessonManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -250,13 +259,16 @@
 				F4F04A1A2906ED2800DD05D9 /* MainPageView.swift in Sources */,
 				F49810E72916830200680568 /* Lesson1View.swift in Sources */,
 				F4F04A28290913CD00DD05D9 /* QuizModel.swift in Sources */,
+				F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */,
 				F49810ED29168E1300680568 /* Quiz3View.swift in Sources */,
+				F4A4ACD72919AD760012522F /* LessonSelectView.swift in Sources */,
 				F4F04A182906EC4200DD05D9 /* ProfileView.swift in Sources */,
 				F4F04A23290894A000DD05D9 /* QuizView.swift in Sources */,
 				F4F04A2D290926E600DD05D9 /* QuizCompletedView.swift in Sources */,
 				F4F04A162906E84700DD05D9 /* LandingPage.swift in Sources */,
 				F478C63828E889000090292F /* firstTestApp.swift in Sources */,
 				F49EFBE4290B1BBB00B32086 /* Lesson0View.swift in Sources */,
+				F4A4ACD32919AAA20012522F /* LessonModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,6 +25,8 @@ struct LoginView: View {
     @State var password = ""
     
     @State var shouldShowImagePicker = false
+    @State private var shouldGoToLandingPage = false
+    
     
     var body: some View {
         NavigationView{
@@ -67,17 +69,20 @@ struct LoginView: View {
                             .autocapitalization(.none)
                         SecureField("Password", text:$password)
                     }.padding(8).background(Color.white)
-
                     
-                    Button {
-                        handleAction()
-                    } label: {
-                        HStack{
-                            Spacer()
-                            Text(isLoginMode ? "Log In" : "Create Account").foregroundColor(.white).padding(.vertical, 8)
-                            Spacer()
-                        }.background(Color.black)
-                    }
+                    NavigationLink(
+                        destination: LandingPage().navigationBarBackButtonHidden(true).navigationBarTitle(Text(""), displayMode: .inline),
+                        isActive: $shouldGoToLandingPage){
+                            Button {
+                                handleAction()
+                            } label: {
+                                HStack{
+                                    Spacer()
+                                    Text(isLoginMode ? "Log In" : "Create Account").foregroundColor(.white).padding(.vertical, 8)
+                                    Spacer()
+                                }.background(Color.black)
+                            }
+                        }
                     
                     Text(self.loginStatusMessage).foregroundColor(.red)
                     
@@ -85,7 +90,7 @@ struct LoginView: View {
 
                 
             }.navigationTitle(isLoginMode ? "Log In" : "Create Account")
-                .background(Color(.init(white: 0, alpha: 0.05)).ignoresSafeArea())
+            .background(Color(.init(white: 0, alpha: 0.05)).ignoresSafeArea())
         }.fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
             ImagePicker(image: $image)
         }
@@ -96,8 +101,10 @@ struct LoginView: View {
     private func handleAction() {
         if isLoginMode{
             loginAccount()
+            shouldGoToLandingPage = true
         } else{
             createNewAccount()
+            shouldGoToLandingPage = false
         }
     }
     
@@ -128,6 +135,7 @@ struct LoginView: View {
             
             print("Successfully created user \(result?.user.uid ?? "")")
             self.loginStatusMessage = "Successfully created user \(result?.user.uid ?? "")"
+            
         }
     }
 }
