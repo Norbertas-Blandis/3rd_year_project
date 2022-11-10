@@ -15,7 +15,7 @@ struct LandingPage: View {
         
         TabView{
             
-            MainPageView()
+            LessonSelectView(lessonManager: LessonManager())
                 .tabItem {
                     Image(systemName: "house").foregroundColor(Color.black)
                 }

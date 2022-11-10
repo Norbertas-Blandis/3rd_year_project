@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseCore
+import FirebaseFirestoreSwift
 
 struct ProfileView: View {
+    
+    let userId = Auth.auth().currentUser?.uid
+    
     var body: some View {
-        Text("This is my profile")                    .foregroundColor(Color.black)
+        Text("This is my profile")
+            .foregroundColor(Color.black)
             .font(.system(size: 32, weight: .bold))
             .multilineTextAlignment(.center)
             .padding()

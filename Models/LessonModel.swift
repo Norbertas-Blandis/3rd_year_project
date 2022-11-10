@@ -8,8 +8,14 @@
 import Foundation
 import SwiftUI
 
-struct LessonModel{
+struct Lessons{
     
+    var lessonModel: [LessonModel]
+}
+
+struct LessonModel: Identifiable{
+    
+    var id: Int
     var title: String
     var duration: String
     var isUnlocked: Bool = false

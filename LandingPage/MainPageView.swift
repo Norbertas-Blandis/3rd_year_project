@@ -25,7 +25,7 @@ struct MainPageView: View {
                 VStack{
                     
                     NavigationLink(
-                        destination: Lesson0View(),
+                        destination: Lesson0View(lessonManager: LessonManager()),
                         isActive: $goToLesson0){
                             Button(action: isLesson0Unlocked ? {goToLesson0.toggle()} : {}) {
                                 HStack{
