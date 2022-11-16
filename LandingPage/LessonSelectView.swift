@@ -22,7 +22,7 @@ struct LessonSelectView: View {
                     
                     ForEach(lessonManager.model.lessonModel){ lesson in
                         NavigationLink(
-                            destination: Lesson0View(lessonId: lesson.id, lessonManager: LessonManager()),
+                            destination: Lesson0View(lessonId: lesson.id, lessonManager: LessonManager()).navigationBarBackButtonHidden(true).navigationBarTitle(Text(""), displayMode: .inline),
                             isActive: $goToLesson0){
                                 Button(action: lesson.isUnlocked ? {goToLesson0.toggle()} : {}) {
                                     HStack{
@@ -41,7 +41,7 @@ struct LessonSelectView: View {
                                 }
                         }.isDetailLink(false)
                     }
-                }.padding(.all, 10)
+                }.padding(.all, 10).offset(y: -10)
                 
             }.navigationBarTitle("Lessons").background(Color(.init(white: 0, alpha: 0.05)).ignoresSafeArea())
         }
