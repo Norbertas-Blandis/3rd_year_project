@@ -14,11 +14,7 @@ struct QuizCompletedView: View {
         NavigationView{
             VStack{
                 Spacer()
-                Text("Quiz Completed!")
-                    .foregroundColor(Color.black)
-                    .font(.system(size: 32, weight: .bold))
-                    .multilineTextAlignment(.center)
-                    .padding()
+                Text("Quiz Completed!").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 24)).multilineTextAlignment(.center).padding()
                 Spacer()
             }
         }

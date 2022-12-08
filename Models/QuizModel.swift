@@ -16,6 +16,7 @@ struct Quiz{
 }
 
 struct QuizModel {
+//    var content: some View
     var question: String
     var answer: String
     var optionList: [QuizOption]

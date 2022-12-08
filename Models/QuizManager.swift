@@ -57,26 +57,19 @@ extension QuizManager{
                                    QuizOption(id: 3, optionId: "C", option: "{1, 2, 3}", color: Color.black),
                                    QuizOption(id: 4, optionId: "D", option: "[1, 2, 3]", color: Color.black)]),
             
-            QuizModel(question: "2. Which of the statements about a given set is correct?",
+            QuizModel(question: "2. Which of the statements about a set X = {1, 2, 3} is correct?",
                       answer: "B",
-                      optionList: [QuizOption(id: 1, optionId: "A", option: "∀", color: Color.black),
-                                   QuizOption(id: 2, optionId: "B", option: "∃", color: Color.black),
-                                   QuizOption(id: 3, optionId: "C", option: "∈", color: Color.black),
-                                   QuizOption(id: 4, optionId: "D", option: "=", color: Color.black)]),
+                      optionList: [QuizOption(id: 1, optionId: "A", option: "a ∈ X", color: Color.black),
+                                   QuizOption(id: 2, optionId: "B", option: "1 ∈ X", color: Color.black),
+                                   QuizOption(id: 3, optionId: "C", option: "1 ⊂ X", color: Color.black),
+                                   QuizOption(id: 4, optionId: "D", option: "{1} ∈ X", color: Color.black)]),
             
-            QuizModel(question: "3. Given function f:X->Y, what is the codomain of f?",
+            QuizModel(question: "3. Which of the statements about a set X = {1, 2, 3} is incorrect?",
                       answer: "C",
-                      optionList: [QuizOption(id: 1, optionId: "A", option: "f", color: Color.black),
-                                   QuizOption(id: 2, optionId: "B", option: "X", color: Color.black),
-                                   QuizOption(id: 3, optionId: "C", option: "Y", color: Color.black),
-                                   QuizOption(id: 4, optionId: "D", option: "x∈X", color: Color.black)]),
-            
-            QuizModel(question: "4. Is this the fourth question?",
-                      answer: "A",
-                      optionList: [QuizOption(id: 1, optionId: "A", option: "yes", color: Color.black),
-                                   QuizOption(id: 2, optionId: "B", option: "no", color: Color.black),
-                                   QuizOption(id: 3, optionId: "C", option: "maybe", color: Color.black),
-                                   QuizOption(id: 4, optionId: "D", option: "-", color: Color.black)])
+                      optionList: [QuizOption(id: 1, optionId: "A", option: "2 ∈ X", color: Color.black),
+                                   QuizOption(id: 2, optionId: "B", option: "{2} ⊂ X", color: Color.black),
+                                   QuizOption(id: 3, optionId: "C", option: "2 ⊂ X", color: Color.black),
+                                   QuizOption(id: 4, optionId: "D", option: "{1, 2} ⊂ X", color: Color.black)])
         
         ]
     }

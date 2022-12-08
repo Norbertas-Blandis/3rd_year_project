@@ -175,7 +175,7 @@ struct Lesson0_5: View {
             
             Spacer()
             
-            Text("To show that a set is a contained in another set we use a symbol ⊆ ").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
+            Text("To show that a set is a contained in another set (or equal to it) we use a symbol ⊆ ").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
             
             ZStack{
                 CircleView(color: .gray, size: 200)
@@ -208,21 +208,36 @@ struct Lesson0_6: View {
     
     var body: some View {
         
+        if (quizManager.model.quizCompleted){
+//            QuizCompletedView(quizManager: quizManager)
+            Lesson0_7()
+        } else {
+            VStack{
+                
+                Spacer()
+                
+                Text(quizManager.model.quizModel.question).foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
+                
+                QuizOptionGridView(quizManager: quizManager)
+                
+                Spacer()
+                
+            }.offset(y: -90)
+        }
+    }
+}
+
+struct Lesson0_7: View {
+    
+    var body: some View {
+        
         VStack{
             
-            Spacer()
-            
-            Text(quizManager.model.quizModel.question).foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
-            
-            QuizOptionGridView(quizManager: quizManager)
-            
-            Spacer()
+            Text("Lesson about Quantifiers!").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
             
         }.offset(y: -90)
         
     }
-    
-    
 }
 
 struct CircleView: View {
