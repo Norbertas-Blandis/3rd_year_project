@@ -94,22 +94,37 @@ struct Lesson0_3: View {
 
     var body: some View {
         VStack{
+            
             Spacer()
+            
             Text("You have probably already come across some sets in the past: C, R, Q, Z, N").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
+            
             ZStack{
-                EllipseView(color: .gray, sizeX: 350, sizeY: 300)
-                Text("C").bold().offset(x:-80, y:-80).font(.system(size:32))
-                EllipseView(color: .gray, sizeX: 300, sizeY: 280).offset(x: -20)
-                Text("R").bold().offset(x:-80, y:-80).font(.system(size:32))
-                EllipseView(color: .gray, sizeX: 250, sizeY: 250).offset(x: -40)
-                Text("Q").bold().offset(x:-80, y:-80).font(.system(size:32))
-                EllipseView(color: .gray, sizeX: 210, sizeY: 200).offset(x: -55)
-                Text("Z").bold().offset(x:-80, y:-80).font(.system(size:32))
-                EllipseView(color: .gray, sizeX: 150, sizeY: 150).offset(x: -73)
+                Button(action: {}){
+                    EllipseView(color: .gray, sizeX: 350, sizeY: 300)
+                }.contentShape(Circle())
+                Text("C").bold().offset(x:150, y:-50).font(.system(size:32))
+                Button(action: {}){
+                    EllipseView(color: .gray, sizeX: 300, sizeY: 280)
+                }.contentShape(Circle()).offset(x: -20)
+                Text("R").bold().offset(x:100, y:-40).font(.system(size:32))
+                Button(action: {}){
+                    EllipseView(color: .gray, sizeX: 250, sizeY: 250)
+                }.contentShape(Circle()).offset(x: -40)
+                Text("Q").bold().offset(x:65, y:-30).font(.system(size:32))
+                Button(action: {}){
+                    EllipseView(color: .gray, sizeX: 210, sizeY: 200)
+                }.contentShape(Circle()).offset(x: -55)
+                Text("Z").bold().offset(x:20, y:-20).font(.system(size:32))
+                Button(action: {}){
+                    EllipseView(color: .gray, sizeX: 150, sizeY: 150)
+                }.contentShape(Circle()).offset(x: -73)
                 Text("N").bold().offset(x:-130, y:0).font(.system(size:32))
             }.padding(10)
+            
             Spacer()
-            NavigationLink(destination: Lesson0_3().navigationBarTitle("").navigationBarHidden(false),label: {
+            
+            NavigationLink(destination: Lesson0_4().navigationBarTitle("").navigationBarHidden(false),label: {
                 Text("Next!")
                     .bold().frame(width: 280, height: 50)
                     .background(Color.green).foregroundColor(.white)
@@ -117,6 +132,97 @@ struct Lesson0_3: View {
             })
         }.offset(y: -90)
     }
+}
+
+struct Lesson0_4: View {
+    
+    var body: some View {
+        VStack{
+            
+            Spacer()
+            
+            Text("To show that an element is a member of the set we use a symbol ∈ ").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
+            
+            ZStack{
+                CircleView(color: .gray, size: 200)
+                CircleView(color: .black, size: 10).offset(x:50, y:20)
+                CircleView(color: .black, size: 10).offset(x:-40, y:-40)
+                CircleView(color: .black, size: 10).offset(x:-20, y:50)
+                Text("a").offset(x:60, y:30)
+                Text("b").offset(x:-50, y:-30)
+                Text("c").offset(x:-30, y:60)
+                Text("A").bold().offset(x:0, y:0).font(.system(size:32))
+            }.padding(10)
+            
+            Text("a,b,c ∈ A, but \n d ∉ A ").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
+            
+            Spacer()
+            
+            NavigationLink(destination: Lesson0_5().navigationBarTitle("").navigationBarHidden(false),label: {
+                Text("Next!")
+                    .bold().frame(width: 280, height: 50)
+                    .background(Color.green).foregroundColor(.white)
+                    .cornerRadius(10)
+            })
+        }.offset(y: -90)
+    }
+}
+
+struct Lesson0_5: View {
+    
+    var body: some View {
+        VStack{
+            
+            Spacer()
+            
+            Text("To show that a set is a contained in another set we use a symbol ⊆ ").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
+            
+            ZStack{
+                CircleView(color: .gray, size: 200)
+                CircleView(color: .black, size: 10).offset(x:50, y:20)
+                CircleView(color: .black, size: 10).offset(x:-40, y:-40)
+                CircleView(color: .black, size: 10).offset(x:-20, y:50)
+                Text("a").offset(x:60, y:30)
+                Text("b").offset(x:-50, y:-30)
+                Text("c").offset(x:-30, y:60)
+                Text("A").bold().offset(x:0, y:0).font(.system(size:32))
+            }.padding(10)
+            
+            Text("{a,b}, {a} ⊆ A, but \n a, {b,d} ⊄ A ").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
+            
+            Spacer()
+            
+            NavigationLink(destination: Lesson0_6(quizManager: QuizManager()).navigationBarTitle("").navigationBarHidden(false),label: {
+                Text("Next!")
+                    .bold().frame(width: 280, height: 50)
+                    .background(Color.green).foregroundColor(.white)
+                    .cornerRadius(10)
+            })
+        }.offset(y: -90)
+    }
+}
+
+struct Lesson0_6: View {
+    
+    @ObservedObject var quizManager: QuizManager
+    
+    var body: some View {
+        
+        VStack{
+            
+            Spacer()
+            
+            Text(quizManager.model.quizModel.question).foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
+            
+            QuizOptionGridView(quizManager: quizManager)
+            
+            Spacer()
+            
+        }.offset(y: -90)
+        
+    }
+    
+    
 }
 
 struct CircleView: View {
