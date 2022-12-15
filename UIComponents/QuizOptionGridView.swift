@@ -16,10 +16,10 @@ struct QuizOptionGridView: View {
         
         LazyVGrid(columns: columns, spacing: 20) {
             ForEach(quizManager.model.quizModel.optionList) { quizOption in
-                OptionCardView(quizOption: quizOption)
-                    .onTapGesture {
-                        quizManager.verifyAnswer(selectedOption: quizOption)
-                    }
+                    OptionCardView(quizOption: quizOption)
+                        .onTapGesture {
+                            quizManager.verifyAnswer(selectedOption: quizOption)
+                        }
             }
         }
         
@@ -29,17 +29,22 @@ struct QuizOptionGridView: View {
 struct OptionCardView: View {
     
     var quizOption: QuizOption
+
     var body: some View {
         
         VStack {
             if (quizOption.isMatched) && (quizOption.isSelected) {
                 OptionStatusImageView(imageName: "checkmark")
             } else if (!(quizOption.isMatched) && (quizOption.isSelected)) {
-                OptionStatusImageView(imageName: "")
+//                OptionView(quizOption: quizOption)
+//                OptionStatusImageView(imageName: "")
+                WrongOptionView(quizOption: quizOption)
             } else {
                 OptionView(quizOption: quizOption)
             }
-        }.frame(width: 150, height: 150).cornerRadius(40)
+        }
+        .frame(width: 150, height: 150)
+        .cornerRadius(40)
     }
     
     func setBackgroundColor() -> Color {
@@ -56,6 +61,7 @@ struct OptionCardView: View {
 struct OptionView: View {
     
     var quizOption: QuizOption
+    
     var body: some View {
         VStack {
             Text(quizOption.optionId)
@@ -69,6 +75,30 @@ struct OptionView: View {
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .frame(width: 159, height: 38)
         }
+    }
+}
+
+struct WrongOptionView: View {
+    
+    var quizOption: QuizOption
+    @State var isShaking = true
+    
+    var body: some View {
+        VStack {
+                
+            Text(quizOption.optionId)
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .frame(width: 50, height: 50)
+                .background(quizOption.color.opacity(0.8))
+                .foregroundColor(.white)
+                .cornerRadius(25)
+            
+            Text(quizOption.option)
+                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .frame(width: 159, height: 38)
+        }
+        .offset(x: isShaking ? 10 : 0, y: 0)
+        .animation(.interactiveSpring())
     }
 }
 

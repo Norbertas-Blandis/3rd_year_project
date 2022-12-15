@@ -39,11 +39,14 @@ struct LessonSelectView: View {
                                     .border(Color.black, width: 2)
                                     .cornerRadius(10)
                                 }
-                        }.isDetailLink(false)
+                        }.isDetailLink(true)
                     }
                 }.padding(.all, 10).offset(y: -10)
                 
-            }.navigationBarTitle("Lessons").background(Color(.init(white: 0, alpha: 0.05)).ignoresSafeArea())
+            }
+            .navigationBarTitle("Lessons")
+            .background(Color(.init(white: 0, alpha: 0.05))
+            .ignoresSafeArea())
         }
     }
 }
