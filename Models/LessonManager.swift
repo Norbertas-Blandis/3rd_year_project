@@ -26,20 +26,23 @@ extension LessonManager{
                      duration: "10 min",
                      isUnlocked: true,
                      isCompleted: false,
-                     destinationView: AnyView(Lesson0View(lessonId: 0, lessonManager: LessonManager()))),
+                     goToLesson: false),
+//                     destinationView: AnyView(Lesson0View(lessonId: 0, lessonManager: LessonManager()))),
          
         LessonModel(id: 1,
                     title: "Sequence introduction",
                     duration: "20 min",
                     isUnlocked: true,
                     isCompleted: false,
-                    destinationView: AnyView(Lesson0View(lessonId: 1, lessonManager: LessonManager()))),
+                    goToLesson: false),
+//                    destinationView: AnyView(Lesson1View(lessonId: 1, lessonManager: LessonManager()))),
          
         LessonModel(id: 2,
                     title: "Sequence examples",
                     duration: "10 min",
                     isUnlocked: false,
                     isCompleted: false,
-                    destinationView: AnyView(Lesson0View(lessonId: 2, lessonManager: LessonManager()))),]
+                    goToLesson: false)]
+//                    destinationView: AnyView(Lesson2View(lessonId: 2, lessonManager: LessonManager()))]
     }
 }

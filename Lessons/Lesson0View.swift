@@ -472,7 +472,6 @@ struct EllipseView: View {
                 .strokeBorder(.black, lineWidth: 1)
                 .background(Ellipse().fill(color))
                 .frame(width: sizeX, height: sizeY)
-//            Ellipse().border(.black).frame(width: sizeX, height: sizeY).foregroundColor(color)
         }
     }
 }

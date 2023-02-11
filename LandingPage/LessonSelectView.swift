@@ -19,14 +19,9 @@ struct LessonSelectView: View {
         NavigationView{
             ScrollView{
                 VStack{
-                    
                     ForEach(lessonManager.model.lessonModel){ lesson in
-                        
-                        let destinationView: Lesson0View = Lesson0View(lessonId: lesson.id, lessonManager: LessonManager())
-                        
-                        
                         NavigationLink(
-                            destination: destinationView.navigationBarBackButtonHidden(true).navigationBarTitle(Text(""), displayMode: .inline),
+                            destination: Lesson0View(lessonId: lesson.id, lessonManager: LessonManager()).navigationBarBackButtonHidden(true).navigationBarTitle(Text(""), displayMode: .inline),
                             isActive: $goToLesson0){
                                 Button(action: lesson.isUnlocked ? {goToLesson0.toggle()} : {}) {
                                     HStack{
