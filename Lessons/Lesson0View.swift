@@ -347,6 +347,7 @@ struct Lesson0_6: View {
 }
 
 import UIKit
+import CoreGraphics
 
 struct Lesson0_7: View {
     
@@ -362,6 +363,9 @@ struct Lesson0_7: View {
         
         VStack{
             
+            let bigSet = CircleView(color: .gray, size: self.isPressedShort ? 250 : 200)
+            let bigSetCenter = bigSet.position
+            
             Spacer()
             
             Text("Correctly construct the set\n A = {{a}, b, {a, b}} \n By dragging the green elements into the gray set").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
@@ -375,20 +379,33 @@ struct Lesson0_7: View {
               }
             }){
                   ZStack{
-                      CircleView(color: .gray, size: self.isPressedShort ? 300 : 250)
+                      bigSet
                       Text("A").bold().offset(x:0, y:0).font(.system(size:32))
                   }.padding(20)
                 }
             
             Spacer()
             
+            let option1 = DraggableCircleView(color: .green, size: 50, text: "a")
+            let option2 = DraggableCircleView(color: .green, size: 50, text: "b")
+            let option3 = DraggableCircleView(color: .green, size: 50, text: "{a}")
+            let option4 = DraggableCircleView(color: .green, size: 50, text: "{b}")
+            let option5 = DraggableCircleView(color: .green, size: 50, text: "{a, b}")
+            let option6 = DraggableCircleView(color: .green, size: 50, text: "A")
+            let option1center = option1.position
+            let option2center = option2.position
+            let option3center = option3.position
+            let option4center = option4.position
+            let option5center = option5.position
+            let option6center = option6.position
+//            let distance1 = bigSetCenter.distance(from: bigSetCenter, to: option1center)
             LazyVGrid(columns: columns, alignment: .center) {
-                DraggableCircleView(color: .green, size: 50, text: "a")
-                DraggableCircleView(color: .green, size: 50, text: "b")
-                DraggableCircleView(color: .green, size: 50, text: "{a}")
-                DraggableCircleView(color: .green, size: 50, text: "{b}")
-                DraggableCircleView(color: .green, size: 50, text: "{a, b}")
-                DraggableCircleView(color: .green, size: 50, text: "A")
+                option1
+                option2
+                option3
+                option4
+                option5
+                option6
             }.padding(.leading, 100.0)
             
             Spacer()
@@ -401,8 +418,6 @@ struct Lesson0_7: View {
             }.sheet(isPresented: $isPopUpVisible) {
                 Text("Incorrect!")
             }
-            
-            Spacer()
             
         }.offset(y: -90).padding(10)
         
@@ -467,3 +482,4 @@ struct Lesson0View_Previews: PreviewProvider {
         Lesson0View(lessonId: 0, lessonManager: LessonManager())
     }
 }
+

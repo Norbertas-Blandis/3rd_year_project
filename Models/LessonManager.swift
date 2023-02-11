@@ -25,18 +25,21 @@ extension LessonManager{
                      title: "Prerequesites",
                      duration: "10 min",
                      isUnlocked: true,
-                     isCompleted: false),
+                     isCompleted: false,
+                     destinationView: AnyView(Lesson0View(lessonId: 0, lessonManager: LessonManager()))),
          
         LessonModel(id: 1,
                     title: "Sequence introduction",
                     duration: "20 min",
-                    isUnlocked: false,
-                    isCompleted: false),
+                    isUnlocked: true,
+                    isCompleted: false,
+                    destinationView: AnyView(Lesson0View(lessonId: 1, lessonManager: LessonManager()))),
          
         LessonModel(id: 2,
                     title: "Sequence examples",
                     duration: "10 min",
                     isUnlocked: false,
-                    isCompleted: false)]
+                    isCompleted: false,
+                    destinationView: AnyView(Lesson0View(lessonId: 2, lessonManager: LessonManager()))),]
     }
 }
