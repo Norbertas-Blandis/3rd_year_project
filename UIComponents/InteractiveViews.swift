@@ -48,25 +48,18 @@ struct LineWithExpandingPoints: View {
     
     var body: some View {
         ZStack {
-            // Line
-            Path { path in
-                path.move(to: CGPoint(x: 0, y: 0.5))
-                path.addLine(to: CGPoint(x: 1, y: 0.5))
-            }
-            .stroke(lineWidth: 2)
-            .frame(width: 300, height: 100)
-            
             // Points
-            ForEach(0..<4) { index in
+            ForEach(1..<5) { index in
                 Circle()
                     .fill(Color.black)
                     .frame(width: self.showExpanded && self.selectedPoint == index ? 20 : 10,
                            height: self.showExpanded && self.selectedPoint == index ? 20 : 10)
-                    .offset(x: (CGFloat(index) * 0.2 + 0.1) * 300, y: 50)
+                    .offset(x: (CGFloat(index) * 50 - 125))
                     .onTapGesture {
                         self.selectedPoint = index
                         self.showExpanded = true
                     }
+                Text("\(index)").offset(x: (CGFloat(index) * 50 - 125), y: -20).modifier(BlackDetailedAcademicTextStyle())
             }
         }
     }

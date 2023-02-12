@@ -20,6 +20,7 @@
 		F49EFBE7290B352A00B32086 /* Quiz0View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49EFBE6290B352A00B32086 /* Quiz0View.swift */; };
 		F4A24DC02998175F00CBDF56 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DBF2998175F00CBDF56 /* TextStyles.swift */; };
 		F4A24DC22998467F00CBDF56 /* InteractiveViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DC12998467F00CBDF56 /* InteractiveViews.swift */; };
+		F4A24DC42999160A00CBDF56 /* AcademicWritingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DC32999160A00CBDF56 /* AcademicWritingViews.swift */; };
 		F4A4ACD32919AAA20012522F /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD22919AAA20012522F /* LessonModel.swift */; };
 		F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD42919AB190012522F /* LessonManager.swift */; };
 		F4A4ACD72919AD760012522F /* LessonSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD62919AD760012522F /* LessonSelectView.swift */; };
@@ -51,6 +52,7 @@
 		F49EFBE6290B352A00B32086 /* Quiz0View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz0View.swift; sourceTree = "<group>"; };
 		F4A24DBF2998175F00CBDF56 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		F4A24DC12998467F00CBDF56 /* InteractiveViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveViews.swift; sourceTree = "<group>"; };
+		F4A24DC32999160A00CBDF56 /* AcademicWritingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicWritingViews.swift; sourceTree = "<group>"; };
 		F4A4ACD22919AAA20012522F /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
 		F4A4ACD42919AB190012522F /* LessonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonManager.swift; sourceTree = "<group>"; };
 		F4A4ACD62919AD760012522F /* LessonSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSelectView.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				F4F04A2C290926E600DD05D9 /* QuizCompletedView.swift */,
 				F4A24DBF2998175F00CBDF56 /* TextStyles.swift */,
 				F4A24DC12998467F00CBDF56 /* InteractiveViews.swift */,
+				F4A24DC32999160A00CBDF56 /* AcademicWritingViews.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				F49EFBE7290B352A00B32086 /* Quiz0View.swift in Sources */,
 				F4F04A262909133200DD05D9 /* QuizManager.swift in Sources */,
 				F4F04A132906D93F00DD05D9 /* ImagePicker.swift in Sources */,
+				F4A24DC42999160A00CBDF56 /* AcademicWritingViews.swift in Sources */,
 				F4F04A2B2909174700DD05D9 /* QuizOptionGridView.swift in Sources */,
 				F49810E92916830F00680568 /* Lesson2View.swift in Sources */,
 				F478C63A28E889000090292F /* LoginView.swift in Sources */,

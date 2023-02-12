@@ -44,7 +44,7 @@ struct BlackTitleAcademicTextStyle: ViewModifier {
             .foregroundColor(Color.black)
             .font(.custom("AmericanTypewriter", fixedSize: 20))
             .multilineTextAlignment(.center)
-            .padding(5)
+            .padding(3)
     }
 }
 
