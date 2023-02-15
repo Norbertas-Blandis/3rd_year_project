@@ -38,6 +38,36 @@ struct GreenButtonWhiteTextStyle: ViewModifier {
     }
 }
 
+struct GreenButtonWhiteTextStyleHalf: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(width: 140, height: 50)
+            .background(Color.green)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+    }
+}
+
+struct GrayButtonWhiteTextStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(width: 280, height: 50)
+            .background(Color.gray)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+    }
+}
+
+struct GrayButtonWhiteTextStyleHalf: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(width: 140, height: 50)
+            .background(Color.gray)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+    }
+}
+
 struct BlackTitleAcademicTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content

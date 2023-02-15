@@ -21,6 +21,9 @@
 		F4A24DC02998175F00CBDF56 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DBF2998175F00CBDF56 /* TextStyles.swift */; };
 		F4A24DC22998467F00CBDF56 /* InteractiveViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DC12998467F00CBDF56 /* InteractiveViews.swift */; };
 		F4A24DC42999160A00CBDF56 /* AcademicWritingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DC32999160A00CBDF56 /* AcademicWritingViews.swift */; };
+		F4A24DC7299A45DB00CBDF56 /* CodeViewer in Frameworks */ = {isa = PBXBuildFile; productRef = F4A24DC6299A45DB00CBDF56 /* CodeViewer */; };
+		F4A24DCA299A46F200CBDF56 /* RichTextView in Frameworks */ = {isa = PBXBuildFile; productRef = F4A24DC9299A46F200CBDF56 /* RichTextView */; };
+		F4A24DD0299D230C00CBDF56 /* SequenceIntroExp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DCF299D230C00CBDF56 /* SequenceIntroExp.swift */; };
 		F4A4ACD32919AAA20012522F /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD22919AAA20012522F /* LessonModel.swift */; };
 		F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD42919AB190012522F /* LessonManager.swift */; };
 		F4A4ACD72919AD760012522F /* LessonSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD62919AD760012522F /* LessonSelectView.swift */; };
@@ -53,6 +56,7 @@
 		F4A24DBF2998175F00CBDF56 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		F4A24DC12998467F00CBDF56 /* InteractiveViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveViews.swift; sourceTree = "<group>"; };
 		F4A24DC32999160A00CBDF56 /* AcademicWritingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicWritingViews.swift; sourceTree = "<group>"; };
+		F4A24DCF299D230C00CBDF56 /* SequenceIntroExp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceIntroExp.swift; sourceTree = "<group>"; };
 		F4A4ACD22919AAA20012522F /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
 		F4A4ACD42919AB190012522F /* LessonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonManager.swift; sourceTree = "<group>"; };
 		F4A4ACD62919AD760012522F /* LessonSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSelectView.swift; sourceTree = "<group>"; };
@@ -72,8 +76,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4F04A1D2907DF8800DD05D9 /* FirebaseAuth in Frameworks */,
+				F4A24DCA299A46F200CBDF56 /* RichTextView in Frameworks */,
 				F4F04A1F2907DF8800DD05D9 /* FirebaseFirestoreSwift in Frameworks */,
 				F4F04A212907DF8800DD05D9 /* FirebaseStorage in Frameworks */,
+				F4A24DC7299A45DB00CBDF56 /* CodeViewer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +89,7 @@
 		F478C62B28E889000090292F = {
 			isa = PBXGroup;
 			children = (
+				F4A24DCC299D22B100CBDF56 /* QuestionExplanations */,
 				F49EFBE5290B351C00B32086 /* Quizes */,
 				F49EFBE2290B1BA800B32086 /* Lessons */,
 				F4F04A292909172C00DD05D9 /* UIComponents */,
@@ -142,6 +149,14 @@
 			path = Quizes;
 			sourceTree = "<group>";
 		};
+		F4A24DCC299D22B100CBDF56 /* QuestionExplanations */ = {
+			isa = PBXGroup;
+			children = (
+				F4A24DCF299D230C00CBDF56 /* SequenceIntroExp.swift */,
+			);
+			path = QuestionExplanations;
+			sourceTree = "<group>";
+		};
 		F4F04A142906E82100DD05D9 /* LandingPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +211,8 @@
 				F4F04A1C2907DF8800DD05D9 /* FirebaseAuth */,
 				F4F04A1E2907DF8800DD05D9 /* FirebaseFirestoreSwift */,
 				F4F04A202907DF8800DD05D9 /* FirebaseStorage */,
+				F4A24DC6299A45DB00CBDF56 /* CodeViewer */,
+				F4A24DC9299A46F200CBDF56 /* RichTextView */,
 			);
 			productName = firstTest;
 			productReference = F478C63428E889000090292F /* firstTest.app */;
@@ -227,6 +244,8 @@
 			mainGroup = F478C62B28E889000090292F;
 			packageReferences = (
 				F4F04A1B2907DF8800DD05D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F4A24DC5299A45DB00CBDF56 /* XCRemoteSwiftPackageReference "CodeViewer" */,
+				F4A24DC8299A46F200CBDF56 /* XCRemoteSwiftPackageReference "RichTextView" */,
 			);
 			productRefGroup = F478C63528E889000090292F /* Products */;
 			projectDirPath = "";
@@ -256,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F49810EB29168DF100680568 /* Quiz2View.swift in Sources */,
+				F4A24DD0299D230C00CBDF56 /* SequenceIntroExp.swift in Sources */,
 				F49EFBE7290B352A00B32086 /* Quiz0View.swift in Sources */,
 				F4F04A262909133200DD05D9 /* QuizManager.swift in Sources */,
 				F4F04A132906D93F00DD05D9 /* ImagePicker.swift in Sources */,
@@ -479,6 +499,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F4A24DC5299A45DB00CBDF56 /* XCRemoteSwiftPackageReference "CodeViewer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dwarvesf/CodeViewer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		F4A24DC8299A46F200CBDF56 /* XCRemoteSwiftPackageReference "RichTextView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tophat/RichTextView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		F4F04A1B2907DF8800DD05D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -490,6 +526,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F4A24DC6299A45DB00CBDF56 /* CodeViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4A24DC5299A45DB00CBDF56 /* XCRemoteSwiftPackageReference "CodeViewer" */;
+			productName = CodeViewer;
+		};
+		F4A24DC9299A46F200CBDF56 /* RichTextView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4A24DC8299A46F200CBDF56 /* XCRemoteSwiftPackageReference "RichTextView" */;
+			productName = RichTextView;
+		};
 		F4F04A1C2907DF8800DD05D9 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F4F04A1B2907DF8800DD05D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

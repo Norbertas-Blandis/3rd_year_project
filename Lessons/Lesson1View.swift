@@ -66,7 +66,7 @@ struct SequenceExampleView: View {
                 .modifier(BlackTitleAcademicTextStyle())
             
             HStack{
-                LineWithExpandingPoints()
+                LineWithExpandingPoints(numOfPoints: 4)
                 Text(" ... ").modifier(BlackTitleAcademicTextStyle()).offset(x: (CGFloat(4) * 50-125), y: -3)
             }
             
@@ -84,27 +84,94 @@ struct SequenceExampleView: View {
             
             Spacer()
             
-            NavigationLink(destination: AnswerChecker1View().navigationBarTitle("").navigationBarHidden(false),label: {
+            NavigationLink(destination: AnswerChecker1View().navigationBarTitle("Practice #1").navigationBarHidden(false),label: {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
+            
         }.offset(y: -90).padding(10)
     }
 }
 
+import CodeViewer
+
 struct AnswerChecker1View: View{
+    
+    @State private var question1 : String = "[math](a_{n})_{n∈N}[/math]"
+    @State private var question2 : String = "[math]a_{n}=n^3[/math]"
+    @State private var question3 : String = "[math]a_{4}[/math]"
+    
     var body: some View{
         VStack{
             
             Spacer()
+            
             HStack{
-                Text("Given a sequence ")
-                MainSequenceDefinitionView()
-                Text(", where an = 1/n")
+                Text("For a sequence ")
+                TextView(string: $question1).frame(width: 100.0, height: 30.0)
             }.modifier(BlackTitleAcademicTextStyle())
             
-            LineWithExpandingPoints()
+            HStack{
+                Text("Given by: ")
+                TextView(string: $question2).frame(width: 100.0, height: 30.0)
+            }.modifier(BlackTitleAcademicTextStyle())
+            
+            HStack{
+                Text("What is the value of: ")
+                TextView(string: $question3).frame(width: 100.0, height: 30.0)
+            }.modifier(BlackTitleAcademicTextStyle())
+            
             Spacer()
-            StringAnswerCheckerView(question: "What is the value of a5", correctAnswer: "Zaza")
+            
+            StringAnswerCheckerView(question: "", correctAnswer: "81", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise #2", explanationView: AnyView(SequenceIntroExp1()))
+        }
+    }
+}
+
+struct AnswerChecker2View: View{
+    
+    @State private var question1 : String = "[math](a_{n})_{n∈N}[/math]"
+    @State private var question2 : String = "[math]a_{n}=1/(n^2)[/math]"
+    @State private var question3 : String = "[math]a_{x}=1/25[/math]"
+    
+    var body: some View{
+        VStack{
+            
+            Spacer()
+            
+            HStack{
+                Text("For a sequence ")
+                TextView(string: $question1).frame(width: 100.0, height: 30.0)
+            }.modifier(BlackTitleAcademicTextStyle())
+            
+            HStack{
+                Text("Given by: ")
+                TextView(string: $question2).frame(width: 120.0, height: 30.0)
+            }.modifier(BlackTitleAcademicTextStyle())
+            
+            HStack{
+                Text("What is the value of x, if")
+                TextView(string: $question3).frame(width: 120.0, height: 30.0)
+            }.modifier(BlackTitleAcademicTextStyle())
+            
+            Spacer()
+            
+            StringAnswerCheckerView(question: "", correctAnswer: "5", destinationView: AnyView(SubsequenceDefinitionView()), destinationViewTitle: "", explanationView: AnyView(SequenceIntroExp2()))
+            
+        }
+    }
+}
+
+struct SubsequenceDefinitionView: View{
+    
+    @State private var question1 : String = "[math](a_{n})_{n∈N}[/math]"
+    @State private var question2 : String = "[math]a_{n}=n^3[/math]"
+    @State private var question3 : String = "[math]a_{4}[/math]"
+    
+    var body: some View{
+        VStack{
+            
+            Text("Subsequences").modifier(BlackTitleAcademicTextStyle())
+            
             Spacer()
         }
     }
