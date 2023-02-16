@@ -86,7 +86,7 @@ struct QuizView: View {
                     
                 }.padding(10)
                 
-            }.navigationTitle("Quizes")
+            }.navigationTitle("Excercises")
         }
     }
 }

@@ -24,12 +24,14 @@
 		F4A24DC7299A45DB00CBDF56 /* CodeViewer in Frameworks */ = {isa = PBXBuildFile; productRef = F4A24DC6299A45DB00CBDF56 /* CodeViewer */; };
 		F4A24DCA299A46F200CBDF56 /* RichTextView in Frameworks */ = {isa = PBXBuildFile; productRef = F4A24DC9299A46F200CBDF56 /* RichTextView */; };
 		F4A24DD0299D230C00CBDF56 /* SequenceIntroExp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DCF299D230C00CBDF56 /* SequenceIntroExp.swift */; };
+		F4A24DD2299EC09200CBDF56 /* ContainerStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DD1299EC09200CBDF56 /* ContainerStyles.swift */; };
+		F4A24DD5299EC9C700CBDF56 /* LaTeXSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F4A24DD4299EC9C700CBDF56 /* LaTeXSwiftUI */; };
 		F4A4ACD32919AAA20012522F /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD22919AAA20012522F /* LessonModel.swift */; };
 		F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD42919AB190012522F /* LessonManager.swift */; };
 		F4A4ACD72919AD760012522F /* LessonSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD62919AD760012522F /* LessonSelectView.swift */; };
 		F4F04A132906D93F00DD05D9 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A122906D93F00DD05D9 /* ImagePicker.swift */; };
 		F4F04A162906E84700DD05D9 /* LandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A152906E84700DD05D9 /* LandingPage.swift */; };
-		F4F04A182906EC4200DD05D9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A172906EC4200DD05D9 /* ProfileView.swift */; };
+		F4F04A182906EC4200DD05D9 /* LectureNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F04A172906EC4200DD05D9 /* LectureNotesView.swift */; };
 		F4F04A1D2907DF8800DD05D9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F4F04A1C2907DF8800DD05D9 /* FirebaseAuth */; };
 		F4F04A1F2907DF8800DD05D9 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F4F04A1E2907DF8800DD05D9 /* FirebaseFirestoreSwift */; };
 		F4F04A212907DF8800DD05D9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F4F04A202907DF8800DD05D9 /* FirebaseStorage */; };
@@ -57,12 +59,13 @@
 		F4A24DC12998467F00CBDF56 /* InteractiveViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveViews.swift; sourceTree = "<group>"; };
 		F4A24DC32999160A00CBDF56 /* AcademicWritingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicWritingViews.swift; sourceTree = "<group>"; };
 		F4A24DCF299D230C00CBDF56 /* SequenceIntroExp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceIntroExp.swift; sourceTree = "<group>"; };
+		F4A24DD1299EC09200CBDF56 /* ContainerStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerStyles.swift; sourceTree = "<group>"; };
 		F4A4ACD22919AAA20012522F /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
 		F4A4ACD42919AB190012522F /* LessonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonManager.swift; sourceTree = "<group>"; };
 		F4A4ACD62919AD760012522F /* LessonSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSelectView.swift; sourceTree = "<group>"; };
 		F4F04A122906D93F00DD05D9 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F4F04A152906E84700DD05D9 /* LandingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPage.swift; sourceTree = "<group>"; };
-		F4F04A172906EC4200DD05D9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F4F04A172906EC4200DD05D9 /* LectureNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureNotesView.swift; sourceTree = "<group>"; };
 		F4F04A22290894A000DD05D9 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		F4F04A252909133200DD05D9 /* QuizManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizManager.swift; sourceTree = "<group>"; };
 		F4F04A27290913CD00DD05D9 /* QuizModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModel.swift; sourceTree = "<group>"; };
@@ -80,6 +83,7 @@
 				F4F04A1F2907DF8800DD05D9 /* FirebaseFirestoreSwift in Frameworks */,
 				F4F04A212907DF8800DD05D9 /* FirebaseStorage in Frameworks */,
 				F4A24DC7299A45DB00CBDF56 /* CodeViewer in Frameworks */,
+				F4A24DD5299EC9C700CBDF56 /* LaTeXSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				F4F04A152906E84700DD05D9 /* LandingPage.swift */,
-				F4F04A172906EC4200DD05D9 /* ProfileView.swift */,
+				F4F04A172906EC4200DD05D9 /* LectureNotesView.swift */,
 				F4F04A22290894A000DD05D9 /* QuizView.swift */,
 				F4A4ACD62919AD760012522F /* LessonSelectView.swift */,
 			);
@@ -187,6 +191,7 @@
 				F4A24DBF2998175F00CBDF56 /* TextStyles.swift */,
 				F4A24DC12998467F00CBDF56 /* InteractiveViews.swift */,
 				F4A24DC32999160A00CBDF56 /* AcademicWritingViews.swift */,
+				F4A24DD1299EC09200CBDF56 /* ContainerStyles.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				F4F04A202907DF8800DD05D9 /* FirebaseStorage */,
 				F4A24DC6299A45DB00CBDF56 /* CodeViewer */,
 				F4A24DC9299A46F200CBDF56 /* RichTextView */,
+				F4A24DD4299EC9C700CBDF56 /* LaTeXSwiftUI */,
 			);
 			productName = firstTest;
 			productReference = F478C63428E889000090292F /* firstTest.app */;
@@ -246,6 +252,7 @@
 				F4F04A1B2907DF8800DD05D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				F4A24DC5299A45DB00CBDF56 /* XCRemoteSwiftPackageReference "CodeViewer" */,
 				F4A24DC8299A46F200CBDF56 /* XCRemoteSwiftPackageReference "RichTextView" */,
+				F4A24DD3299EC9C700CBDF56 /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */,
 			);
 			productRefGroup = F478C63528E889000090292F /* Products */;
 			projectDirPath = "";
@@ -288,7 +295,8 @@
 				F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */,
 				F49810ED29168E1300680568 /* Quiz3View.swift in Sources */,
 				F4A4ACD72919AD760012522F /* LessonSelectView.swift in Sources */,
-				F4F04A182906EC4200DD05D9 /* ProfileView.swift in Sources */,
+				F4F04A182906EC4200DD05D9 /* LectureNotesView.swift in Sources */,
+				F4A24DD2299EC09200CBDF56 /* ContainerStyles.swift in Sources */,
 				F4A24DC22998467F00CBDF56 /* InteractiveViews.swift in Sources */,
 				F4F04A23290894A000DD05D9 /* QuizView.swift in Sources */,
 				F4A24DC02998175F00CBDF56 /* TextStyles.swift in Sources */,
@@ -422,6 +430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"firstTest/Preview Content\"";
@@ -433,6 +442,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -451,6 +461,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"firstTest/Preview Content\"";
@@ -462,6 +473,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -515,6 +527,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		F4A24DD3299EC9C700CBDF56 /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/colinc86/LaTeXSwiftUI.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		F4F04A1B2907DF8800DD05D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -535,6 +555,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F4A24DC8299A46F200CBDF56 /* XCRemoteSwiftPackageReference "RichTextView" */;
 			productName = RichTextView;
+		};
+		F4A24DD4299EC9C700CBDF56 /* LaTeXSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4A24DD3299EC9C700CBDF56 /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */;
+			productName = LaTeXSwiftUI;
 		};
 		F4F04A1C2907DF8800DD05D9 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

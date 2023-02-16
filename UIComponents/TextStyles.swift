@@ -48,6 +48,16 @@ struct GreenButtonWhiteTextStyleHalf: ViewModifier {
     }
 }
 
+struct LessonSelectButtonStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity, minHeight: 50)
+            .background(Color.green)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+    }
+}
+
 struct GrayButtonWhiteTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content

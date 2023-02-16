@@ -12,32 +12,21 @@ struct Lesson0View: View {
     var lessonId: Int
     @ObservedObject var lessonManager: LessonManager
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     var body: some View {
-        
-        NavigationView{
-            VStack{
-                Text("Welcome to "+lessonManager.model.lessonModel[lessonId].title+"!")
-                    .foregroundColor(Color.black)
-                    .font(.system(size: 32))
-                    .multilineTextAlignment(.center)
-                    .padding()
-                
-                NavigationLink(destination: Lesson0_1().navigationBarTitle("").navigationBarHidden(false), label: {
-                    Text("Start the lesson!")
-                        .bold().frame(width: 280, height: 50)
-                        .background(Color.green).foregroundColor(.white)
-                        .cornerRadius(10)
-                })
-            }.offset(y: -90)
-        }.accentColor(Color(.label))
+        VStack{
+            Text("Welcome to "+lessonManager.model.lessonModel[lessonId].title+"!")
+                .modifier(BlackTitleTextStyle())
+            
+            NavigationLink(destination: Lesson0_1().navigationBarTitle("").navigationBarHidden(false), label: {
+                Text("Start the lesson!")
+                .modifier(GreenButtonWhiteTextStyle())})
+            
+        }.offset(y: -90)
     }
 }
 
 struct Lesson0_1: View {
-    
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     @State private var isPressedShort = false
     @State private var isPressedLong = false
     
@@ -45,9 +34,7 @@ struct Lesson0_1: View {
         VStack{
             
             Spacer()
-            
             Text("A set is just a collection of items.\nFor example: A = {a, b, c} is a set with elements a, b, c. ").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 24)).multilineTextAlignment(.center).padding()
-            
             
             Button(action: {
                 withAnimation { self.isPressedShort = true
@@ -72,11 +59,7 @@ struct Lesson0_1: View {
             Spacer()
             
             NavigationLink(destination: Lesson0_2().navigationBarTitle("").navigationBarHidden(false),label: {
-                Text("Next!")
-                    .bold().frame(width: 280, height: 50)
-                    .background(Color.green).foregroundColor(.white)
-                    .cornerRadius(10)
-            })
+                Text("Next!").modifier(GreenButtonWhiteTextStyle())})
         }.offset(y: -90)
     }
 }
@@ -116,11 +99,7 @@ struct Lesson0_2: View {
             Spacer()
             
             NavigationLink(destination: Lesson0_3().navigationBarTitle("").navigationBarHidden(false),label: {
-                Text("Next!")
-                    .bold().frame(width: 280, height: 50)
-                    .background(Color.green).foregroundColor(.white)
-                    .cornerRadius(10)
-            })
+                Text("Next!").modifier(GreenButtonWhiteTextStyle())})
         }.offset(y: -90)
     }
 }
@@ -221,11 +200,7 @@ struct Lesson0_3: View {
             Spacer()
             
             NavigationLink(destination: Lesson0_4().navigationBarTitle("").navigationBarHidden(false),label: {
-                Text("Next!")
-                    .bold().frame(width: 280, height: 50)
-                    .background(Color.green).foregroundColor(.white)
-                    .cornerRadius(10)
-            })
+                Text("Next!").modifier(GreenButtonWhiteTextStyle())})
         }.offset(y: -90)
     }
 }
@@ -267,11 +242,7 @@ struct Lesson0_4: View {
             Spacer()
             
             NavigationLink(destination: Lesson0_5().navigationBarTitle("").navigationBarHidden(false),label: {
-                Text("Next!")
-                    .bold().frame(width: 280, height: 50)
-                    .background(Color.green).foregroundColor(.white)
-                    .cornerRadius(10)
-            })
+                Text("Next!").modifier(GreenButtonWhiteTextStyle())})
         }.offset(y: -90)
     }
 }
@@ -313,11 +284,7 @@ struct Lesson0_5: View {
             Spacer()
             
             NavigationLink(destination: Lesson0_6(quizManager: QuizManager()).navigationBarTitle("").navigationBarHidden(false),label: {
-                Text("Next!")
-                    .bold().frame(width: 280, height: 50)
-                    .background(Color.green).foregroundColor(.white)
-                    .cornerRadius(10)
-            })
+                Text("Next!").modifier(GreenButtonWhiteTextStyle())})
         }.offset(y: -90)
     }
 }

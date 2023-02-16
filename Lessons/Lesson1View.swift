@@ -13,17 +13,13 @@ struct Lesson1View: View {
     @ObservedObject var lessonManager: LessonManager
     
     var body: some View {
-        
-        NavigationView{
-            VStack{
-                Text("Welcome to "+lessonManager.model.lessonModel[lessonId].title+"!")
-                    .modifier(BlackTitleTextStyle())
-                
-                NavigationLink(destination: SequenceDefinitionView().navigationBarTitle("").navigationBarHidden(false),label: {
-                    Text("Start the lesson!")
-                        .modifier(GreenButtonWhiteTextStyle())})
-            }.offset(y: -90)
-        }.accentColor(Color(.label))
+        VStack{
+            Text("Welcome to "+lessonManager.model.lessonModel[lessonId].title+"!")
+                .modifier(BlackTitleTextStyle())
+            
+            NavigationLink(destination: SequenceDefinitionView().navigationBarTitle("").navigationBarHidden(false),label: {
+                Text("Start the lesson!").modifier(GreenButtonWhiteTextStyle())})
+        }.offset(y: -90)
     }
 }
 
@@ -66,7 +62,7 @@ struct SequenceExampleView: View {
                 .modifier(BlackTitleAcademicTextStyle())
             
             HStack{
-                LineWithExpandingPoints(numOfPoints: 4)
+                LineWithExpandingPoints(numOfPoints: 4, namesOfPoints: ["1", "2", "3", "4"])
                 Text(" ... ").modifier(BlackTitleAcademicTextStyle()).offset(x: (CGFloat(4) * 50-125), y: -3)
             }
             
@@ -104,25 +100,25 @@ struct AnswerChecker1View: View{
         VStack{
             
             Spacer()
-            
-            HStack{
-                Text("For a sequence ")
-                TextView(string: $question1).frame(width: 100.0, height: 30.0)
-            }.modifier(BlackTitleAcademicTextStyle())
-            
-            HStack{
-                Text("Given by: ")
-                TextView(string: $question2).frame(width: 100.0, height: 30.0)
-            }.modifier(BlackTitleAcademicTextStyle())
-            
-            HStack{
-                Text("What is the value of: ")
-                TextView(string: $question3).frame(width: 100.0, height: 30.0)
-            }.modifier(BlackTitleAcademicTextStyle())
-            
+            VStack{
+                HStack{
+                    Text("For a sequence ")
+                    TextView(string: $question1).frame(width: 100.0, height: 30.0)
+                }.modifier(BlackTitleAcademicTextStyle())
+                
+                HStack{
+                    Text("Given by: ")
+                    TextView(string: $question2).frame(width: 100.0, height: 30.0)
+                }.modifier(BlackTitleAcademicTextStyle())
+                
+                HStack{
+                    Text("What is the value of: ")
+                    TextView(string: $question3).frame(width: 100.0, height: 30.0)
+                }.modifier(BlackTitleAcademicTextStyle())
+            }.modifier(GrayContainerStyle(opacity: 0.25))
             Spacer()
             
-            StringAnswerCheckerView(question: "", correctAnswer: "81", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise #2", explanationView: AnyView(SequenceIntroExp1()))
+            StringAnswerCheckerView(question: "", correctAnswer: "64", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise #2", explanationView: AnyView(SequenceIntroExp1()))
         }
     }
 }
@@ -137,31 +133,111 @@ struct AnswerChecker2View: View{
         VStack{
             
             Spacer()
-            
-            HStack{
-                Text("For a sequence ")
-                TextView(string: $question1).frame(width: 100.0, height: 30.0)
-            }.modifier(BlackTitleAcademicTextStyle())
-            
-            HStack{
-                Text("Given by: ")
-                TextView(string: $question2).frame(width: 120.0, height: 30.0)
-            }.modifier(BlackTitleAcademicTextStyle())
-            
-            HStack{
-                Text("What is the value of x, if")
-                TextView(string: $question3).frame(width: 120.0, height: 30.0)
-            }.modifier(BlackTitleAcademicTextStyle())
-            
+            VStack{
+                HStack{
+                    Text("For a sequence ")
+                    TextView(string: $question1).frame(width: 100.0, height: 30.0)
+                }
+                
+                HStack{
+                    Text("Given by: ")
+                    TextView(string: $question2).frame(width: 120.0, height: 30.0)
+                }
+                
+                HStack{
+                    Text("What is the value of x, if")
+                    TextView(string: $question3).frame(width: 120.0, height: 30.0)
+                }
+            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.25))
             Spacer()
             
-            StringAnswerCheckerView(question: "", correctAnswer: "5", destinationView: AnyView(SubsequenceDefinitionView()), destinationViewTitle: "", explanationView: AnyView(SequenceIntroExp2()))
+            StringAnswerCheckerView(question: "", correctAnswer: "5", destinationView: AnyView(SubsequenceDefinitionView()), destinationViewTitle: "Subsequences", explanationView: AnyView(SequenceIntroExp2()))
             
         }
     }
 }
 
+//import LaTeXSwiftUI
+
 struct SubsequenceDefinitionView: View{
+    
+    @State private var seqdefinition : String = "[math](a_{n})_{n∈N}[/math],"
+    @State private var subdefinition: String = "[math](a_{n_{k}})_{k∈N}[/math]"
+    @State private var subindequality: String = "[math]n_{1}<n_{2}<n_{3}<...[/math]"
+    
+    var body: some View{
+        VStack{
+            VStack{
+                Spacer()
+                HStack{
+                    Text("Given a sequence")
+                    TextView(string: $subdefinition).frame(width: 100.0, height: 40.0)
+                }
+                Text("A subsequence is any sequence of the form")
+                TextView(string: $subdefinition).frame(width: 100.0, height: 40.0)
+                HStack{
+                    Text("Where")
+                    TextView(string: $subindequality).frame(width: 200.0, height: 23.0)
+                }
+                Spacer()
+            }.modifier(BlackTitleAcademicTextStyle())
+            
+            NavigationLink(destination: SubsequenceIntuitionView().navigationBarTitle("Subsequences").navigationBarHidden(false),label: {
+                Text("Next!")
+                    .modifier(GreenButtonWhiteTextStyle())})
+        }.offset(y: -90).padding(10)
+    }
+}
+
+struct SubsequenceIntuitionView: View{
+    
+    @State private var seqdefinition : String = "[math](a_{n})_{n∈N}[/math],"
+    @State private var subdefinition: String = "[math](a_{n_{k}})_{k∈N}[/math]"
+    @State private var subindequality: String = "[math]n_{1}<n_{2}<n_{3}<...[/math]"
+    
+    @State private var showSubsequence = false
+    @State private var randomList = ["", "", "", "", "", ""]
+    
+    var body: some View{
+        VStack{
+            VStack{
+                Spacer()
+                Text("More simply, you can think of it as 'what is left' of a sequence after deleting some elements:").modifier(BlackTitleAcademicTextStyle())
+                
+                HStack{
+                    LineWithExpandingPoints(numOfPoints: 6, namesOfPoints: ["a","b","c","d","e","f"]).offset(x:-50)
+                    Text("...").offset(x:120, y:-8)
+                }
+                
+                Button(action: {
+                    self.showSubsequence = true
+                    self.randomList = (0..<6).map { index in
+                                        Bool.random() ? String(Character(UnicodeScalar(65+index)!)) : ""
+                                    }.map { $0.lowercased() }
+                }) {
+                    (Text("Generate new subsequence  ")+Text(Image(systemName: "arrow.down"))).modifier(GrayButtonWhiteTextStyle())
+                }
+                
+                HStack{
+                    if !self.showSubsequence{
+                        LineWithExpandingPoints(numOfPoints: 6, namesOfPoints: self.randomList).offset(x:-50)
+                    } else{
+                        LineWithExpandingPoints(numOfPoints: 6, namesOfPoints: self.randomList).offset(x:-50)
+                        Text("...").offset(x:120, y:-8)
+                    }
+                }
+                Spacer()
+                
+            }
+            
+            NavigationLink(destination: AnswerChecker3View().navigationBarTitle("Subsequences").navigationBarHidden(false),label: {
+                Text("Next!")
+                    .modifier(GreenButtonWhiteTextStyle())})
+        }.offset(y: -90).padding(10)
+    }
+}
+
+struct AnswerChecker3View: View{
     
     @State private var question1 : String = "[math](a_{n})_{n∈N}[/math]"
     @State private var question2 : String = "[math]a_{n}=n^3[/math]"
@@ -170,16 +246,33 @@ struct SubsequenceDefinitionView: View{
     var body: some View{
         VStack{
             
-            Text("Subsequences").modifier(BlackTitleAcademicTextStyle())
-            
             Spacer()
+            VStack{
+                HStack{
+                    Text("For a sequence ")
+                    TextView(string: $question1).frame(width: 100.0, height: 30.0)
+                }.modifier(BlackTitleAcademicTextStyle())
+                
+                HStack{
+                    Text("Given by: ")
+                    TextView(string: $question2).frame(width: 100.0, height: 30.0)
+                }.modifier(BlackTitleAcademicTextStyle())
+                
+                HStack{
+                    Text("What is the value of: ")
+                    TextView(string: $question3).frame(width: 100.0, height: 30.0)
+                }.modifier(BlackTitleAcademicTextStyle())
+            }.modifier(GrayContainerStyle(opacity: 0.25))
+            Spacer()
+            
+            StringAnswerCheckerView(question: "", correctAnswer: "64", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise #2", explanationView: AnyView(SequenceIntroExp1()))
         }
     }
 }
 
 struct Lesson1View_Previews: PreviewProvider {
     static var previews: some View {
-        Lesson1View(lessonId: 1, lessonManager: LessonManager())
+        SubsequenceIntuitionView()
         
     }
 }

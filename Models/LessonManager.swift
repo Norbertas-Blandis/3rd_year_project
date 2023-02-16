@@ -43,6 +43,6 @@ extension LessonManager{
                     isUnlocked: false,
                     isCompleted: false,
                     goToLesson: false)]
-//                    destinationView: AnyView(Lesson2View(lessonId: 2, lessonManager: LessonManager()))]
+//                    destinationView: AnyView(Lesson2View(lessonId: 2, lessonManager: LessonManager())))]
     }
 }

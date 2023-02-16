@@ -20,33 +20,46 @@ struct LessonSelectView: View {
             ScrollView{
                 VStack{
                     ForEach(lessonManager.model.lessonModel){ lesson in
-                        NavigationLink(
-                            destination: Lesson0View(lessonId: lesson.id, lessonManager: LessonManager()).navigationBarBackButtonHidden(true).navigationBarTitle(Text(""), displayMode: .inline),
-                            isActive: $goToLesson0){
-                                Button(action: lesson.isUnlocked ? {goToLesson0.toggle()} : {}) {
-                                    HStack{
-                                        Text(String(lesson.id+1)+". "+lesson.title)
-                                            .foregroundColor(Color.black)
-                                            .font(.system(size: 18, weight: .bold))
-                                            .multilineTextAlignment(.center)
-                                            .padding()
-                                        Spacer()
-                                        Text(lesson.duration).padding()
-                                        Spacer()
-                                        Image(systemName: lesson.isUnlocked ? "lock.open" : "lock").padding()
-                                    }.padding(8.0)
-                                    .border(Color.black, width: 2)
-                                    .cornerRadius(10)
-                                }
+                        
+                        if String(lesson.id) == "0"{
+                            NavigationLink(
+                                destination: Lesson0View(lessonId: lesson.id, lessonManager: LessonManager()).navigationBarBackButtonHidden(false).navigationBarTitle(Text("")),
+                                isActive: $goToLesson0){
+                                    Button(action: lesson.isUnlocked ? { goToLesson0.toggle() } : {}) {
+                                        HStack {
+                                            Spacer()
+                                            Text(String(lesson.id + 1) + ". " + lesson.title)
+                                            Spacer()
+                                            Text(lesson.duration)
+                                            Spacer()
+                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock"))
+                                            Spacer()
+                                        }.modifier(LessonSelectButtonStyle())
+                                    }.padding(.all, 10)
+
+                            }
+                        } else{
+                            NavigationLink(
+                                destination: Lesson1View(lessonId: lesson.id, lessonManager: LessonManager()).navigationBarBackButtonHidden(false).navigationBarTitle(Text("")),
+                                isActive: $goToLesson1){
+                                    Button(action: lesson.isUnlocked ? { goToLesson1.toggle() } : {}) {
+                                        HStack {
+                                            Spacer()
+                                            Text(String(lesson.id + 1) + ". " + lesson.title)
+                                            Spacer()
+                                            Text(lesson.duration)
+                                            Spacer()
+                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock"))
+                                            Spacer()
+                                        }.modifier(LessonSelectButtonStyle())
+                                    }.padding(.all, 10)
+                            }
+
                         }
                     }
-                }.padding(.all, 10).offset(y: -10)
-                
-            }
-            .navigationBarTitle("Lessons")
-            .background(Color(.init(white: 0, alpha: 0.05))
-            .ignoresSafeArea())
-        }
+                }.padding(.all, 10)
+            }.navigationBarTitle("Lessons")
+        }.accentColor(Color(.label))
     }
 }
 

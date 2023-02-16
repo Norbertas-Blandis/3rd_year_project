@@ -88,7 +88,7 @@ struct StringAnswerCheckerView: View {
                 }.padding()
                 .sheet(isPresented: $showScreenCover) {
                     VStack {
-                        Text("This is the screen cover.").modifier(BlackTitleAcademicTextStyle())
+                        AnyView(explanationView)
 
                         Button(action: {
                             self.showScreenCover = false
@@ -105,6 +105,8 @@ struct StringAnswerCheckerView: View {
 struct LineWithExpandingPoints: View {
     
     var numOfPoints : Int
+    var namesOfPoints: Array<String>
+    
     @State private var showExpanded = false
     @State private var selectedPoint = -1
     
@@ -113,7 +115,7 @@ struct LineWithExpandingPoints: View {
             // Points
             ForEach(1..<numOfPoints+1) { index in
                 Circle()
-                    .fill(Color.black)
+                    .fill(namesOfPoints[index-1] == "" ? Color.white : Color.black)
                     .frame(width: self.showExpanded && self.selectedPoint == index ? 20 : 10,
                            height: self.showExpanded && self.selectedPoint == index ? 20 : 10)
                     .offset(x: (CGFloat(index) * 50 - 125))
@@ -121,9 +123,30 @@ struct LineWithExpandingPoints: View {
                         self.selectedPoint = index
                         self.showExpanded = true
                     }
-                Text("\(index)").offset(x: (CGFloat(index) * 50 - 125), y: -20).modifier(BlackDetailedAcademicTextStyle())
+                Text("\(namesOfPoints[index-1])").offset(x: (CGFloat(index) * 50 - 125), y: -20).modifier(BlackDetailedAcademicTextStyle())
+//                TextView(string: $namesOfPoints[index-1]).offset(x: (CGFloat(index) * 50 - 125), y: -20).modifier(BlackDetailedAcademicTextStyle())
             }
         }
+    }
+}
+
+extension UIFont {
+    var bold: UIFont { return withWeight(.bold) }
+    var semibold: UIFont { return withWeight(.semibold) }
+
+    private func withWeight(_ weight: UIFont.Weight) -> UIFont {
+        var attributes = fontDescriptor.fontAttributes
+        var traits = (attributes[.traits] as? [UIFontDescriptor.TraitKey: Any]) ?? [:]
+
+        traits[.weight] = weight
+
+        attributes[.name] = nil
+        attributes[.traits] = traits
+        attributes[.family] = familyName
+
+        let descriptor = UIFontDescriptor(fontAttributes: attributes)
+
+        return UIFont(descriptor: descriptor, size: pointSize)
     }
 }
 
@@ -137,22 +160,20 @@ struct TextView : UIViewRepresentable {
         let richTextView = RichTextView(
             input: string,
             latexParser: LatexParser(),
-            font: UIFont.systemFont(ofSize: 18),
+            font: UIFont.init(descriptor: UIFontDescriptor(name: "American Typewriter", size: 24.0), size: 20),
             textColor: UIColor.black,
             isEditable: true,
             frame: CGRect.null,
             completion: nil
         )
-        
         return richTextView
-        
     }
 
    func updateUIView(_ uiView: RichTextView, context: Context) {
         uiView.update(
             input: string,
             latexParser: LatexParser(),
-            font: UIFont.systemFont(ofSize: 20),
+            font: UIFont.italicSystemFont(ofSize: 20),
             textColor: UIColor.black,
             completion: nil
         )

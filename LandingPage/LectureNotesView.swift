@@ -10,21 +10,22 @@ import Firebase
 import FirebaseCore
 import FirebaseFirestoreSwift
 
-struct ProfileView: View {
+struct LectureNotesView: View {
     
     let userId = Auth.auth().currentUser?.uid
     
     var body: some View {
-        Text("This is my profile")
-            .foregroundColor(Color.black)
-            .font(.system(size: 32, weight: .bold))
-            .multilineTextAlignment(.center)
-            .padding()
+        
+        NavigationView{
+            ScrollView{
+                
+            }.navigationTitle("Lecture Notes")
+        }
     }
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        LectureNotesView()
     }
 }

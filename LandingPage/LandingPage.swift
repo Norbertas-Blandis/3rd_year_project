@@ -20,9 +20,9 @@ struct LandingPage: View {
                     Image(systemName: "house").foregroundColor(Color.black)
                 }
             
-            ProfileView()
+            LectureNotesView()
                 .tabItem {
-                    Image(systemName: "person").foregroundColor(Color.black)
+                    Image(systemName: "book.closed.fill").foregroundColor(Color.black)
                 }
             
             QuizView()
