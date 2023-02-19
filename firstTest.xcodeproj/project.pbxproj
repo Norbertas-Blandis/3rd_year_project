@@ -93,6 +93,7 @@
 		F478C62B28E889000090292F = {
 			isa = PBXGroup;
 			children = (
+				F4A24DD6299FBBE700CBDF56 /* LectureNotes */,
 				F4A24DCC299D22B100CBDF56 /* QuestionExplanations */,
 				F49EFBE5290B351C00B32086 /* Quizes */,
 				F49EFBE2290B1BA800B32086 /* Lessons */,
@@ -159,6 +160,13 @@
 				F4A24DCF299D230C00CBDF56 /* SequenceIntroExp.swift */,
 			);
 			path = QuestionExplanations;
+			sourceTree = "<group>";
+		};
+		F4A24DD6299FBBE700CBDF56 /* LectureNotes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LectureNotes;
 			sourceTree = "<group>";
 		};
 		F4F04A142906E82100DD05D9 /* LandingPage */ = {

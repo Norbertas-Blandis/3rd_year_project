@@ -285,6 +285,7 @@ struct Lesson0_5: View {
             
             NavigationLink(destination: Lesson0_6(quizManager: QuizManager()).navigationBarTitle("").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+            
         }.offset(y: -90)
     }
 }
@@ -296,7 +297,7 @@ struct Lesson0_6: View {
     var body: some View {
         
         if (quizManager.model.quizCompleted){
-            Lesson0_7()
+            Lesson0Complete(lessonManager: LessonManager())
         } else {
             VStack{
                 
@@ -313,133 +314,27 @@ struct Lesson0_6: View {
     }
 }
 
-import UIKit
-import CoreGraphics
-
-struct Lesson0_7: View {
+struct Lesson0Complete: View {
     
-    @State private var isShaking = false
-    @State private var isPressedShort = false
-    @State private var isPressedLong = false
+    @ObservedObject var lessonManager: LessonManager
     
-    var columns: [GridItem] = Array(repeating: GridItem(.fixed(100), spacing: 0), count: 3)
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    @State private var isPopUpVisible = false
+    @State private var isPressed: Bool = false
     
-    var body: some View {
+    var body: some View{
         
         VStack{
-            
-            let bigSet = CircleView(color: .gray, size: self.isPressedShort ? 250 : 200)
-            let bigSetCenter = bigSet.position
-            
+            Spacer()
+            Text("Congratulations! You have completed Prerequisites!").modifier(BlackTitleTextStyle())
             Spacer()
             
-            Text("Correctly construct the set\n A = {{a}, b, {a, b}} \n By dragging the green elements into the gray set").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
-            
-            Button(action: {
-                withAnimation { self.isPressedShort = true
-                    self.isPressedLong.toggle()
-                }
-              DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                withAnimation {self.isPressedShort = false}
-              }
-            }){
-                  ZStack{
-                      bigSet
-                      Text("A").bold().offset(x:0, y:0).font(.system(size:32))
-                  }.padding(20)
-                }
-            
-            Spacer()
-            
-            let option1 = DraggableCircleView(color: .green, size: 50, text: "a")
-            let option2 = DraggableCircleView(color: .green, size: 50, text: "b")
-            let option3 = DraggableCircleView(color: .green, size: 50, text: "{a}")
-            let option4 = DraggableCircleView(color: .green, size: 50, text: "{b}")
-            let option5 = DraggableCircleView(color: .green, size: 50, text: "{a, b}")
-            let option6 = DraggableCircleView(color: .green, size: 50, text: "A")
-            let option1center = option1.position
-            let option2center = option2.position
-            let option3center = option3.position
-            let option4center = option4.position
-            let option5center = option5.position
-            let option6center = option6.position
-//            let distance1 = bigSetCenter.distance(from: bigSetCenter, to: option1center)
-            LazyVGrid(columns: columns, alignment: .center) {
-                option1
-                option2
-                option3
-                option4
-                option5
-                option6
-            }.padding(.leading, 100.0)
-            
-            Spacer()
-            
-            Button(action: { self.isPopUpVisible = true }){
-                Text("Check!")
-                    .bold().frame(width: 280, height: 50)
-                    .background(Color.green).foregroundColor(.white)
-                    .cornerRadius(10)
-            }.sheet(isPresented: $isPopUpVisible) {
-                Text("Incorrect!")
-            }
-            
-        }.offset(y: -90).padding(10)
-        
-    }
-}
+            NavigationLink(destination: LessonSelectView(lessonManager: LessonManager(), isCompleted: true, completedLessonId: 0, unlockedLessonId: 1).navigationBarTitle("").navigationBarHidden(true),label: {
+                Text("Great!").modifier(GreenButtonWhiteTextStyle())
+            })
 
-struct CircleView: View {
-    
-    var color: Color
-    var size: CGFloat
-    
-    var body: some View {
-        ZStack{
-            Circle().frame(width: size, height: size).foregroundColor(color)
-        }
-    }
-}
-
-struct DraggableCircleView: View {
-    
-    var color: Color
-    var size: CGFloat
-    var text: String
-    @State private var position = CGPoint.zero
-    
-    var body: some View {
-        ZStack{
-            Circle()
-                .frame(width: size, height: size)
-                .foregroundColor(color)
-                .position(position)
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            self.position = value.location
-                        })
             
-            Text(text).position(position)
-        }
-    }
-}
-
-struct EllipseView: View {
-    
-    var color: Color
-    var sizeX: CGFloat
-    var sizeY: CGFloat
-    
-    var body: some View {
-        ZStack{
-            Ellipse()
-                .strokeBorder(.black, lineWidth: 1)
-                .background(Ellipse().fill(color))
-                .frame(width: sizeX, height: sizeY)
-        }
+        }.offset(y: -90)
     }
 }
 
@@ -448,4 +343,83 @@ struct Lesson0View_Previews: PreviewProvider {
         Lesson0View(lessonId: 0, lessonManager: LessonManager())
     }
 }
+
+
+//import UIKit
+//import CoreGraphics
+//
+//struct Lesson0_7: View {
+//
+//    @State private var isShaking = false
+//    @State private var isPressedShort = false
+//    @State private var isPressedLong = false
+//
+//    var columns: [GridItem] = Array(repeating: GridItem(.fixed(100), spacing: 0), count: 3)
+//
+//    @State private var isPopUpVisible = false
+//
+//    var body: some View {
+//
+//        VStack{
+//
+//            let bigSet = CircleView(color: .gray, size: self.isPressedShort ? 250 : 200)
+//            let bigSetCenter = bigSet.position
+//
+//            Spacer()
+//
+//            Text("Correctly construct the set\n A = {{a}, b, {a, b}} \n By dragging the green elements into the gray set").foregroundColor(Color.black).font(.custom("AmericanTypewriter", fixedSize: 23)).multilineTextAlignment(.center).padding()
+//
+//            Button(action: {
+//                withAnimation { self.isPressedShort = true
+//                    self.isPressedLong.toggle()
+//                }
+//              DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                withAnimation {self.isPressedShort = false}
+//              }
+//            }){
+//                  ZStack{
+//                      bigSet
+//                      Text("A").bold().offset(x:0, y:0).font(.system(size:32))
+//                  }.padding(20)
+//                }
+//
+//            Spacer()
+//
+//            let option1 = DraggableCircleView(color: .green, size: 50, text: "a")
+//            let option2 = DraggableCircleView(color: .green, size: 50, text: "b")
+//            let option3 = DraggableCircleView(color: .green, size: 50, text: "{a}")
+//            let option4 = DraggableCircleView(color: .green, size: 50, text: "{b}")
+//            let option5 = DraggableCircleView(color: .green, size: 50, text: "{a, b}")
+//            let option6 = DraggableCircleView(color: .green, size: 50, text: "A")
+//            let option1center = option1.position
+//            let option2center = option2.position
+//            let option3center = option3.position
+//            let option4center = option4.position
+//            let option5center = option5.position
+//            let option6center = option6.position
+////            let distance1 = bigSetCenter.distance(from: bigSetCenter, to: option1center)
+//            LazyVGrid(columns: columns, alignment: .center) {
+//                option1
+//                option2
+//                option3
+//                option4
+//                option5
+//                option6
+//            }.padding(.leading, 100.0)
+//
+//            Spacer()
+//
+//            Button(action: { self.isPopUpVisible = true }){
+//                Text("Check!")
+//                    .bold().frame(width: 280, height: 50)
+//                    .background(Color.green).foregroundColor(.white)
+//                    .cornerRadius(10)
+//            }.sheet(isPresented: $isPopUpVisible) {
+//                Text("Incorrect!")
+//            }
+//
+//        }.offset(y: -90).padding(10)
+//
+//    }
+//}
 

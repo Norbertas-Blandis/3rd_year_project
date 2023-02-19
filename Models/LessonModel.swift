@@ -18,8 +18,8 @@ struct LessonModel: Identifiable{
     var id: Int
     var title: String
     var duration: String
-    var isUnlocked: Bool = false
-    var isCompleted: Bool = false
-    @State var goToLesson: Bool = false
+    @State var isUnlocked: Bool
+    @State var isCompleted: Bool
+    @State var goToLesson: Bool
 //    var destinationView: AnyView
 }

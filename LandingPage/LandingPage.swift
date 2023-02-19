@@ -15,12 +15,12 @@ struct LandingPage: View {
         
         TabView{
             
-            LessonSelectView(lessonManager: LessonManager())
+            LessonSelectView(lessonManager: LessonManager(), isCompleted: false, completedLessonId: -1, unlockedLessonId: -1)
                 .tabItem {
                     Image(systemName: "house").foregroundColor(Color.black)
                 }
             
-            LectureNotesView()
+            LectureNotesView(lessonManager: LessonManager())
                 .tabItem {
                     Image(systemName: "book.closed.fill").foregroundColor(Color.black)
                 }

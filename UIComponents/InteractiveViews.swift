@@ -180,3 +180,59 @@ struct TextView : UIViewRepresentable {
    }
 }
 
+struct CircleView: View {
+    
+    var color: Color
+    var size: CGFloat
+    
+    var body: some View {
+        ZStack{
+            Circle().frame(width: size, height: size).foregroundColor(color)
+        }
+    }
+}
+
+struct DraggableCircleView: View {
+    
+    var color: Color
+    var size: CGFloat
+    var text: String
+    @State private var position = CGPoint.zero
+    
+    var body: some View {
+        ZStack{
+            Circle()
+                .frame(width: size, height: size)
+                .foregroundColor(color)
+                .position(position)
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            self.position = value.location
+                        })
+            
+            Text(text).position(position)
+        }
+    }
+}
+
+struct EllipseView: View {
+    
+    var color: Color
+    var sizeX: CGFloat
+    var sizeY: CGFloat
+    
+    var body: some View {
+        ZStack{
+            Ellipse()
+                .strokeBorder(.black, lineWidth: 1)
+                .background(Ellipse().fill(color))
+                .frame(width: sizeX, height: sizeY)
+        }
+    }
+}
+
+
+
+
+
