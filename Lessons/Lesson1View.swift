@@ -230,49 +230,75 @@ struct SubsequenceIntuitionView: View{
                 
             }
             
-            NavigationLink(destination: AnswerChecker3View().navigationBarTitle("Subsequences").navigationBarHidden(false),label: {
+            NavigationLink(destination: ConvergenceIntuitionView().navigationBarTitle("Convergence").navigationBarHidden(false),label: {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
         }.offset(y: -90).padding(10)
     }
 }
 
-struct AnswerChecker3View: View{
+struct ConvergenceIntuitionView: View{
     
-    @State private var question1 : String = "[math](a_{n})_{n∈N}[/math]"
-    @State private var question2 : String = "[math]a_{n}=n^3[/math]"
-    @State private var question3 : String = "[math]a_{4}[/math]"
+    @State private var seqdefinition : String = "[math](a_{n})_{n∈N}[/math],"
+    @State private var subdefinition: String = "[math](a_{n_{k}})_{k∈N}[/math]"
+    @State private var subindequality: String = "[math]n_{1}<n_{2}<n_{3}<...[/math]"
+    
+    @State private var sliderValue: Double = 0.0
     
     var body: some View{
         VStack{
-            
-            Spacer()
             VStack{
-                HStack{
-                    Text("For a sequence ")
-                    TextView(string: $question1).frame(width: 100.0, height: 30.0)
-                }.modifier(BlackTitleAcademicTextStyle())
+                Spacer()
+                Text("It is often useful to find out whether a given sequence converges.\nIntuitively, we can understand convergence as 'approaching a point'")
                 
-                HStack{
-                    Text("Given by: ")
-                    TextView(string: $question2).frame(width: 100.0, height: 30.0)
-                }.modifier(BlackTitleAcademicTextStyle())
-                
-                HStack{
-                    Text("What is the value of: ")
-                    TextView(string: $question3).frame(width: 100.0, height: 30.0)
-                }.modifier(BlackTitleAcademicTextStyle())
-            }.modifier(GrayContainerStyle(opacity: 0.25))
-            Spacer()
+                LineWithSlider(pointsCount: 10, labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]).padding()
+                Spacer()
+            }.modifier(BlackTitleAcademicTextStyle())
             
-            StringAnswerCheckerView(question: "", correctAnswer: "64", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise #2", explanationView: AnyView(SequenceIntroExp1()))
-        }
+//            NavigationLink(destination: SubsequenceIntuitionView().navigationBarTitle("Subsequences").navigationBarHidden(false),label: {
+//                Text("Next!")
+//                    .modifier(GreenButtonWhiteTextStyle())})
+            
+        }.offset(y: -90).padding(10)
     }
 }
 
+//struct AnswerChecker3View: View{
+//
+//    @State private var question1 : String = "[math](a_{n})_{n∈N}[/math]"
+//    @State private var question2 : String = "[math]a_{n}=n^3[/math]"
+//    @State private var question3 : String = "[math]a_{4}[/math]"
+//
+//    var body: some View{
+//        VStack{
+//
+//            Spacer()
+//            VStack{
+//                HStack{
+//                    Text("For a sequence ")
+//                    TextView(string: $question1).frame(width: 100.0, height: 30.0)
+//                }.modifier(BlackTitleAcademicTextStyle())
+//
+//                HStack{
+//                    Text("Given by: ")
+//                    TextView(string: $question2).frame(width: 100.0, height: 30.0)
+//                }.modifier(BlackTitleAcademicTextStyle())
+//
+//                HStack{
+//                    Text("What is the value of: ")
+//                    TextView(string: $question3).frame(width: 100.0, height: 30.0)
+//                }.modifier(BlackTitleAcademicTextStyle())
+//            }.modifier(GrayContainerStyle(opacity: 0.25))
+//            Spacer()
+//
+//            StringAnswerCheckerView(question: "", correctAnswer: "64", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise #2", explanationView: AnyView(SequenceIntroExp1()))
+//        }
+//    }
+//}
+
 struct Lesson1View_Previews: PreviewProvider {
     static var previews: some View {
-        SubsequenceIntuitionView()
+        ConvergenceIntuitionView()
         
     }
 }

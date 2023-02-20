@@ -37,8 +37,6 @@ struct LessonSelectView: View {
                                          goToLesson: lesson2.goToLesson)
         lessonManager.model.lessonModel[num1] = currTempLesson
         lessonManager.model.lessonModel[num2] = nextTempLesson
-        
-        
     }
     
     var body: some View {
@@ -68,7 +66,6 @@ struct LessonSelectView: View {
                                     .cornerRadius(10)
                                     .shadow(color: Color.blue.opacity(0.7), radius: 5, x: 0, y: 5)
                             }
-
                         }
                     }.frame(width: .infinity, height: 200).cornerRadius(20).shadow(radius: 10).padding(15)
                 }

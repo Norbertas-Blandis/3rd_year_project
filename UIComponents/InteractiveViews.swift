@@ -232,6 +232,63 @@ struct EllipseView: View {
     }
 }
 
+struct LineWithSlider: View {
+    @State private var sliderValue: Double = 0.0
+    let pointsCount: Int
+    let labels: [String]
+    
+    init(pointsCount: Int, labels: [String]) {
+        self.pointsCount = pointsCount
+        self.labels = labels
+    }
+    
+    var body: some View {
+        VStack {
+            // X-axis
+            GeometryReader { geometry in
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: geometry.size.height/2))
+                    path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height/2))
+                }
+                .stroke(lineWidth: 2)
+                .overlay(
+                    ForEach(0..<pointsCount) { i in
+                        VStack {
+                            Circle()
+                                .fill(i == Int(sliderValue) ? Color.red : Color.gray)
+                                .frame(width: i == Int(sliderValue) ? 10 : 6, height: i == Int(sliderValue) ? 10 : 6)
+                                .position(x: Double(i) * geometry.size.width / Double(pointsCount - 1), y: geometry.size.height/2)
+                            Text(labels[i]).position(x: Double(i) * geometry.size.width / Double(pointsCount - 1), y: geometry.size.height/3)
+                        }
+                    }
+                )
+            }.frame(height: 70)
+            
+            // Slider
+            VStack {
+                Slider(value: $sliderValue, in: 0...Double(pointsCount - 1), step: 1)
+                    .frame(width: 100)
+                Text("n=\(Int(sliderValue))")
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+struct LineWithSlider_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        LineWithSlider(pointsCount: 10, labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+        
+    }
+}
+
+
 
 
 
