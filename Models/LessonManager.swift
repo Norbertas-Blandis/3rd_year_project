@@ -32,7 +32,7 @@ extension LessonManager{
         LessonModel(id: 1,
                     title: "Sequence introduction",
                     duration: "20 min",
-                    isUnlocked: false,
+                    isUnlocked: true,
                     isCompleted: false,
                     goToLesson: false),
 //                    destinationView: AnyView(Lesson1View(lessonId: 1, lessonManager: LessonManager()))),

@@ -162,7 +162,7 @@ struct TextView : UIViewRepresentable {
             latexParser: LatexParser(),
             font: UIFont.init(descriptor: UIFontDescriptor(name: "American Typewriter", size: 24.0), size: 20),
             textColor: UIColor.black,
-            isEditable: true,
+            isEditable: false,
             frame: CGRect.null,
             completion: nil
         )
@@ -232,43 +232,118 @@ struct EllipseView: View {
     }
 }
 
+//struct LineWithSlider: View {
+//    @State private var sliderValue: Double = 0.0
+//    let pointsCount: Int
+//    let labels: [String]
+//
+//    init(pointsCount: Int, labels: [String]) {
+//        self.pointsCount = pointsCount
+//        self.labels = labels
+//    }
+//
+//    var body: some View {
+//        VStack {
+//            // X-axis
+//            GeometryReader { geometry in
+//                Path { path in
+//                    path.move(to: CGPoint(x: 0, y: geometry.size.height/2))
+//                    path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height/2))
+//                }
+//                .stroke(lineWidth: 2)
+//                .overlay(
+//                    ForEach(0..<pointsCount) { i in
+//                        VStack {
+//                            Circle()
+//                                .fill(i == Int(sliderValue) ? Color.red : Color.gray)
+//                                .frame(width: i == Int(sliderValue) ? 10 : 6, height: i == Int(sliderValue) ? 10 : 6)
+//                                .position(x: Double(i) * geometry.size.width / Double(pointsCount - 1), y: geometry.size.height/2)
+//                            Text(labels[i]).position(x: Double(i) * geometry.size.width / Double(pointsCount - 1), y: geometry.size.height/3)
+//                        }
+//                    }
+//                )
+//            }.frame(height: 70)
+//
+//            // Slider
+//            VStack {
+//                Slider(value: $sliderValue, in: 0...Double(pointsCount - 1), step: 1)
+//                    .frame(width: 100)
+//                Text("n=\(Int(sliderValue))")
+//            }
+//        }
+//    }
+//}
+
 struct LineWithSlider: View {
     @State private var sliderValue: Double = 0.0
     let pointsCount: Int
     let labels: [String]
+    let pointPosition: (Int, Int) -> CGPoint // custom formula for point position
     
-    init(pointsCount: Int, labels: [String]) {
+    init(pointsCount: Int, labels: [String], pointPosition: @escaping (Int, Int) -> CGPoint) {
         self.pointsCount = pointsCount
         self.labels = labels
+        self.pointPosition = pointPosition
     }
+    
+    let maxWidth = UIScreen.main.bounds.width - 50
+    let minTickValue = 0
+    let maxTickValue = 1
+    
+    @State private var seq : String = "[math]a_{n}=[/math]"
     
     var body: some View {
         VStack {
             // X-axis
             GeometryReader { geometry in
-                Path { path in
-                    path.move(to: CGPoint(x: 0, y: geometry.size.height/2))
-                    path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height/2))
-                }
-                .stroke(lineWidth: 2)
-                .overlay(
-                    ForEach(0..<pointsCount) { i in
-                        VStack {
-                            Circle()
-                                .fill(i == Int(sliderValue) ? Color.red : Color.gray)
-                                .frame(width: i == Int(sliderValue) ? 10 : 6, height: i == Int(sliderValue) ? 10 : 6)
-                                .position(x: Double(i) * geometry.size.width / Double(pointsCount - 1), y: geometry.size.height/2)
-                            Text(labels[i]).position(x: Double(i) * geometry.size.width / Double(pointsCount - 1), y: geometry.size.height/3)
-                        }
+                ZStack {
+                    
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: geometry.size.height/2))
+                        path.addLine(to: CGPoint(x: maxWidth, y: geometry.size.height/2))
                     }
-                )
+                    .stroke(lineWidth: 2)
+                    .overlay(
+                        ForEach(0..<pointsCount) { i in
+                            VStack {
+                                Circle()
+                                    .fill(i == Int(sliderValue) ? Color.red : Color.gray)
+                                    .frame(width: i == Int(sliderValue) ? 12 : 8, height: i == Int(sliderValue) ? 12 : 8)
+                                    .position(pointPosition(i, pointsCount))
+                                Text(labels[i]).position(x: pointPosition(i, pointsCount).x, y: -20.0)
+                            }
+                        }
+                    )
+                    
+                    ForEach(0..<11) { i in
+                        let tickPosition = CGPoint(x: Double(i) * Double(maxWidth/Double(10)), y: geometry.size.height/2)
+                        
+                        Path { path in
+                            path.move(to: tickPosition)
+                            path.addLine(to: CGPoint(x: tickPosition.x, y: tickPosition.y + 5))
+                        }
+                        .stroke(lineWidth: 1)
+                        
+                        let value = Double(i) / Double(10)
+                        Text(String(format: "%.1f", value))
+                            .position(x: tickPosition.x, y: tickPosition.y + 20)
+                    }
+                }
             }.frame(height: 70)
             
-            // Slider
-            VStack {
-                Slider(value: $sliderValue, in: 0...Double(pointsCount - 1), step: 1)
-                    .frame(width: 100)
-                Text("n=\(Int(sliderValue))")
+            HStack{
+                // Slider
+                VStack {
+                    Slider(value: $sliderValue, in: 0...Double(pointsCount - 1), step: 1)
+                        .frame(width: 100)
+                    Text("n=\(Int(sliderValue))")
+                }.padding()
+                
+                // Box showing current point position
+                HStack{
+                    TextView(string: $seq).frame(width: 50.0, height: 20.0)
+                    Text("\(pointPosition(Int(sliderValue), pointsCount).x / maxWidth)")
+                }.padding().background(Color.gray.opacity(0.2)).cornerRadius(8)
             }
         }
     }
@@ -280,13 +355,25 @@ struct LineWithSlider: View {
 
 
 
+
+
 struct LineWithSlider_Previews: PreviewProvider {
     
     static var previews: some View {
-        LineWithSlider(pointsCount: 10, labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+        LineWithSlider(pointsCount: 10, labels: ["0","1/2","3/4","4/5","4","5","","....","",""]) { i, pointsCount in
+            let maxWidth = UIScreen.main.bounds.width
+            let x = Double(1 - 1/Double(i+1)) * (maxWidth-50)
+            let y = 35.0
+            return CGPoint(x: x, y: y)
+        }
         
     }
 }
+
+//x = Double(i) * 360 / Double(pointsCount - 1)
+
+//            let x = Double(1-Double(1/(i+1))) * 200// custom formula for x-position
+//            let y = sin(x * .pi / 100) * 20 + 35 // custom formula for y-position
 
 
 

@@ -239,29 +239,100 @@ struct SubsequenceIntuitionView: View{
 
 struct ConvergenceIntuitionView: View{
     
-    @State private var seqdefinition : String = "[math](a_{n})_{n∈N}[/math],"
-    @State private var subdefinition: String = "[math](a_{n_{k}})_{k∈N}[/math]"
-    @State private var subindequality: String = "[math]n_{1}<n_{2}<n_{3}<...[/math]"
-    
     @State private var sliderValue: Double = 0.0
     
     var body: some View{
         VStack{
             VStack{
                 Spacer()
-                Text("It is often useful to find out whether a given sequence converges.\nIntuitively, we can understand convergence as 'approaching a point'")
+                Text("Intuitively, we can understand convergence as 'approaching a point'").modifier(BlackTitleAcademicTextStyle())
                 
-                LineWithSlider(pointsCount: 10, labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]).padding()
+                Text("Here is a convergent sequence, can you guess which number does it converge to?").modifier(BlackDetailedAcademicTextStyle())
+                
+                LineWithSlider(pointsCount: 15, labels: ["0","1/2","2/3","3/4","","...","","","","", "", "","","","",""]) { i, pointsCount in
+                    let maxWidth = UIScreen.main.bounds.width
+                    let x = Double(1 - 1/Double(i+1)) * (maxWidth-50)
+                    let y = 35.0
+                    return CGPoint(x: x, y: y)
+                }.padding()
                 Spacer()
-            }.modifier(BlackTitleAcademicTextStyle())
+                
+            }
             
-//            NavigationLink(destination: SubsequenceIntuitionView().navigationBarTitle("Subsequences").navigationBarHidden(false),label: {
+            NavigationLink(destination: ConvergenceExampleView().navigationBarTitle("Convergence").navigationBarHidden(false),label: {
+                Text("Next!")
+                    .modifier(GreenButtonWhiteTextStyle())})
+            
+        }.offset(y: -90).padding(10)
+    }
+}
+
+struct ConvergenceExampleView: View{
+    
+    @State private var seqdefinition : String = "[math](a_{n})_{n∈N}[/math]"
+    @State private var seqdeclaration: String = "[math]a_{n}=1-1/n[/math]"
+    
+    @State private var sliderValue: Double = 0.0
+    
+    var body: some View{
+        VStack{
+            VStack{
+                
+                Spacer()
+//                HStack{
+//                    Text("Consider a sequence ")
+//                    TextView(string: $seqdefinition).frame(width: 100.0, height: 30.0)
+//                }
+                
+                HStack{
+                    Text("Consider a sequence given by: ").multilineTextAlignment(.center)
+                    TextView(string: $seqdeclaration).frame(width: 150.0, height: 30.0)
+                }
+                
+                LineWithSlider(pointsCount: 15, labels: ["","","","","","","","","","", "", "","","","",""]) { i, pointsCount in
+                    let maxWidth = UIScreen.main.bounds.width
+                    let x = Double(1 - 1/Double(i+1)) * (maxWidth-50)
+                    let y = 35.0
+                    return CGPoint(x: x, y: y)
+                }.padding()
+                Text("It is clear that the value of the sequence approaches 1 as n tends to infinity. The natural question is").multilineTextAlignment(.center)
+                Text("'how should we rigorously define convergence?'").bold().multilineTextAlignment(.center).padding()
+                Spacer()
+                
+            }
+            
+            NavigationLink(destination: ConvergenceDefinitionView().navigationBarTitle("Subsequences").navigationBarHidden(false),label: {
+                Text("Next!")
+                    .modifier(GreenButtonWhiteTextStyle())})
+            
+        }.offset(y: -90).padding(10)
+    }
+}
+
+struct ConvergenceDefinitionView: View{
+    
+    @State private var convergencedef: String = "[math]∀ε>0,∃N∈N,∀n≥N |a_{n}−r|<ε[/math]"
+    @State private var ineq: String = "[math]|a_{n}−r|<ε[/math]"
+    var body: some View{
+        VStack{
+            VStack{
+                
+                Spacer()
+                Text("A formal definition of convergence is as follows:")
+                TextView(string: $convergencedef).frame(width: 380.0, height: 30.0)
+                Text("Let's break this down:")
+                Spacer()
+            }.modifier(BlackDetailedAcademicTextStyle())
+            
+//            NavigationLink(destination: ConvergenceExampleView().navigationBarTitle("Convergence").navigationBarHidden(false),label: {
 //                Text("Next!")
 //                    .modifier(GreenButtonWhiteTextStyle())})
             
         }.offset(y: -90).padding(10)
     }
 }
+
+
 
 //struct AnswerChecker3View: View{
 //
@@ -298,7 +369,7 @@ struct ConvergenceIntuitionView: View{
 
 struct Lesson1View_Previews: PreviewProvider {
     static var previews: some View {
-        ConvergenceIntuitionView()
+        ConvergenceDefinitionView()
         
     }
 }
