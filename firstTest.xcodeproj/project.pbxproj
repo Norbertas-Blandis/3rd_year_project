@@ -26,6 +26,8 @@
 		F4A24DD0299D230C00CBDF56 /* SequenceIntroExp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DCF299D230C00CBDF56 /* SequenceIntroExp.swift */; };
 		F4A24DD2299EC09200CBDF56 /* ContainerStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DD1299EC09200CBDF56 /* ContainerStyles.swift */; };
 		F4A24DD5299EC9C700CBDF56 /* LaTeXSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F4A24DD4299EC9C700CBDF56 /* LaTeXSwiftUI */; };
+		F4A24DDE29ABE8F700CBDF56 /* Conv:DiffExplan.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DDD29ABE8F700CBDF56 /* Conv:DiffExplan.swift */; };
+		F4A24DE029B5145D00CBDF56 /* ConvergenceDefExpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DDF29B5145D00CBDF56 /* ConvergenceDefExpl.swift */; };
 		F4A4ACD32919AAA20012522F /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD22919AAA20012522F /* LessonModel.swift */; };
 		F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD42919AB190012522F /* LessonManager.swift */; };
 		F4A4ACD72919AD760012522F /* LessonSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD62919AD760012522F /* LessonSelectView.swift */; };
@@ -60,6 +62,8 @@
 		F4A24DC32999160A00CBDF56 /* AcademicWritingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicWritingViews.swift; sourceTree = "<group>"; };
 		F4A24DCF299D230C00CBDF56 /* SequenceIntroExp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceIntroExp.swift; sourceTree = "<group>"; };
 		F4A24DD1299EC09200CBDF56 /* ContainerStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerStyles.swift; sourceTree = "<group>"; };
+		F4A24DDD29ABE8F700CBDF56 /* Conv:DiffExplan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conv:DiffExplan.swift"; sourceTree = "<group>"; };
+		F4A24DDF29B5145D00CBDF56 /* ConvergenceDefExpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvergenceDefExpl.swift; sourceTree = "<group>"; };
 		F4A4ACD22919AAA20012522F /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
 		F4A4ACD42919AB190012522F /* LessonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonManager.swift; sourceTree = "<group>"; };
 		F4A4ACD62919AD760012522F /* LessonSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSelectView.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 		F478C62B28E889000090292F = {
 			isa = PBXGroup;
 			children = (
+				F4A24DDC29ABE8C500CBDF56 /* LessonExplanation */,
 				F4A24DD6299FBBE700CBDF56 /* LectureNotes */,
 				F4A24DCC299D22B100CBDF56 /* QuestionExplanations */,
 				F49EFBE5290B351C00B32086 /* Quizes */,
@@ -158,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				F4A24DCF299D230C00CBDF56 /* SequenceIntroExp.swift */,
+				F4A24DDF29B5145D00CBDF56 /* ConvergenceDefExpl.swift */,
 			);
 			path = QuestionExplanations;
 			sourceTree = "<group>";
@@ -167,6 +173,14 @@
 			children = (
 			);
 			path = LectureNotes;
+			sourceTree = "<group>";
+		};
+		F4A24DDC29ABE8C500CBDF56 /* LessonExplanation */ = {
+			isa = PBXGroup;
+			children = (
+				F4A24DDD29ABE8F700CBDF56 /* Conv:DiffExplan.swift */,
+			);
+			path = LessonExplanation;
 			sourceTree = "<group>";
 		};
 		F4F04A142906E82100DD05D9 /* LandingPage */ = {
@@ -290,12 +304,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F49810EB29168DF100680568 /* Quiz2View.swift in Sources */,
+				F4A24DDE29ABE8F700CBDF56 /* Conv:DiffExplan.swift in Sources */,
 				F4A24DD0299D230C00CBDF56 /* SequenceIntroExp.swift in Sources */,
 				F49EFBE7290B352A00B32086 /* Quiz0View.swift in Sources */,
 				F4F04A262909133200DD05D9 /* QuizManager.swift in Sources */,
 				F4F04A132906D93F00DD05D9 /* ImagePicker.swift in Sources */,
 				F4A24DC42999160A00CBDF56 /* AcademicWritingViews.swift in Sources */,
 				F4F04A2B2909174700DD05D9 /* QuizOptionGridView.swift in Sources */,
+				F4A24DE029B5145D00CBDF56 /* ConvergenceDefExpl.swift in Sources */,
 				F49810E92916830F00680568 /* Lesson2View.swift in Sources */,
 				F478C63A28E889000090292F /* LoginView.swift in Sources */,
 				F49810E72916830200680568 /* Lesson1View.swift in Sources */,

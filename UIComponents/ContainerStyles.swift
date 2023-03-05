@@ -16,6 +16,6 @@ struct GrayContainerStyle: ViewModifier {
             .frame(maxWidth: .infinity, minHeight: 50)
             .background(Color.gray.opacity(opacity))
             .cornerRadius(10)
-            .padding(EdgeInsets(top: 20, leading: 15, bottom: 20, trailing: 15))
+//            .padding(EdgeInsets(top: 20, leading: 15, bottom: 20, trailing: 15))
     }
 }

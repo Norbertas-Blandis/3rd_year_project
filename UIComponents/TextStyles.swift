@@ -82,7 +82,7 @@ struct BlackTitleAcademicTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(Color.black)
-            .font(.custom("AmericanTypewriter", fixedSize: 20))
+            .font(.custom("Arial", fixedSize: 20))
             .multilineTextAlignment(.center)
             .padding(3)
     }
@@ -92,8 +92,46 @@ struct BlackDetailedAcademicTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(Color.black)
-            .font(.custom("AmericanTypewriter", fixedSize: 18))
+            .font(.custom("Arial", fixedSize: 18))
             .multilineTextAlignment(.center)
             .padding(20)
+    }
+}
+
+struct LightGreenContainerStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(Color.green.opacity(0.1))
+            .cornerRadius(15)
+    }
+}
+
+struct PulsatingButtonCoverStyle: ViewModifier {
+    
+    @State var showCover = false
+    @State var isPulsating: Bool
+    var explanationView: AnyView
+    
+    @State private var scaleFactor: CGFloat = 1.2
+    
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .background(Color.green.opacity(0.1))
+            .cornerRadius(5)
+            .scaleEffect(isPulsating ? scaleFactor : 1.0)
+            .animation(Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true))
+            .onAppear { isPulsating = false}
+            .onDisappear { isPulsating = false}
+            .onTapGesture { showCover.toggle()}
+            .fullScreenCover(isPresented: $showCover, content: {
+                AnyView(explanationView)
+                Button(action: {
+                    showCover = false
+                    isPulsating = false
+                }) {
+                    Text("Understood")
+                }.padding()
+            })
     }
 }

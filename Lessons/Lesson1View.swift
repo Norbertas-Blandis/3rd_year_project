@@ -157,8 +157,6 @@ struct AnswerChecker2View: View{
     }
 }
 
-//import LaTeXSwiftUI
-
 struct SubsequenceDefinitionView: View{
     
     @State private var seqdefinition : String = "[math](a_{n})_{n∈N}[/math],"
@@ -251,10 +249,10 @@ struct ConvergenceIntuitionView: View{
                 
                 LineWithSlider(pointsCount: 15, labels: ["0","1/2","2/3","3/4","","...","","","","", "", "","","","",""]) { i, pointsCount in
                     let maxWidth = UIScreen.main.bounds.width
-                    let x = Double(1 - 1/Double(i+1)) * (maxWidth-50)
+                    let x = Double(1 - 1/Double(i+1)) * (maxWidth*0.9)
                     let y = 35.0
                     return CGPoint(x: x, y: y)
-                }.padding()
+                }.modifier(LightGreenContainerStyle()).padding()
                 Spacer()
                 
             }
@@ -291,10 +289,10 @@ struct ConvergenceExampleView: View{
                 
                 LineWithSlider(pointsCount: 15, labels: ["","","","","","","","","","", "", "","","","",""]) { i, pointsCount in
                     let maxWidth = UIScreen.main.bounds.width
-                    let x = Double(1 - 1/Double(i+1)) * (maxWidth-50)
+                    let x = Double(1 - 1/Double(i+1)) * (maxWidth*0.9)
                     let y = 35.0
                     return CGPoint(x: x, y: y)
-                }.padding()
+                }.modifier(LightGreenContainerStyle()).padding()
                 Text("It is clear that the value of the sequence approaches 1 as n tends to infinity. The natural question is").multilineTextAlignment(.center)
                 Text("'how should we rigorously define convergence?'").bold().multilineTextAlignment(.center).padding()
                 Spacer()
@@ -312,64 +310,187 @@ struct ConvergenceExampleView: View{
 struct ConvergenceDefinitionView: View{
     
     @State private var convergencedef: String = "[math]∀ε>0,∃N∈N,∀n≥N |a_{n}−r|<ε[/math]"
-    @State private var ineq: String = "[math]|a_{n}−r|<ε[/math]"
+    @State private var epsilon: String = "[math]∀ε>0[/math]"
+    @State private var bigN: String = "[math]∃N∈N[/math]"
+    @State private var smallN: String = "[math]∀n≥N[/math]"
+    @State private var diff: String = "[math]|a_{n}−r|<ε[/math]"
+    @State private var seq: String = "[math]a_{n}[/math]"
+    @State private var rvalue: String = "[math]r[/math]"
+    
+    @State private var showCover = false
+    @State private var isPulsating = 0
+    @State private var scaleFactor: CGFloat = 1.2
+    
     var body: some View{
         VStack{
             VStack{
-                
                 Spacer()
+                
                 Text("A formal definition of convergence is as follows:")
-                TextView(string: $convergencedef).frame(width: 380.0, height: 30.0)
+                TextView(string: $convergencedef).frame(width: 360.0, height: 30.0).background(Color.gray.opacity(0.2)).cornerRadius(5).padding(15)
                 Text("Let's break this down:")
+                
+                //for all epsilon view
+                if isPulsating == 4{
+                    HStack{
+                        TextView(string: $epsilon).frame(width: 75, height: 20.0)
+                        Text(" - for all positive ε,")}.modifier(PulsatingButtonCoverStyle(isPulsating: true, explanationView: AnyView(ForAllEpsilonView())))
+                } else {
+                    HStack{
+                        TextView(string: $epsilon).frame(width: 75, height: 20.0)
+                        Text(" - for all positive ε,")}.padding()
+                }
+                
+                //there is N view
+                if isPulsating == 3{
+                    HStack{
+                        TextView(string: $bigN).frame(width: 75, height: 20.0)
+                        Text(" - there is a natural number N,")}.modifier(PulsatingButtonCoverStyle(isPulsating: true, explanationView: AnyView(ThereExistNView())))
+                } else {
+                    HStack{
+                        TextView(string: $bigN).frame(width: 75, height: 20.0)
+                        Text(" - there is a natural number N,")}.padding()
+                }
+                
+                //for all greater than N view
+                if isPulsating == 2{
+                    HStack{
+                        TextView(string: $smallN).frame(width: 75, height: 20.0)
+                        Text(" - such that for all values n greater or equal to N,")}.modifier(PulsatingButtonCoverStyle(isPulsating: true, explanationView: AnyView(ForAllNView())))
+                } else {
+                    HStack{
+                        TextView(string: $smallN).frame(width: 75, height: 20.0)
+                        Text(" - such that for all values n greater or equal to N,")}.padding()
+                }
+                
+                //Modulus inequality view
+                if isPulsating == 1{
+                    HStack{
+                        Text("we have")
+                        TextView(string: $diff).frame(width: 125, height: 30.0)
+                    }.modifier(PulsatingButtonCoverStyle(isPulsating: true, explanationView: AnyView(Conv_DiffExplan())))
+                } else {
+                    HStack{
+                        Text("we have")
+                        TextView(string: $diff).frame(width: 125, height: 30.0)
+                    }.padding()
+                }
+                
                 Spacer()
             }.modifier(BlackDetailedAcademicTextStyle())
             
-//            NavigationLink(destination: ConvergenceExampleView().navigationBarTitle("Convergence").navigationBarHidden(false),label: {
-//                Text("Next!")
-//                    .modifier(GreenButtonWhiteTextStyle())})
+            if isPulsating<5 {
+                Button(action: {isPulsating = isPulsating + 1}, label: {
+                    Text("Ok?!").modifier(GreenButtonWhiteTextStyle())})
+            } else {
+                NavigationLink(destination: ConvergenceDefinitionQuestion1View().navigationBarTitle("Practise Convergence #1").navigationBarHidden(false),label: {
+                    Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+            }
             
         }.offset(y: -90).padding(10)
     }
 }
 
+public let labelList = [AnyView(SubscriptString(main: "a",sub: "1")),
+                       AnyView(SubscriptString(main: "a",sub: "2")),
+                       AnyView(SubscriptString(main: "a",sub: "3")),
+                       AnyView(SubscriptString(main: "a",sub: "4")),
+                       AnyView(SubscriptString(main: "a",sub: "5")),
+                       AnyView(Text("")),AnyView(Text("")),AnyView(Text("")),
+                       AnyView(Text("")),AnyView(Text("")),AnyView(Text("")),
+                       AnyView(Text("")),AnyView(Text("")),AnyView(Text(""))]
 
+struct ConvergenceDefinitionQuestion1View: View{
+    
+    @State private var seq: String = "[math](a_{n})_{n∈N}[/math]"
+    @State private var convergencedef: String = "[math]∀ε>0,∃N∈N,∀n≥N |a_{n}−r|<ε[/math]"
+    @State private var question1: String = "[math]a_{n}=1-1/n[/math]"
+    @State private var question2: String = "[math]∀n≥N |a_{n}−1|<0.3[/math] ?"
 
-//struct AnswerChecker3View: View{
-//
-//    @State private var question1 : String = "[math](a_{n})_{n∈N}[/math]"
-//    @State private var question2 : String = "[math]a_{n}=n^3[/math]"
-//    @State private var question3 : String = "[math]a_{4}[/math]"
-//
-//    var body: some View{
-//        VStack{
-//
-//            Spacer()
-//            VStack{
-//                HStack{
-//                    Text("For a sequence ")
-//                    TextView(string: $question1).frame(width: 100.0, height: 30.0)
-//                }.modifier(BlackTitleAcademicTextStyle())
-//
-//                HStack{
-//                    Text("Given by: ")
-//                    TextView(string: $question2).frame(width: 100.0, height: 30.0)
-//                }.modifier(BlackTitleAcademicTextStyle())
-//
-//                HStack{
-//                    Text("What is the value of: ")
-//                    TextView(string: $question3).frame(width: 100.0, height: 30.0)
-//                }.modifier(BlackTitleAcademicTextStyle())
-//            }.modifier(GrayContainerStyle(opacity: 0.25))
-//            Spacer()
-//
-//            StringAnswerCheckerView(question: "", correctAnswer: "64", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise #2", explanationView: AnyView(SequenceIntroExp1()))
-//        }
-//    }
-//}
+    var body: some View{
+        VStack{
+            VStack{
+                VStack{
+                    Spacer()
+                    
+                    HStack{
+                        Text("Recall that")
+                        TextView(string: $seq).frame(width: 80, height:30)
+                        Text("is convergent if:")}
+                    .padding(.top, 10.0)
+                    
+                    TextView(string: $convergencedef).frame(width: 360.0, height: 30.0)
+                    Spacer()
+                    VStack{
+                        HStack{
+                            Text("For a sequence:").multilineTextAlignment(.center)
+                            TextView(string: $question1).frame(width: 140.0, height: 30.0)}
+                        Text("and ε = 0.3, what is the smallest value of N, such that:")
+                        TextView(string: $question2).frame(width: 210.0, height: 30.0)
+                    }.modifier(GrayContainerStyle(opacity: 0.25))
+                    
+                    LineWithSliderNValue(pointsCount: 12, labels: [], labelViews: labelList, rvalue: 1, epsilon: 0.3, maxWidth: UIScreen.main.bounds.width*0.8) { i, pointsCount in
+                                    let maxWidth = UIScreen.main.bounds.width
+                                    let x = Double(1 - 1/Double(i+1)) * (maxWidth*0.8)
+                                    let y = 35.0
+                        return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle())
+        
+                    StringAnswerCheckerView(question: "", correctAnswer: "4", destinationView: AnyView(ConvergenceDefinitionQuestion2View()), destinationViewTitle: "Practise Convergence #2", explanationView: AnyView(ConvergenceDefExpl()))
+                }
+                
+            }.modifier(BlackDetailedAcademicTextStyle())
+            
+        }.offset(y: -90).padding(10)
+    }
+}
+
+struct ConvergenceDefinitionQuestion2View: View{
+    
+    @State private var seq: String = "[math](a_{n})_{n∈N}[/math]"
+    @State private var convergencedef: String = "[math]∀ε>0,∃N∈N,∀n≥N |a_{n}−r|<ε[/math]"
+    @State private var question1: String = "[math]a_{n}=1/2-1/2n[/math]"
+    @State private var question2: String = "[math]∀n≥N |a_{n}−0.5|<0.2[/math] ?"
+
+    var body: some View{
+        VStack{
+            VStack{
+                VStack{
+                    Spacer()
+                    
+                    HStack{
+                        Text("Recall that")
+                        TextView(string: $seq).frame(width: 80, height:30)
+                        Text("is convergent if:")}
+                    .padding(.top, 10.0)
+                    
+                    TextView(string: $convergencedef).frame(width: 360.0, height: 30.0)
+                    Spacer()
+                    VStack{
+                        HStack{
+                            Text("For a sequence:").multilineTextAlignment(.center)
+                            TextView(string: $question1).frame(width: 190.0, height: 30.0)}
+                        Text("and ε = 0.2, what is the smallest value of N, such that:")
+                        TextView(string: $question2).frame(width: 210.0, height: 30.0)
+                    }.modifier(GrayContainerStyle(opacity: 0.25))
+                    
+                    let maxWidth = UIScreen.main.bounds.width * 0.8
+                    LineWithSliderNValue(pointsCount: 12, labels: [], labelViews: labelList, rvalue: 0.5, epsilon: 0.2, maxWidth: maxWidth) { i, pointsCount in
+                        let x = Double(0.5 - 0.5*1/Double(i+1)) * maxWidth
+                        let y = 35.0
+                        return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle())
+        
+                    StringAnswerCheckerView(question: "", correctAnswer: "3", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise Convergence #2", explanationView: AnyView(ConvergenceDefExpl2()))
+                }
+                
+            }.modifier(BlackDetailedAcademicTextStyle())
+            
+        }.offset(y: -90).padding(10)
+    }
+}
 
 struct Lesson1View_Previews: PreviewProvider {
     static var previews: some View {
-        ConvergenceDefinitionView()
+        ConvergenceDefinitionQuestion2View()
         
     }
 }
