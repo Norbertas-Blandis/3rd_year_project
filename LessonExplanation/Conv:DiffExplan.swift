@@ -87,16 +87,6 @@ struct ForAllNView: View {
                 Spacer()
                 TextView(string: $diff).frame(width: 110, height: 30.0)
                 Spacer()}
-
-            HStack{
-                Spacer()
-                TextView(string: $equiv).frame(width: 45, height: 30.0)
-                Spacer()}
-            
-            HStack{
-                Spacer()
-                TextView(string: $diffan).frame(width: 200, height: 30.0)
-                Spacer()}
             
             Text("The sequence points that are coloured green satisfy this inequality").multilineTextAlignment(.center).padding(.horizontal, 10.0)
             
@@ -190,7 +180,7 @@ struct ForAllEpsilonView: View {
                 Spacer()}
             
             let maxWidth = UIScreen.main.bounds.width * 0.8
-            LineWithSliderEpsilon(pointsCount: 16, labels: [], labelViews: labelList, rvalue: 0.5, maxWidth: maxWidth) { i, pointsCount in
+            LineWithSliderEpsilon(pointsCount: 12, labels: [], labelViews: labelList, rvalue: 0.5, maxWidth: maxWidth) { i, pointsCount in
                 let x = Double(0.5 - (1/Double(i+2))) * maxWidth
                 let y = 35.0
                 return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle()).padding(.all, 15.0)
@@ -204,6 +194,6 @@ struct ForAllEpsilonView: View {
 
 struct Conv_DiffExplan_Previews: PreviewProvider {
     static var previews: some View {
-        ForAllNView()
+        ForAllEpsilonView()
     }
 }

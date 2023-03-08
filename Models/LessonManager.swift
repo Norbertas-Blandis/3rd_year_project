@@ -27,22 +27,40 @@ extension LessonManager{
                      isUnlocked: true,
                      isCompleted: false,
                      goToLesson: false),
-//                     destinationView: AnyView(Lesson0View(lessonId: 0, lessonManager: LessonManager()))),
          
         LessonModel(id: 1,
-                    title: "Sequence introduction",
+                    title: "Sequences and convergence",
                     duration: "20 min",
                     isUnlocked: true,
                     isCompleted: false,
                     goToLesson: false),
-//                    destinationView: AnyView(Lesson1View(lessonId: 1, lessonManager: LessonManager()))),
          
         LessonModel(id: 2,
-                    title: "Sequence examples",
-                    duration: "10 min",
-                    isUnlocked: false,
+                    title: "Using convergence",
+                    duration: "15 min",
+                    isUnlocked: true,
                     isCompleted: false,
-                    goToLesson: false)]
-//                    destinationView: AnyView(Lesson2View(lessonId: 2, lessonManager: LessonManager())))]
+                    goToLesson: false),
+         
+         LessonModel(id: 3,
+                     title: "Theorems on convergence",
+                     duration: "15 min",
+                     isUnlocked: false,
+                     isCompleted: false,
+                     goToLesson: false),
+        
+         LessonModel(id: 4,
+                     title: "Continuity",
+                     duration: "20 min",
+                     isUnlocked: false,
+                     isCompleted: false,
+                     goToLesson: false),
+        
+         LessonModel(id: 5,
+                     title: "Theorems on continuity",
+                     duration: "20 min",
+                     isUnlocked: false,
+                     isCompleted: false,
+                     goToLesson: false)]
     }
 }

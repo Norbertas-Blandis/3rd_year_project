@@ -98,7 +98,6 @@ struct AnswerChecker1View: View{
     
     var body: some View{
         VStack{
-            
             Spacer()
             VStack{
                 HStack{
@@ -115,7 +114,7 @@ struct AnswerChecker1View: View{
                     Text("What is the value of: ")
                     TextView(string: $question3).frame(width: 100.0, height: 30.0)
                 }.modifier(BlackTitleAcademicTextStyle())
-            }.modifier(GrayContainerStyle(opacity: 0.25))
+            }.modifier(GrayContainerStyle(opacity: 0.25)).padding(15)
             Spacer()
             
             StringAnswerCheckerView(question: "", correctAnswer: "64", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise #2", explanationView: AnyView(SequenceIntroExp1()))
@@ -148,7 +147,7 @@ struct AnswerChecker2View: View{
                     Text("What is the value of x, if")
                     TextView(string: $question3).frame(width: 120.0, height: 30.0)
                 }
-            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.25))
+            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.25)).padding(15)
             Spacer()
             
             StringAnswerCheckerView(question: "", correctAnswer: "5", destinationView: AnyView(SubsequenceDefinitionView()), destinationViewTitle: "Subsequences", explanationView: AnyView(SequenceIntroExp2()))
@@ -225,9 +224,7 @@ struct SubsequenceIntuitionView: View{
                     }
                 }
                 Spacer()
-                
             }
-            
             NavigationLink(destination: ConvergenceIntuitionView().navigationBarTitle("Convergence").navigationBarHidden(false),label: {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
@@ -247,14 +244,13 @@ struct ConvergenceIntuitionView: View{
                 
                 Text("Here is a convergent sequence, can you guess which number does it converge to?").modifier(BlackDetailedAcademicTextStyle())
                 
-                LineWithSlider(pointsCount: 15, labels: ["0","1/2","2/3","3/4","","...","","","","", "", "","","","",""]) { i, pointsCount in
-                    let maxWidth = UIScreen.main.bounds.width
-                    let x = Double(1 - 1/Double(i+1)) * (maxWidth*0.9)
+                let maxWidth = UIScreen.main.bounds.width*0.8
+                LineWithSlider(pointsCount: 15, labels: ["0","1/2","2/3","3/4","","...","","","","", "", "","","","",""], maxWidth: maxWidth) { i, pointsCount in
+                    let x = Double(1 - 1/Double(i+1)) * maxWidth
                     let y = 35.0
                     return CGPoint(x: x, y: y)
                 }.modifier(LightGreenContainerStyle()).padding()
                 Spacer()
-                
             }
             
             NavigationLink(destination: ConvergenceExampleView().navigationBarTitle("Convergence").navigationBarHidden(false),label: {
@@ -287,9 +283,9 @@ struct ConvergenceExampleView: View{
                     TextView(string: $seqdeclaration).frame(width: 150.0, height: 30.0)
                 }
                 
-                LineWithSlider(pointsCount: 15, labels: ["","","","","","","","","","", "", "","","","",""]) { i, pointsCount in
-                    let maxWidth = UIScreen.main.bounds.width
-                    let x = Double(1 - 1/Double(i+1)) * (maxWidth*0.9)
+                let maxWidth = UIScreen.main.bounds.width*0.8
+                LineWithSlider(pointsCount: 15, labels: ["","","","","","","","","","", "", "","","","",""], maxWidth: maxWidth) { i, pointsCount in
+                    let x = Double(1 - 1/Double(i+1)) * maxWidth
                     let y = 35.0
                     return CGPoint(x: x, y: y)
                 }.modifier(LightGreenContainerStyle()).padding()
@@ -413,14 +409,13 @@ struct ConvergenceDefinitionQuestion1View: View{
                 VStack{
                     Spacer()
                     
-                    HStack{
-                        Text("Recall that")
-                        TextView(string: $seq).frame(width: 80, height:30)
-                        Text("is convergent if:")}
-                    .padding(.top, 10.0)
-                    
-                    TextView(string: $convergencedef).frame(width: 360.0, height: 30.0)
-                    Spacer()
+//                    HStack{
+//                        Text("Recall that")
+//                        TextView(string: $seq).frame(width: 80, height:30)
+//                        Text("is convergent if:")}
+//                    .padding(.top, 10.0)
+//                    TextView(string: $convergencedef).frame(width: 360.0, height: 30.0)
+//                    Spacer()
                     VStack{
                         HStack{
                             Text("For a sequence:").multilineTextAlignment(.center)
@@ -434,13 +429,14 @@ struct ConvergenceDefinitionQuestion1View: View{
                                     let x = Double(1 - 1/Double(i+1)) * (maxWidth*0.8)
                                     let y = 35.0
                         return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle())
+                    Spacer()
         
                     StringAnswerCheckerView(question: "", correctAnswer: "4", destinationView: AnyView(ConvergenceDefinitionQuestion2View()), destinationViewTitle: "Practise Convergence #2", explanationView: AnyView(ConvergenceDefExpl()))
                 }
                 
             }.modifier(BlackDetailedAcademicTextStyle())
             
-        }.offset(y: -90).padding(10)
+        }.padding(10)
     }
 }
 
@@ -457,14 +453,6 @@ struct ConvergenceDefinitionQuestion2View: View{
                 VStack{
                     Spacer()
                     
-                    HStack{
-                        Text("Recall that")
-                        TextView(string: $seq).frame(width: 80, height:30)
-                        Text("is convergent if:")}
-                    .padding(.top, 10.0)
-                    
-                    TextView(string: $convergencedef).frame(width: 360.0, height: 30.0)
-                    Spacer()
                     VStack{
                         HStack{
                             Text("For a sequence:").multilineTextAlignment(.center)
@@ -479,18 +467,38 @@ struct ConvergenceDefinitionQuestion2View: View{
                         let y = 35.0
                         return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle())
         
-                    StringAnswerCheckerView(question: "", correctAnswer: "3", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise Convergence #2", explanationView: AnyView(ConvergenceDefExpl2()))
+                    Spacer()
+                    StringAnswerCheckerView(question: "", correctAnswer: "3", destinationView: AnyView(Lesson1Complete(lessonManager: LessonManager())), destinationViewTitle: "", explanationView: AnyView(ConvergenceDefExpl2()))
                 }
                 
             }.modifier(BlackDetailedAcademicTextStyle())
             
-        }.offset(y: -90).padding(10)
+        }.padding(10)
+    }
+}
+
+struct Lesson1Complete: View {
+    
+    @ObservedObject var lessonManager: LessonManager
+    @State private var isPressed: Bool = false
+    
+    var body: some View{
+        
+        VStack{
+            Spacer()
+            Text("Congratulations! You have completed the introduction to sequences and convergence!").modifier(BlackTitleTextStyle())
+            Spacer()
+            
+            NavigationLink(destination: LessonSelectView(lessonManager: LessonManager(), isCompleted: true, completedLessonId: 1, unlockedLessonId: 2).navigationBarTitle("").navigationBarHidden(true),label: {
+                Text("Great!").modifier(GreenButtonWhiteTextStyle())
+            })
+        }.offset(y: -90).padding(20)
     }
 }
 
 struct Lesson1View_Previews: PreviewProvider {
     static var previews: some View {
-        ConvergenceDefinitionQuestion2View()
+        ConvergenceIntuitionView()
         
     }
 }

@@ -106,6 +106,34 @@ struct LightGreenContainerStyle: ViewModifier {
     }
 }
 
+struct GreenHelpButtonStyle: ViewModifier {
+    
+    @State var isActivated: Bool
+    
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 16))
+            .multilineTextAlignment(.center)
+            .foregroundColor(.white)
+            .frame(width: 120, height: 50)
+            .background(isActivated ? Color.green : Color.green.opacity(0.5))
+            .cornerRadius(10)
+    }
+}
+
+struct GreenCheckAnswerButtonStyle: ViewModifier {
+    
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: 18))
+            .multilineTextAlignment(.center)
+            .foregroundColor(.white)
+            .frame(width: 180, height: 50)
+            .background(Color.green)
+            .cornerRadius(10)
+    }
+}
+
 struct PulsatingButtonCoverStyle: ViewModifier {
     
     @State var showCover = false

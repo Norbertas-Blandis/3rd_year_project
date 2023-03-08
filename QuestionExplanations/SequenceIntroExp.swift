@@ -35,7 +35,7 @@ struct SequenceIntroExp1: View {
                     Text("So, ")
                     TextView(string: $answer).frame(width: 200.0, height: 30.0)
                 }
-            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.25))
+            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.25)).padding(15)
             Spacer()
         }
     }
@@ -71,7 +71,7 @@ struct SequenceIntroExp2: View {
                     Text("We get that our answer")
                     TextView(string: $question4).frame(width: 100.0, height: 25.0)
                 }
-            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.2))
+            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.2)).padding(15)
             Spacer()
         }
     }

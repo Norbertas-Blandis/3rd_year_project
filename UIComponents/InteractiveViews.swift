@@ -233,20 +233,19 @@ struct EllipseView: View {
 }
 
 struct LineWithSlider: View {
+    
     @State private var sliderValue: Double = 0.0
     let pointsCount: Int
     let labels: [String]
+    let maxWidth: CGFloat
     let pointPosition: (Int, Int) -> CGPoint // custom formula for point position
     
-    init(pointsCount: Int, labels: [String], pointPosition: @escaping (Int, Int) -> CGPoint) {
+    init(pointsCount: Int, labels: [String], maxWidth: CGFloat, pointPosition: @escaping (Int, Int) -> CGPoint) {
         self.pointsCount = pointsCount
         self.labels = labels
+        self.maxWidth = maxWidth
         self.pointPosition = pointPosition
     }
-    
-    let maxWidth = UIScreen.main.bounds.width * 0.9
-    let minTickValue = 0
-    let maxTickValue = 1
     
     @State private var seq : String = "[math]a_{n}=[/math]"
     
@@ -254,6 +253,8 @@ struct LineWithSlider: View {
         VStack {
             // X-axis
             GeometryReader { geometry in
+                
+                Spacer()
                 ZStack {
                     
                     Path { path in
@@ -287,7 +288,7 @@ struct LineWithSlider: View {
                             .position(x: tickPosition.x, y: tickPosition.y + 20)
                     }
                 }
-            }.frame(height: 70)
+            }.frame(height: 70).padding(10)
             
             HStack{
                 // Slider
@@ -355,9 +356,8 @@ struct LineWithSliderEpsilon: View {
     let labelViews: [AnyView]
     let rvalue: Double
     let maxWidth: CGFloat
-    
+    @State private var epsilon: Double = 0.5
     @State private var sliderValue: Double = 0.0
-    @State private var epsilon: Double = 0.0
     let pointPosition: (Int, Int) -> CGPoint // custom formula for point position
     
     init(pointsCount: Int, labels: [String], labelViews: [AnyView], rvalue: Double, maxWidth: Double, pointPosition: @escaping (Int, Int) -> CGPoint) {
@@ -448,22 +448,20 @@ struct LineWithSliderEpsilon: View {
                             .position(x: tickPosition.x, y: tickPosition.y + 20)
                     }
                 }
-            }.frame(height: 70).padding()
+            }.frame(height: 70).padding(10)
             
-            HStack{
-                // Slider
-                VStack {
-                    Slider(value: $epsilon, in: 0...Double(0.5), step: 0.05)
-                        .frame(width: 100)
-                    Text("ε = \(String(format: "%.2f", epsilon))")
-                }.padding()
+            // Slider
+            VStack {
+                Slider(value: $epsilon, in: 0...Double(0.5), step: 0.05)
+                    .frame(width: 100)
+                Text("ε = \(String(format: "%.2f", epsilon))")
                 
-                // Box showing current point position
-                HStack{
-                    Text("r-\(String(format: "%.2f", epsilon))")
-                    TextView(string: $seq).frame(width: 70.0, height: 22.0)
-                    Text("r-\(String(format: "%.2f", epsilon))")
-                }.padding().background(Color.gray.opacity(0.2)).cornerRadius(8)
+//                // Box showing current point position
+//                HStack{
+//                    Text("r-\(String(format: "%.2f", epsilon))")
+//                    TextView(string: $seq).frame(width: 70.0, height: 22.0)
+//                    Text("r-\(String(format: "%.2f", epsilon))")
+//                }.padding().background(Color.gray.opacity(0.2)).cornerRadius(8)
             }
         }
     }
@@ -610,9 +608,7 @@ struct LineWithSliderNValue: View {
 }
 
 struct LineWithSlider_Previews: PreviewProvider {
-    
-    
-    
+
     static var previews: some View {
         
         let labelList = [AnyView(SubscriptString(main: "a",sub: "1")),
@@ -630,16 +626,66 @@ struct LineWithSlider_Previews: PreviewProvider {
                 let x = Double(0.5 - (1/Double(i+2))) * (maxWidth*0.85)
                 let y = 35.0
                 return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle()).padding(.all, 15.0)
-//        ZoomableCoordinateSystemView().frame(width: 300, height: 300)
     }
-    
-    
 }
 
-//x = Double(i) * 360 / Double(pointsCount - 1)
+struct QuestionView: View {
+    @State private var selectedAnswer: String? = nil
+    @State private var showAnswer: Bool = false
 
-//            let x = Double(1-Double(1/(i+1))) * 200// custom formula for x-position
-//            let y = sin(x * .pi / 100) * 20 + 35 // custom formula for y-position
+    let question: String
+    let correctAnswer: String
+    let incorrectAnswer: String
+
+    var body: some View {
+        VStack(alignment: .center, spacing: 20) {
+
+            HStack{
+                Button(action: {selectedAnswer = correctAnswer}) {
+                    Text(correctAnswer)
+                        .font(.headline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity/2)
+                        .background(selectedAnswer == correctAnswer ? Color.gray : Color.gray.opacity(0.6))
+                        .cornerRadius(10)
+                }.disabled(showAnswer)
+
+                Button(action: {selectedAnswer = incorrectAnswer}) {
+                    Text(incorrectAnswer)
+                        .font(.headline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity/2)
+                        .background(selectedAnswer == incorrectAnswer ? Color.gray : Color.gray.opacity(0.6))
+                        .cornerRadius(10)
+                }.disabled(showAnswer)
+            }
+
+            Button(action: {showAnswer = true}) {
+                Text("Check Answer").modifier(GreenCheckAnswerButtonStyle())
+            }
+
+            if showAnswer {
+                if selectedAnswer == correctAnswer {
+                    Text("Correct!").foregroundColor(.green).padding(.top, 20)} else {
+                    Text("Incorrect.").foregroundColor(.red).padding(.top, 20)}
+            }
+        }.padding()
+    }
+}
+
+
+
+
+struct QuestionView_Previews: PreviewProvider {
+    static var previews: some View {
+        QuestionView(question: "What is the capital of France?", correctAnswer: "Paris", incorrectAnswer: "Berlin")
+    }
+}
+
 
 
 
