@@ -28,6 +28,9 @@
 		F4A24DD5299EC9C700CBDF56 /* LaTeXSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F4A24DD4299EC9C700CBDF56 /* LaTeXSwiftUI */; };
 		F4A24DDE29ABE8F700CBDF56 /* Conv:DiffExplan.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DDD29ABE8F700CBDF56 /* Conv:DiffExplan.swift */; };
 		F4A24DE029B5145D00CBDF56 /* ConvergenceDefExpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DDF29B5145D00CBDF56 /* ConvergenceDefExpl.swift */; };
+		F4A24DE229BE11A000CBDF56 /* ConvergenceCalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DE129BE11A000CBDF56 /* ConvergenceCalcView.swift */; };
+		F4A24DE429BE428100CBDF56 /* ConvergenceCalcExampleExpl1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DE329BE428100CBDF56 /* ConvergenceCalcExampleExpl1.swift */; };
+		F4A24DE629BF430700CBDF56 /* ConstantConvergenceExampleExpl1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A24DE529BF430700CBDF56 /* ConstantConvergenceExampleExpl1.swift */; };
 		F4A4ACD32919AAA20012522F /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD22919AAA20012522F /* LessonModel.swift */; };
 		F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD42919AB190012522F /* LessonManager.swift */; };
 		F4A4ACD72919AD760012522F /* LessonSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A4ACD62919AD760012522F /* LessonSelectView.swift */; };
@@ -64,6 +67,9 @@
 		F4A24DD1299EC09200CBDF56 /* ContainerStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerStyles.swift; sourceTree = "<group>"; };
 		F4A24DDD29ABE8F700CBDF56 /* Conv:DiffExplan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conv:DiffExplan.swift"; sourceTree = "<group>"; };
 		F4A24DDF29B5145D00CBDF56 /* ConvergenceDefExpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvergenceDefExpl.swift; sourceTree = "<group>"; };
+		F4A24DE129BE11A000CBDF56 /* ConvergenceCalcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvergenceCalcView.swift; sourceTree = "<group>"; };
+		F4A24DE329BE428100CBDF56 /* ConvergenceCalcExampleExpl1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvergenceCalcExampleExpl1.swift; sourceTree = "<group>"; };
+		F4A24DE529BF430700CBDF56 /* ConstantConvergenceExampleExpl1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantConvergenceExampleExpl1.swift; sourceTree = "<group>"; };
 		F4A4ACD22919AAA20012522F /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
 		F4A4ACD42919AB190012522F /* LessonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonManager.swift; sourceTree = "<group>"; };
 		F4A4ACD62919AD760012522F /* LessonSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSelectView.swift; sourceTree = "<group>"; };
@@ -164,6 +170,9 @@
 			children = (
 				F4A24DCF299D230C00CBDF56 /* SequenceIntroExp.swift */,
 				F4A24DDF29B5145D00CBDF56 /* ConvergenceDefExpl.swift */,
+				F4A24DE129BE11A000CBDF56 /* ConvergenceCalcView.swift */,
+				F4A24DE329BE428100CBDF56 /* ConvergenceCalcExampleExpl1.swift */,
+				F4A24DE529BF430700CBDF56 /* ConstantConvergenceExampleExpl1.swift */,
 			);
 			path = QuestionExplanations;
 			sourceTree = "<group>";
@@ -315,6 +324,8 @@
 				F49810E92916830F00680568 /* Lesson2View.swift in Sources */,
 				F478C63A28E889000090292F /* LoginView.swift in Sources */,
 				F49810E72916830200680568 /* Lesson1View.swift in Sources */,
+				F4A24DE629BF430700CBDF56 /* ConstantConvergenceExampleExpl1.swift in Sources */,
+				F4A24DE429BE428100CBDF56 /* ConvergenceCalcExampleExpl1.swift in Sources */,
 				F4F04A28290913CD00DD05D9 /* QuizModel.swift in Sources */,
 				F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */,
 				F49810ED29168E1300680568 /* Quiz3View.swift in Sources */,
@@ -323,6 +334,7 @@
 				F4A24DD2299EC09200CBDF56 /* ContainerStyles.swift in Sources */,
 				F4A24DC22998467F00CBDF56 /* InteractiveViews.swift in Sources */,
 				F4F04A23290894A000DD05D9 /* QuizView.swift in Sources */,
+				F4A24DE229BE11A000CBDF56 /* ConvergenceCalcView.swift in Sources */,
 				F4A24DC02998175F00CBDF56 /* TextStyles.swift in Sources */,
 				F4F04A2D290926E600DD05D9 /* QuizCompletedView.swift in Sources */,
 				F4F04A162906E84700DD05D9 /* LandingPage.swift in Sources */,

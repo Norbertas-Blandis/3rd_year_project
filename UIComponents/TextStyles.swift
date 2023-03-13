@@ -144,7 +144,7 @@ struct PulsatingButtonCoverStyle: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .padding()
+            .padding(5)
             .background(Color.green.opacity(0.1))
             .cornerRadius(5)
             .scaleEffect(isPulsating ? scaleFactor : 1.0)
@@ -157,6 +157,60 @@ struct PulsatingButtonCoverStyle: ViewModifier {
                 Button(action: {
                     showCover = false
                     isPulsating = false
+                }) {
+                    Text("Understood")
+                }.padding()
+            })
+    }
+}
+
+struct PulsatingButtonCoverStyleFullFrame: ViewModifier {
+    
+    @State var showCover = false
+    @State var isPulsating: Bool
+    var explanationView: AnyView
+    
+    @State private var scaleFactor: CGFloat = 1.2
+    
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity)
+            .padding(5)
+            .background(Color.green.opacity(0.1))
+            .cornerRadius(5)
+            .scaleEffect(isPulsating ? scaleFactor : 1.0)
+            .animation(Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true))
+            .onAppear { isPulsating = false}
+            .onDisappear { isPulsating = false}
+            .onTapGesture { showCover.toggle()}
+            .fullScreenCover(isPresented: $showCover, content: {
+                AnyView(explanationView)
+                Button(action: {
+                    showCover = false
+                    isPulsating = false
+                }) {
+                    Text("Understood")
+                }.padding()
+            })
+    }
+}
+
+struct NotPulsatingButtonCoverStyleFullFrame: ViewModifier {
+    
+    @State var showCover = false
+    var explanationView: AnyView
+    
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity)
+            .padding(5)
+            .background(Color.green.opacity(0.1))
+            .cornerRadius(5)
+            .onTapGesture { showCover.toggle()}
+            .fullScreenCover(isPresented: $showCover, content: {
+                AnyView(explanationView)
+                Button(action: {
+                    showCover = false
                 }) {
                     Text("Understood")
                 }.padding()

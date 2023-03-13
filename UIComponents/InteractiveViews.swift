@@ -7,6 +7,47 @@
 
 import SwiftUI
 
+struct StringAnswerCheckerNoExplanationView: View {
+    
+    var question: String
+    @State var correctAnswer: String
+    
+    @State private var input: String = ""
+    @State private var showResult = false
+    @State private var isAnswerCorrect = false
+
+    var body: some View {
+        VStack{
+            
+            //Question
+            Text(question)
+                .modifier(BlackTitleAcademicTextStyle())
+            
+            //Enter the answer
+            TextField("Enter answer", text: $input)
+                .modifier(GrayTextFieldStyle())
+            
+            //Button to check if the answer is correct, if the answer has been attempted, two buttons - check answer and explanation
+                Button(action: {
+                    self.showResult = true
+                    if input == correctAnswer{
+                        self.isAnswerCorrect = true
+                    }
+                }) {
+                    Text("Check Answer")
+                        .modifier(GreenButtonWhiteTextStyle())
+                }.padding()
+            
+            //Status of whether the answer is correct
+            if showResult {
+                Text(input == correctAnswer ? "Correct!" : "Incorrect")
+                    .font(.headline)
+                    .foregroundColor(input == correctAnswer ? .green : .red)
+            }
+        }
+    }
+}
+
 struct StringAnswerCheckerView: View {
     
     var question: String
@@ -594,14 +635,14 @@ struct LineWithSliderNValue: View {
                     Slider(value: $NValue, in: 1...12, step: 1)
                         .frame(width: 100)
                     Text("N = \(String(format: "%.0f", NValue))")
-                }.padding()
+                }
                 
-                // Box showing current point position
-                VStack{
-                    Text("r = \(String(format: "%.2f", rvalue))")
-                    Text("ε = \(String(format: "%.2f", epsilon))")
-                    Text("N = \(String(format: "%.0f", NValue))")
-                }.padding(10).background(Color.gray.opacity(0.2)).cornerRadius(8)
+//                // Box showing current point position
+//                VStack{
+//                    Text("r = \(String(format: "%.2f", rvalue))")
+//                    Text("ε = \(String(format: "%.2f", epsilon))")
+//                    Text("N = \(String(format: "%.0f", NValue))")
+//                }.padding(10).background(Color.gray.opacity(0.2)).cornerRadius(8)
             }
         }
     }
@@ -677,12 +718,122 @@ struct QuestionView: View {
     }
 }
 
+struct MultipleQuestionView<A: View, B: View, C: View, D: View>: View {
+    
+    let optionA: A
+    let optionB: B
+    let optionC: C
+    let optionD: D
+    let correctAnswerIndex: Int
+    let alignment: String
+    
+    @State private var selectedOption: Int? = nil
+    
+    var isAnswerCorrect: Bool {
+        return selectedOption == correctAnswerIndex
+    }
+    
+    var body: some View {
+        
+        VStack(alignment: .center) {
+            
+            if alignment == "h"{
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                    Button(action: { self.selectedOption = 0 }) {
+                        AnswerOptionView(answer: optionA, isSelected: selectedOption == 0)
+                    }
+                    Button(action: { self.selectedOption = 1 }) {
+                        AnswerOptionView(answer: optionB, isSelected: selectedOption == 1)
+                    }
+                    Button(action: { self.selectedOption = 2 }) {
+                        AnswerOptionView(answer: optionC, isSelected: selectedOption == 2)
+                    }
+                    Button(action: { self.selectedOption = 3 }) {
+                        AnswerOptionView(answer: optionD, isSelected: selectedOption == 3)
+                    }
+                }
+            } else {
+                Button(action: { self.selectedOption = 0 }) {
+                    AnswerOptionView(answer: optionA, isSelected: selectedOption == 0)
+                }
+                Button(action: { self.selectedOption = 1 }) {
+                    AnswerOptionView(answer: optionB, isSelected: selectedOption == 1)
+                }
+                Button(action: { self.selectedOption = 2 }) {
+                    AnswerOptionView(answer: optionC, isSelected: selectedOption == 2)
+                }
+                Button(action: { self.selectedOption = 3 }) {
+                    AnswerOptionView(answer: optionD, isSelected: selectedOption == 3)
+                }
+
+            }
+            
+            Button(action: {
+                // Do nothing if no option is selected
+                guard let selectedOption = selectedOption else { return }
+                
+                // Set the result message based on whether the answer is correct or not
+                let resultMessage = isAnswerCorrect ? "Correct!" : "Incorrect."
+                
+                // Set the result message color based on whether the answer is correct or not
+                let resultColor = isAnswerCorrect ? Color.green : Color.red
+                
+//                // Update the UI with the result message and color
+                selectedResultView = Text(resultMessage)
+                    .foregroundColor(resultColor)
+            }) {
+                Text("Check Answer")
+                    .fontWeight(.bold)
+                    .padding()
+                    .background(Color.green.opacity(0.7))
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+                    .padding(.top, 16)
+            }
+            // Display the result message if it's not nil
+            if let selectedResultView = selectedResultView {
+                selectedResultView
+            }
+            Spacer()
+        }.padding()
+    }
+    
+    @State private var selectedResultView: Text? = nil
+}
+
+
+
+struct AnswerOptionView<Answer: View>: View {
+    let answer: Answer
+    let isSelected: Bool
+    
+    var body: some View {
+        HStack {
+            Image(systemName: isSelected ? "checkmark.square.fill" : "square")
+            answer
+        }
+        .foregroundColor(.primary)
+        .padding(.vertical, 8)
+        .padding(.horizontal, 16)
+        .background(Color(UIColor.secondarySystemBackground))
+        .cornerRadius(8)
+        .padding(.bottom, 8)
+    }
+}
+
+
 
 
 
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionView(question: "What is the capital of France?", correctAnswer: "Paris", incorrectAnswer: "Berlin")
+        MultipleQuestionView(
+            optionA: Text("Option A"),
+            optionB: Text("Option B"),
+            optionC: Text("Option C"),
+            optionD: Text("Option D"),
+            correctAnswerIndex: 1, alignment: "h"
+        )
     }
 }
 
