@@ -17,6 +17,7 @@ struct LessonSelectView: View {
     @State private var goToLesson0 = false
     @State private var goToLesson1 = false
     @State private var goToLesson2 = false
+    @State private var goToLesson3 = false
     
     func updateLessonModel(num1: Int, num2: Int) {
         
@@ -112,6 +113,22 @@ struct LessonSelectView: View {
                                 destination: Lesson2View(lessonId: lesson.id, lessonManager: LessonManager()).navigationBarBackButtonHidden(false).navigationBarTitle(Text("")),
                                 isActive: $goToLesson2){
                                     Button(action: lesson.isUnlocked ? { goToLesson2.toggle() } : {}) {
+                                        HStack {
+                                            Spacer()
+                                            Text(String(lesson.id + 1) + ". " + lesson.title)
+                                            Spacer()
+                                            Text(lesson.duration)
+                                            Spacer()
+                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock"))
+                                            Spacer()
+                                        }.modifier(LessonSelectButtonStyle())
+                                    }.padding(.all, 10)
+                            }
+                        }else if String(lesson.id) == "3"{
+                            NavigationLink(
+                                destination: Lesson3View(lessonId: lesson.id, lessonManager: LessonManager()).navigationBarBackButtonHidden(false).navigationBarTitle(Text("")),
+                                isActive: $goToLesson3){
+                                    Button(action: lesson.isUnlocked ? { goToLesson3.toggle() } : {}) {
                                         HStack {
                                             Spacer()
                                             Text(String(lesson.id + 1) + ". " + lesson.title)

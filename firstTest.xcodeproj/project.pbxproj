@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F406A93E29352B000003C8A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F406A93D29352B000003C8A2 /* GoogleService-Info.plist */; };
+		F4744EC029C75DAB00DAC9EC /* Lesson3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EBF29C75DAB00DAC9EC /* Lesson3View.swift */; };
+		F4744EC229C7957700DAC9EC /* UniqueLimitEasyProofExpl1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC129C7957700DAC9EC /* UniqueLimitEasyProofExpl1.swift */; };
 		F478C63828E889000090292F /* firstTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63728E889000090292F /* firstTestApp.swift */; };
 		F478C63A28E889000090292F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63928E889000090292F /* LoginView.swift */; };
 		F478C63C28E889010090292F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F478C63B28E889010090292F /* Assets.xcassets */; };
@@ -49,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		F406A93D29352B000003C8A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F4744EBF29C75DAB00DAC9EC /* Lesson3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson3View.swift; sourceTree = "<group>"; };
+		F4744EC129C7957700DAC9EC /* UniqueLimitEasyProofExpl1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueLimitEasyProofExpl1.swift; sourceTree = "<group>"; };
 		F478C63428E889000090292F /* firstTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firstTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F478C63728E889000090292F /* firstTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstTestApp.swift; sourceTree = "<group>"; };
 		F478C63928E889000090292F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 				F49EFBE3290B1BBB00B32086 /* Lesson0View.swift */,
 				F49810E62916830200680568 /* Lesson1View.swift */,
 				F49810E82916830F00680568 /* Lesson2View.swift */,
+				F4744EBF29C75DAB00DAC9EC /* Lesson3View.swift */,
 			);
 			path = Lessons;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 				F4A24DE129BE11A000CBDF56 /* ConvergenceCalcView.swift */,
 				F4A24DE329BE428100CBDF56 /* ConvergenceCalcExampleExpl1.swift */,
 				F4A24DE529BF430700CBDF56 /* ConstantConvergenceExampleExpl1.swift */,
+				F4744EC129C7957700DAC9EC /* UniqueLimitEasyProofExpl1.swift */,
 			);
 			path = QuestionExplanations;
 			sourceTree = "<group>";
@@ -316,6 +322,8 @@
 				F4A24DDE29ABE8F700CBDF56 /* Conv:DiffExplan.swift in Sources */,
 				F4A24DD0299D230C00CBDF56 /* SequenceIntroExp.swift in Sources */,
 				F49EFBE7290B352A00B32086 /* Quiz0View.swift in Sources */,
+				F4744EC229C7957700DAC9EC /* UniqueLimitEasyProofExpl1.swift in Sources */,
+				F4744EC029C75DAB00DAC9EC /* Lesson3View.swift in Sources */,
 				F4F04A262909133200DD05D9 /* QuizManager.swift in Sources */,
 				F4F04A132906D93F00DD05D9 /* ImagePicker.swift in Sources */,
 				F4A24DC42999160A00CBDF56 /* AcademicWritingViews.swift in Sources */,

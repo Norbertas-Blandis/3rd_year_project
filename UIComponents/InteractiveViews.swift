@@ -508,6 +508,159 @@ struct LineWithSliderEpsilon: View {
     }
 }
 
+struct LineWithSliderTwoPointsEpsilon: View {
+    
+    let pointsCount: Int
+    let labels: [String]
+    let labelViews: [AnyView]
+    let rvalue: Double
+    let svalue: Double
+    let maxWidth: CGFloat
+    @State private var epsilon: Double = 0.1
+    @State private var sliderValue: Double = 0.0
+    let pointPosition: (Int, Int) -> CGPoint // custom formula for point position
+    
+    init(pointsCount: Int, labels: [String], labelViews: [AnyView], rvalue: Double, svalue: Double, maxWidth: Double, pointPosition: @escaping (Int, Int) -> CGPoint) {
+        self.pointsCount = pointsCount
+        self.labels = labels
+        self.labelViews = labelViews
+        self.rvalue = rvalue
+        self.svalue = svalue
+        self.maxWidth = maxWidth
+        self.pointPosition = pointPosition
+    }
+    
+    @State private var seq : String = "[math]<a_{n}<[/math]"
+    
+    var body: some View {
+        VStack {
+            // X-axis
+            GeometryReader { geometry in
+                
+                Spacer()
+                ZStack {
+                    
+                    //Create a line
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: geometry.size.height/2))
+                        path.addLine(to: CGPoint(x: maxWidth, y: geometry.size.height/2))
+                    }
+                    .stroke(lineWidth: 2)
+                    .overlay(
+                        //The green line between the two slider points
+                        ZStack{
+                            Path { path in
+                                path.move(to: CGPoint(x: maxWidth*rvalue-maxWidth*CGFloat(epsilon), y: geometry.size.height/2))
+                                path.addLine(to: CGPoint(x: maxWidth*rvalue+maxWidth*CGFloat(epsilon), y: geometry.size.height/2))
+                            }.stroke(Color.green, lineWidth: 3)
+                            Path { path in
+                                path.move(to: CGPoint(x: maxWidth*svalue-maxWidth*CGFloat(epsilon), y: geometry.size.height/2))
+                                path.addLine(to: CGPoint(x: maxWidth*svalue+maxWidth*CGFloat(epsilon), y: geometry.size.height/2))
+                            }.stroke(Color.green, lineWidth: 3)
+                        }
+                        .overlay(
+                            //The convergent and two slider points
+                            ZStack {
+                                //First convergent
+                                Circle()
+                                    .fill(Color.red)
+                                    .frame(width: 15, height: 15)
+                                    .position(CGPoint(x: maxWidth*rvalue, y: geometry.size.height/2))
+                                Text("r").position(x: maxWidth*rvalue, y: geometry.size.height/2-20)
+                                //Second Convergent
+                                Circle()
+                                    .fill(Color.red)
+                                    .frame(width: 15, height: 15)
+                                    .position(CGPoint(x: maxWidth*svalue, y: geometry.size.height/2))
+                                Text("s").position(x: maxWidth*svalue, y: geometry.size.height/2-20)
+                                //Midpoint
+                                Circle()
+                                    .fill(Color.red)
+                                    .frame(width: 15, height: 15)
+                                    .position(CGPoint(x: maxWidth*(rvalue+svalue)/2, y: geometry.size.height/2))
+                                Text("(r+s)/2").position(x: maxWidth*(rvalue+svalue)/2, y: geometry.size.height/2-20)
+                                //parantheses around r
+                                Circle()
+                                    .fill(Color.black)
+                                    .frame(width: 1, height: 1)
+                                    .position(CGPoint(x: maxWidth*CGFloat(rvalue-epsilon), y: geometry.size.height/2))
+                                    .overlay(Text("(").font(.system(size: 30)).position(CGPoint(x: maxWidth*CGFloat(rvalue-epsilon), y: geometry.size.height/2)))
+                                Circle()
+                                    .fill(Color.black)
+                                    .frame(width: 1, height: 1)
+                                    .position(CGPoint(x: maxWidth*CGFloat(rvalue+epsilon), y: geometry.size.height/2))
+                                    .overlay(Text(")").font(.system(size: 30)).position(CGPoint(x: maxWidth*CGFloat(rvalue+epsilon), y: geometry.size.height/2)))
+                                //parantheses around s
+                                Circle()
+                                    .fill(Color.black)
+                                    .frame(width: 1, height: 1)
+                                    .position(CGPoint(x: maxWidth*CGFloat(svalue-epsilon), y: geometry.size.height/2))
+                                    .overlay(Text("(").font(.system(size: 30)).position(CGPoint(x: maxWidth*CGFloat(svalue-epsilon), y: geometry.size.height/2)))
+                                Circle()
+                                    .fill(Color.black)
+                                    .frame(width: 1, height: 1)
+                                    .position(CGPoint(x: maxWidth*CGFloat(svalue+epsilon), y: geometry.size.height/2))
+                                    .overlay(Text(")").font(.system(size: 30)).position(CGPoint(x: maxWidth*CGFloat(svalue+epsilon), y: geometry.size.height/2)))
+                            }
+                        )
+                        .overlay(
+                            //Display the sequence points
+                            ForEach(0..<pointsCount) { i in
+                                VStack {
+                                    let lowerBound = maxWidth*CGFloat(rvalue-epsilon)
+                                    let currentX = pointPosition(i, pointsCount).x
+                                    let upperBound = maxWidth*CGFloat(rvalue+epsilon)
+                                    let isXInTheRange = lowerBound < currentX && currentX <
+                                        upperBound
+                                    Circle()
+                                        .fill(isXInTheRange ? Color.green : Color.gray)
+                                        .frame(width: 7, height: 7)
+                                        .position(pointPosition(i, pointsCount))
+                                    labelViews[i].position(x: pointPosition(i, pointsCount).x, y: -15.0)
+                                }
+                            }
+                        )
+                    )
+                    
+//                    //Create ticks for the line
+//                    ForEach(0..<11) { i in
+//                        let tickPosition = CGPoint(x: Double(i) * Double(maxWidth/Double(10)), y: geometry.size.height/2)
+//
+//                        Path { path in
+//                            path.move(to: tickPosition)
+//                            path.addLine(to: CGPoint(x: tickPosition.x, y: tickPosition.y + 5))
+//                        }
+//                        .stroke(lineWidth: 1)
+//
+//                        let value = Double(i) / Double(10)
+//                        Text(String(format: "%.1f", value))
+//                            .position(x: tickPosition.x, y: tickPosition.y + 20)
+//                    }
+                }
+            }.frame(height: 70).padding(10)
+            
+            // Slider
+            HStack {
+                Text("ε")
+                Slider(value: $epsilon, in: 0...Double(0.25), step: 0.025)
+                    .frame(width: 150)
+            }
+        }
+    }
+}
+
+struct LineWithSlider_Previews: PreviewProvider {
+
+    static var previews: some View {
+        
+        let maxWidth = UIScreen.main.bounds.width * 0.8
+        LineWithSliderTwoPointsEpsilon(pointsCount: 0, labels: [], labelViews: [], rvalue: 0.33, svalue: 0.66, maxWidth: maxWidth) { i, pointsCount in
+            let x = Double(1 - 1/Double(i+1)) * maxWidth
+            let y = 35.0
+            return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle()).padding(.all, 15.0)
+    }
+}
+
 struct DownArrowShape: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -645,28 +798,6 @@ struct LineWithSliderNValue: View {
 //                }.padding(10).background(Color.gray.opacity(0.2)).cornerRadius(8)
             }
         }
-    }
-}
-
-struct LineWithSlider_Previews: PreviewProvider {
-
-    static var previews: some View {
-        
-        let labelList = [AnyView(SubscriptString(main: "a",sub: "1")),
-                         AnyView(SubscriptString(main: "a",sub: "2")),
-                         AnyView(SubscriptString(main: "a",sub: "3")),
-                         AnyView(SubscriptString(main: "a",sub: "4")),
-                         AnyView(SubscriptString(main: "a",sub: "5")),
-                         AnyView(Text("")),AnyView(Text("")),AnyView(Text("")),
-                         AnyView(Text("")),AnyView(Text("")),AnyView(Text("")),
-                         AnyView(Text("")),AnyView(Text("")),AnyView(Text(""))]
-        
-        let maxWidth = UIScreen.main.bounds.width * 0.8
-        LineWithSliderNValue(pointsCount: 12, labels: [], labelViews: labelList, rvalue: 0.5, epsilon: 0.25, maxWidth: maxWidth) { i, pointsCount in
-                let maxWidth = UIScreen.main.bounds.width
-                let x = Double(0.5 - (1/Double(i+2))) * (maxWidth*0.85)
-                let y = 35.0
-                return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle()).padding(.all, 15.0)
     }
 }
 

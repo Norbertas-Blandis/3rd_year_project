@@ -217,3 +217,13 @@ struct NotPulsatingButtonCoverStyleFullFrame: ViewModifier {
             })
     }
 }
+
+struct LightGreenButtonStyleFullFrame: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity)
+            .padding(5)
+            .background(Color.green.opacity(0.1))
+            .cornerRadius(5)
+    }
+}

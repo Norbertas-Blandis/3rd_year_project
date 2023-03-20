@@ -45,7 +45,7 @@ extension LessonManager{
          LessonModel(id: 3,
                      title: "Theorems on convergence",
                      duration: "15 min",
-                     isUnlocked: false,
+                     isUnlocked: true,
                      isCompleted: false,
                      goToLesson: false),
         
