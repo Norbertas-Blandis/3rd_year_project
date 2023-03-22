@@ -87,6 +87,7 @@ struct ConvergenceCalcExampleExpl2: View {
     @State private var option4: String = "[math]n>1/ε[/math]"
     
     @State private var showNumerical: Bool = false
+    @State private var showNextQuestion = false
     
     var body: some View {
         
@@ -110,7 +111,7 @@ struct ConvergenceCalcExampleExpl2: View {
                 optionB: TextView(string: $option2).frame(width: 90, height: 25.0),
                 optionC: TextView(string: $option3).frame(width: 70, height: 20.0),
                 optionD: TextView(string: $option4).frame(width: 90, height: 25.0),
-                correctAnswerIndex: 3, alignment: "h")
+                correctAnswerIndex: 3, alignment: "h", showNextQuestion: $showNextQuestion)
             
             //Numerical explanation
             if showNumerical{
@@ -145,6 +146,7 @@ struct ConvergenceCalcExampleExpl3: View {
     @State private var option4: String = "[math]N(ε)=ε[/math]"
     
     @State private var showNumerical: Bool = false
+    @State private var showNextQuestion = false
     
     @State private var epsilon: Double = 0.3
     
@@ -178,7 +180,7 @@ struct ConvergenceCalcExampleExpl3: View {
                 optionB: TextView(string: $option2).frame(width: 170, height: 25.0),
                 optionC: TextView(string: $option3).frame(width: 170, height: 25.0),
                 optionD: TextView(string: $option4).frame(width: 170, height: 25.0),
-                correctAnswerIndex: 1, alignment: "v")
+                correctAnswerIndex: 1, alignment: "v", showNextQuestion: $showNextQuestion)
             
             //Numerical explanation
             if showNumerical{

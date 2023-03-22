@@ -802,12 +802,14 @@ struct LineWithSliderNValue: View {
 }
 
 struct QuestionView: View {
+    
     @State private var selectedAnswer: String? = nil
     @State private var showAnswer: Bool = false
 
     let question: String
     let correctAnswer: String
     let incorrectAnswer: String
+    @Binding var showNextQuestion: Bool
 
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
@@ -822,7 +824,7 @@ struct QuestionView: View {
                         .frame(maxWidth: .infinity/2)
                         .background(selectedAnswer == correctAnswer ? Color.gray : Color.gray.opacity(0.6))
                         .cornerRadius(10)
-                }.disabled(showAnswer)
+                }
 
                 Button(action: {selectedAnswer = incorrectAnswer}) {
                     Text(incorrectAnswer)
@@ -833,19 +835,22 @@ struct QuestionView: View {
                         .frame(maxWidth: .infinity/2)
                         .background(selectedAnswer == incorrectAnswer ? Color.gray : Color.gray.opacity(0.6))
                         .cornerRadius(10)
-                }.disabled(showAnswer)
+                }
             }
 
-            Button(action: {showAnswer = true}) {
+            Button(action: {showAnswer = true
+                if selectedAnswer == correctAnswer{
+                    withAnimation{showNextQuestion=true}
+                }}) {
                 Text("Check Answer").modifier(GreenCheckAnswerButtonStyle())
             }
 
             if showAnswer {
                 if selectedAnswer == correctAnswer {
-                    Text("Correct!").foregroundColor(.green).padding(.top, 20)} else {
-                    Text("Incorrect.").foregroundColor(.red).padding(.top, 20)}
+                    Text("Correct!").foregroundColor(.green).padding(.top, 10)} else {
+                    Text("Incorrect.").foregroundColor(.red).padding(.top, 10)}
             }
-        }.padding()
+        }
     }
 }
 
@@ -857,6 +862,7 @@ struct MultipleQuestionView<A: View, B: View, C: View, D: View>: View {
     let optionD: D
     let correctAnswerIndex: Int
     let alignment: String
+    @Binding var showNextQuestion: Bool
     
     @State private var selectedOption: Int? = nil
     
@@ -912,6 +918,10 @@ struct MultipleQuestionView<A: View, B: View, C: View, D: View>: View {
 //                // Update the UI with the result message and color
                 selectedResultView = Text(resultMessage)
                     .foregroundColor(resultColor)
+                
+                if isAnswerCorrect{
+                    withAnimation{showNextQuestion = true}
+                }
             }) {
                 Text("Check Answer")
                     .fontWeight(.bold)
@@ -919,14 +929,13 @@ struct MultipleQuestionView<A: View, B: View, C: View, D: View>: View {
                     .background(Color.green.opacity(0.7))
                     .foregroundColor(.white)
                     .cornerRadius(8)
-                    .padding(.top, 16)
+                    .padding(.top, 8)
             }
             // Display the result message if it's not nil
             if let selectedResultView = selectedResultView {
                 selectedResultView
             }
-            Spacer()
-        }.padding()
+        }
     }
     
     @State private var selectedResultView: Text? = nil
@@ -949,18 +958,6 @@ struct AnswerOptionView<Answer: View>: View {
         .background(Color(UIColor.secondarySystemBackground))
         .cornerRadius(8)
         .padding(.bottom, 8)
-    }
-}
-
-struct QuestionView_Previews: PreviewProvider {
-    static var previews: some View {
-        MultipleQuestionView(
-            optionA: Text("Option A"),
-            optionB: Text("Option B"),
-            optionC: Text("Option C"),
-            optionD: Text("Option D"),
-            correctAnswerIndex: 1, alignment: "h"
-        )
     }
 }
 

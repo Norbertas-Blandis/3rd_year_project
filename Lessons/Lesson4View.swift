@@ -370,6 +370,180 @@ struct ContinuityDefinitionView: View{
             
             if showNext{
                 Spacer()
+                NavigationLink(destination: ContinuityQuestion1View().navigationBarTitle("Continuity practice").navigationBarHidden(false),label: {
+                    Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+            }
+            
+            Spacer()
+            
+        }.padding(10)
+    }
+}
+
+struct ContinuityQuestion1View: View{
+    
+    @State private var functiondef : String = "[math]f:ℝ → ℝ, f(x)=x^2[/math]"
+    @State private var contpoint : String = "[math]x=0.5?[/math]"
+    
+    @State private var intervalf: String = "[math]f(a)-ε<f(x)<f(a)+ε[/math]"
+    @State private var interval: String = "[math]a-δ<x<a+δ[/math]"
+    @State private var continuitydef2: String = "[math]|x−a|<δ⇒|f(x)−f(a)|<ε[/math]"
+    @State private var epsilonineq: String = "[math]|f(x)−f(a)|<ε[/math]"
+    @State private var lastquestion: String = "[math]|x−a|<δ⇒|f(x)−f(a)|<ε[/math]"
+    
+    
+    @State private var option1: String = "[math]ε=0[/math]"
+    @State private var option2: String = "[math]ε=0.2[/math]"
+    @State private var option3: String = "[math]ε=0.5[/math]"
+    @State private var option4: String = "[math]ε=1[/math]"
+    
+    @State private var option21: String = "[math]x∈(0,1)[/math]"
+    @State private var option22: String = "[math]x∈(0.3,1)[/math]"
+    @State private var option23: String = "[math]x∈(0.3,0.7)[/math]"
+    @State private var option24: String = "[math]x∈(0.7,1)[/math]"
+    
+    @State private var option31: String = "[math]δ=0[/math]"
+    @State private var option32: String = "[math]δ=0.2[/math]"
+    @State private var option33: String = "[math]δ=0.5[/math]"
+    @State private var option34: String = "[math]δ=1[/math]"
+    
+    @State private var fa : String = "[math]f(a)[/math]"
+    @State private var fx : String = "[math]f(x)[/math]"
+    
+    @State private var showNextQuestion1 = false
+    @State private var showNextQuestion2 = false
+    @State private var showNextQuestion3 = false
+    @State private var showNextSlide = false
+    
+    var body: some View{
+        VStack{
+            Spacer()
+            
+            //Graph
+            VStack{
+                Text("Given a function:")
+                TextView(string: $functiondef).frame(width: 230, height: 30.0).padding(.bottom)
+                if !showNextQuestion1{
+                    FunctionPlotSliderView(
+                        formula: { x in -pow(x,2) },
+                        xMin: -1,
+                        xMax: 1,
+                        yMin: -1,
+                        yMax: 1,
+                        maxWidth: 300,
+                        maxHeight: 300,
+                        funcMinX: -1,
+                        funcMaxX: 1,
+                        deletionStart: -0.01,
+                        deletionEnd: 0.01,
+                        aVal: 0.5).padding([.bottom, .top])
+                } else if !showNextQuestion2{
+                    FunctionPlotSliderEpsilonView(
+                        formula: { x in -pow(x,2) },
+                        xMin: -1,
+                        xMax: 1,
+                        yMin: -1,
+                        yMax: 1,
+                        maxWidth: 300,
+                        maxHeight: 300,
+                        funcMinX: -1,
+                        funcMaxX: 1,
+                        deletionStart: -0.01,
+                        deletionEnd: 0.01,
+                        aVal: 0.5,
+                        epsilon: 0.2).padding([.bottom, .top])
+                } else {
+                    FunctionPlotSliderDeltaView(
+                        formula: { x in -pow(x,2) },
+                        xMin: -1,
+                        xMax: 1,
+                        yMin: -1,
+                        yMax: 1,
+                        maxWidth: 300,
+                        maxHeight: 300,
+                        funcMinX: -1,
+                        funcMaxX: 1,
+                        deletionStart: -0.01,
+                        deletionEnd: 0.01,
+                        aVal: 0.5,
+                        epsilon: 0.2).padding([.bottom, .top])
+                }
+            }.modifier(GrayContainerStyle(opacity: 0.1))
+            
+            //Question 1
+            if !showNextQuestion1{
+                VStack{
+                    HStack{
+                        Text("Is this function continuous at")
+                        TextView(string: $contpoint).frame(width: 100, height: 20.0)}
+                    QuestionView(question: "", correctAnswer: "Yes", incorrectAnswer: "No", showNextQuestion: $showNextQuestion1)
+                }.padding()
+            }
+            
+            if showNextQuestion1 && !showNextQuestion2{
+                VStack{
+                    Text("Could you determine from the graph what is the value of ε?").multilineTextAlignment(.center)
+                    HStack{
+                        Text("(Interval")
+                        TextView(string: $intervalf).frame(width: 280, height: 30.0)}
+                    Text("is coloured green)")
+                    MultipleQuestionView(
+                        optionA: TextView(string: $option1).frame(width: 100, height: 20.0),
+                        optionB: TextView(string: $option2).frame(width: 100, height: 20.0),
+                        optionC: TextView(string: $option3).frame(width: 100, height: 20.0),
+                        optionD: TextView(string: $option4).frame(width: 100, height: 20.0),
+                        correctAnswerIndex: 1, alignment: "h",
+                        showNextQuestion: $showNextQuestion2
+                    )
+                }.padding()
+            }
+            
+            if showNextQuestion2 && !showNextSlide{
+                VStack{
+                    Text("For ε=0.2 fixed, what values of x satisfy the implication:").multilineTextAlignment(.center)
+                    TextView(string: $continuitydef2).frame(width: 300, height: 30.0)
+                    MultipleQuestionView(
+                        optionA: TextView(string: $option21).frame(width: 120, height: 25.0),
+                        optionB: TextView(string: $option22).frame(width: 120, height: 25.0),
+                        optionC: TextView(string: $option23).frame(width: 120, height: 25.0),
+                        optionD: TextView(string: $option24).frame(width: 120, height: 25.0),
+                        correctAnswerIndex: 2, alignment: "h",
+                        showNextQuestion: $showNextSlide
+                    )
+                }.padding()
+            }
+            
+//            if showNextQuestion3 && !showNextSlide{
+//                VStack{
+//                    Text("So we know that for ε=0.2, we have that if ").multilineTextAlignment(.center)
+//                    HStack{
+//                        TextView(string: $option23).frame(width: 120, height: 25.0)
+//                        Text(",then following is satisfied")}
+//                    TextView(string: $continuitydef2).frame(width: 300, height: 30.0)
+//                    Text("What value of δ should we choose?")
+//                    MultipleQuestionView(
+//                        optionA: TextView(string: $option31).frame(width: 120, height: 25.0),
+//                        optionB: TextView(string: $option32).frame(width: 120, height: 25.0),
+//                        optionC: TextView(string: $option33).frame(width: 120, height: 25.0),
+//                        optionD: TextView(string: $option34).frame(width: 120, height: 25.0),
+//                        correctAnswerIndex: 1, alignment: "h",
+//                        showNextQuestion: $showNextSlide
+//                    )
+//                }.padding()
+//            }
+            
+            if showNextSlide{
+                Text("Notice that for ε=0.2, we have that when").multilineTextAlignment(.center)
+                HStack{
+                    Text("x approaches 0.5 -")
+                    TextView(string: $option23).frame(width: 120, height: 25.0)}
+                HStack{
+                    Text("We will have that")
+                    TextView(string: $fx).frame(width: 45, height: 25.0)
+                    Text("is approaching")
+                    TextView(string: $fa).frame(width: 45, height: 25.0)
+                    Text(" - ")}
+                TextView(string: $continuitydef2).frame(width: 300, height: 30.0).padding(.bottom)
                 NavigationLink(destination: ContinuityDefinitionView().navigationBarTitle("Continuity practice").navigationBarHidden(false),label: {
                     Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             }
@@ -380,8 +554,180 @@ struct ContinuityDefinitionView: View{
     }
 }
 
+struct ContinuityQuestion2View: View{
+    
+    let myFunc = { (x: Double) -> Double in
+        if x < 0 {
+            return 0
+        } else{
+            return -1
+        }
+    }
+    
+    @State private var functiondef : String = "[math]f:ℝ → ℝ, f(x)=[/math]"
+    @State private var bracket : String = "{"
+    @State private var f1 : String = "[math]0 : x≤0[/math]"
+    @State private var f2 : String = "[math]1 : x>1[/math]"
+    @State private var contpoint : String = "[math]∀x∈ℝ?[/math]"
+    
+    @State private var intervalf: String = "[math]f(a)-ε<f(x)<f(a)+ε[/math]"
+    @State private var interval: String = "[math]a-δ<x<a+δ[/math]"
+    @State private var continuitydef2: String = "[math]|x−a|<δ⇒|f(x)−f(a)|<ε[/math]"
+    @State private var epsilonineq: String = "[math]|f(x)−f(a)|<ε[/math]"
+    @State private var lastquestion: String = "[math]|x−a|<δ⇒|f(x)−f(a)|<ε[/math]"
+    
+    
+    @State private var option1: String = "[math]ε=0[/math]"
+    @State private var option2: String = "[math]ε=0.2[/math]"
+    @State private var option3: String = "[math]ε=0.5[/math]"
+    @State private var option4: String = "[math]ε=1[/math]"
+    
+    @State private var option21: String = "[math]x=-1[/math]"
+    @State private var option22: String = "[math]x=0[/math]"
+    @State private var option23: String = "[math]x=0.5[/math]"
+    @State private var option24: String = "[math]x=1[/math]"
+    
+    @State private var option31: String = "[math]0-δ=-δ<0[/math]"
+    @State private var option32: String = "[math]f(-δ)=0[/math]"
+    @State private var option33: String = "[math]1-0.2<f(-δ)<1+0.2[/math]"
+    
+    @State private var showNextQuestion1 = false
+    @State private var showNextQuestion2 = false
+    @State private var showNextQuestion3 = false
+    @State private var showNextSlide = false
+    
+    var body: some View{
+        VStack{
+            Spacer()
+            
+            Text("Given a function:")
+            HStack{
+                TextView(string: $functiondef).frame(width: 180, height: 25.0)
+                Text("{").fontWeight(.ultraLight).font(.system(size: 64)).offset(y:-10)
+                VStack{
+                    TextView(string: $f1).frame(width: 110, height: 25.0)
+                    TextView(string: $f2).frame(width: 110, height: 25.0)
+                }}
+            
+            //Graph
+            VStack{
+                if !showNextQuestion2{
+                    FunctionPlotSliderView(
+                        formula: { x in myFunc(x) },
+                        xMin: -1,
+                        xMax: 1,
+                        yMin: -1,
+                        yMax: 1,
+                        maxWidth: 300,
+                        maxHeight: 300,
+                        funcMinX: -1,
+                        funcMaxX: 1,
+                        deletionStart: -0.01,
+                        deletionEnd: 0.01,
+                        aVal: 10).padding([.bottom, .top])
+                } else {
+                    FunctionPlotSliderEpsilonView(
+                        formula: { x in myFunc(x) },
+                        xMin: -1,
+                        xMax: 1,
+                        yMin: -1,
+                        yMax: 1,
+                        maxWidth: 300,
+                        maxHeight: 300,
+                        funcMinX: -1,
+                        funcMaxX: 1,
+                        deletionStart: -0.01,
+                        deletionEnd: 0.01,
+                        aVal: 0,
+                        epsilon: 0.2).padding([.bottom, .top])
+                }
+            }.modifier(GrayContainerStyle(opacity: 0.1))
+            
+            //Question 1
+            if !showNextQuestion1{
+                VStack{
+                    HStack{
+                        Text("Is this function continuous")
+                        TextView(string: $contpoint).frame(width: 100, height: 20.0)}
+                    QuestionView(question: "", correctAnswer: "No", incorrectAnswer: "Yes", showNextQuestion: $showNextQuestion1)
+                }.padding()
+            }
+            
+            //Question 2
+            if showNextQuestion1 && !showNextQuestion2{
+                VStack{
+                    Text("At which point is the function not continuous?").multilineTextAlignment(.center)
+                    MultipleQuestionView(
+                        optionA: TextView(string: $option21).frame(width: 100, height: 20.0),
+                        optionB: TextView(string: $option22).frame(width: 100, height: 20.0),
+                        optionC: TextView(string: $option23).frame(width: 100, height: 20.0),
+                        optionD: TextView(string: $option24).frame(width: 100, height: 20.0),
+                        correctAnswerIndex: 1, alignment: "h",
+                        showNextQuestion: $showNextQuestion2
+                    )
+                }.padding()
+            }
+            
+            //Question 3
+            if showNextQuestion2 && !showNextQuestion3{
+                VStack{
+                    Text("Could you determine from the graph what is the value of ε?").multilineTextAlignment(.center)
+                    MultipleQuestionView(
+                        optionA: TextView(string: $option1).frame(width: 100, height: 20.0),
+                        optionB: TextView(string: $option2).frame(width: 100, height: 20.0),
+                        optionC: TextView(string: $option3).frame(width: 100, height: 20.0),
+                        optionD: TextView(string: $option4).frame(width: 100, height: 20.0),
+                        correctAnswerIndex: 1, alignment: "h",
+                        showNextQuestion: $showNextQuestion3
+                    )
+                }.padding()
+            }
+            
+            //Question 4
+            if showNextQuestion3{
+                VStack{
+                    Text("But notice that for all positive δ, we will have:").multilineTextAlignment(.center)
+                    HStack{
+                        TextView(string: $option31).frame(width: 170, height: 25.0)
+                        Text("and so:")}
+                    HStack{
+                        TextView(string: $option32).frame(width: 120, height: 25.0)
+                        Text("and we get that")}
+                    TextView(string: $option33).frame(width: 300, height: 25.0)
+                    Text("is not satisfied, so")
+                    Text("f is not continuous at 0!").bold()
+                    NavigationLink(destination: Lesson4Complete(lessonManager: LessonManager()).navigationBarTitle("").navigationBarHidden(false),label: {
+                        Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                }.padding()
+            }
+            
+            Spacer()
+            
+        }.padding(10)
+    }
+}
+
+struct Lesson4Complete: View {
+    
+    @ObservedObject var lessonManager: LessonManager
+    @State private var isPressed: Bool = false
+
+    var body: some View{
+
+        VStack{
+            Spacer()
+            Text("Congratulations! You have completed the introduction to Continuity lesson!").modifier(BlackTitleTextStyle())
+            Spacer()
+
+            NavigationLink(destination: LessonSelectView(lessonManager: LessonManager(), isCompleted: true, completedLessonId: 3, unlockedLessonId: 4).navigationBarTitle("").navigationBarHidden(true),label: {
+                Text("Great!").modifier(GreenButtonWhiteTextStyle())
+            })
+        }.offset(y: -90).padding(20)
+    }
+}
+
 struct Lesson4View_Previews: PreviewProvider {
     static var previews: some View {
-        ContinuityDefinitionView()
+        ContinuityQuestion1View()
     }
 }

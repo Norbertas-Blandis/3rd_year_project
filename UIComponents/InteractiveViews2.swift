@@ -344,23 +344,6 @@ struct FunctionPlotSliderDeltaView: View {
                     
                     //X-Y axis with green epsilon interval
                     XYAxisView(width: geometry.size.width, height: geometry.size.height)
-                        .overlay(
-                            ZStack{
-                                //The green line
-                                Path { path in
-                                    path.move(to: CGPoint(x: aVal*maxHeight/2+maxHeight/2-epsilon*maxHeight/2, y: geometry.size.height/2))
-                                    path.addLine(to: CGPoint(x: aVal*maxHeight/2+maxHeight/2+epsilon*maxHeight/2, y: geometry.size.height/2))
-                                }.stroke(Color.green, lineWidth: 3)
-                                Circle()
-                                    .fill(Color.red)
-                                    .frame(width: 10, height: 10)
-                                    .position(CGPoint(x: aVal*maxHeight/2+maxHeight/2, y: geometry.size.height/2))
-                                Circle()
-                                    .fill(xSliderValue>(aVal-epsilon) && xSliderValue<(aVal+epsilon) ? Color.green : Color.black)
-                                    .frame(width: 10, height: 10)
-                                    .position(CGPoint(x: xSliderValue*maxHeight/2+maxHeight/2, y:geometry.size.height/2))
-                            }
-                        )
                     
                     //Ticks and Labels for X-Y axis
                     XYAxisTicksView(width: geometry.size.width, height: geometry.size.height, xMin: xMin, xMax: xMax)
@@ -408,6 +391,19 @@ struct FunctionPlotSliderDeltaView: View {
                                 .fill(xSliderValue>(aVal-epsilon) && xSliderValue<(aVal+epsilon) ? Color.green : Color.black)
                                 .frame(width: 10, height: 10)
                                 .position(CGPoint(x: xSliderValue*maxWidth/2+maxWidth/2, y: formula(xSliderValue)*maxHeight/2+maxHeight/2))
+                            //The green line
+                            Path { path in
+                                path.move(to: CGPoint(x: aVal*maxHeight/2+maxHeight/2-epsilon*maxHeight/2, y: geometry.size.height/2))
+                                path.addLine(to: CGPoint(x: aVal*maxHeight/2+maxHeight/2+epsilon*maxHeight/2, y: geometry.size.height/2))
+                            }.stroke(Color.green, lineWidth: 3)
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 10, height: 10)
+                                .position(CGPoint(x: aVal*maxHeight/2+maxHeight/2, y: geometry.size.height/2))
+                            Circle()
+                                .fill(xSliderValue>(aVal-epsilon) && xSliderValue<(aVal+epsilon) ? Color.green : Color.black)
+                                .frame(width: 10, height: 10)
+                                .position(CGPoint(x: xSliderValue*maxHeight/2+maxHeight/2, y:geometry.size.height/2))
                         }
                     )
                     

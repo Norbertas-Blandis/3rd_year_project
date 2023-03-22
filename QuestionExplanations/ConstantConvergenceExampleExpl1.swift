@@ -83,6 +83,7 @@ struct ConstantConvergenceExampleExpl2: View {
     @State private var option4: String = "[math]n<1/ε[/math]"
     
     @State private var showNumerical: Bool = false
+    @State private var showNextQuestion = false
     
     var body: some View {
         
@@ -106,7 +107,7 @@ struct ConstantConvergenceExampleExpl2: View {
                 optionB: TextView(string: $option2).frame(width: 90, height: 25.0),
                 optionC: TextView(string: $option3).frame(width: 70, height: 20.0),
                 optionD: TextView(string: $option4).frame(width: 90, height: 25.0),
-                correctAnswerIndex: 0, alignment: "h")
+                correctAnswerIndex: 0, alignment: "h", showNextQuestion: $showNextQuestion)
             
             //Numerical explanation
             if showNumerical{
@@ -138,6 +139,7 @@ struct ConstantConvergenceExampleExpl3: View {
     @State private var option4: String = "[math]∅[/math]"
     
     @State private var showNumerical: Bool = false
+    @State private var showNextQuestion = false
     
     @State private var epsilon: Double = 0.3
     
@@ -171,7 +173,7 @@ struct ConstantConvergenceExampleExpl3: View {
                 optionB: TextView(string: $option2).frame(width: 170, height: 25.0),
                 optionC: TextView(string: $option3).frame(width: 170, height: 25.0),
                 optionD: TextView(string: $option4).frame(width: 170, height: 25.0),
-                correctAnswerIndex: 0, alignment: "v")
+                correctAnswerIndex: 0, alignment: "v", showNextQuestion: $showNextQuestion)
             
             //Numerical explanation
             if showNumerical{
