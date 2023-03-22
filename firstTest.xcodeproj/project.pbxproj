@@ -10,6 +10,9 @@
 		F406A93E29352B000003C8A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F406A93D29352B000003C8A2 /* GoogleService-Info.plist */; };
 		F4744EC029C75DAB00DAC9EC /* Lesson3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EBF29C75DAB00DAC9EC /* Lesson3View.swift */; };
 		F4744EC229C7957700DAC9EC /* UniqueLimitEasyProofExpl1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC129C7957700DAC9EC /* UniqueLimitEasyProofExpl1.swift */; };
+		F4744EC429C89E4E00DAC9EC /* Lesson4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC329C89E4E00DAC9EC /* Lesson4View.swift */; };
+		F4744EC629CA4B8400DAC9EC /* ContinuityDefExpl1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC529CA4B8400DAC9EC /* ContinuityDefExpl1.swift */; };
+		F4744EC829CA694600DAC9EC /* InteractiveViews2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC729CA694600DAC9EC /* InteractiveViews2.swift */; };
 		F478C63828E889000090292F /* firstTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63728E889000090292F /* firstTestApp.swift */; };
 		F478C63A28E889000090292F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63928E889000090292F /* LoginView.swift */; };
 		F478C63C28E889010090292F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F478C63B28E889010090292F /* Assets.xcassets */; };
@@ -53,6 +56,9 @@
 		F406A93D29352B000003C8A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F4744EBF29C75DAB00DAC9EC /* Lesson3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson3View.swift; sourceTree = "<group>"; };
 		F4744EC129C7957700DAC9EC /* UniqueLimitEasyProofExpl1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueLimitEasyProofExpl1.swift; sourceTree = "<group>"; };
+		F4744EC329C89E4E00DAC9EC /* Lesson4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson4View.swift; sourceTree = "<group>"; };
+		F4744EC529CA4B8400DAC9EC /* ContinuityDefExpl1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuityDefExpl1.swift; sourceTree = "<group>"; };
+		F4744EC729CA694600DAC9EC /* InteractiveViews2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveViews2.swift; sourceTree = "<group>"; };
 		F478C63428E889000090292F /* firstTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firstTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F478C63728E889000090292F /* firstTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstTestApp.swift; sourceTree = "<group>"; };
 		F478C63928E889000090292F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -156,6 +162,7 @@
 				F49810E62916830200680568 /* Lesson1View.swift */,
 				F49810E82916830F00680568 /* Lesson2View.swift */,
 				F4744EBF29C75DAB00DAC9EC /* Lesson3View.swift */,
+				F4744EC329C89E4E00DAC9EC /* Lesson4View.swift */,
 			);
 			path = Lessons;
 			sourceTree = "<group>";
@@ -179,6 +186,7 @@
 				F4A24DE329BE428100CBDF56 /* ConvergenceCalcExampleExpl1.swift */,
 				F4A24DE529BF430700CBDF56 /* ConstantConvergenceExampleExpl1.swift */,
 				F4744EC129C7957700DAC9EC /* UniqueLimitEasyProofExpl1.swift */,
+				F4744EC529CA4B8400DAC9EC /* ContinuityDefExpl1.swift */,
 			);
 			path = QuestionExplanations;
 			sourceTree = "<group>";
@@ -229,6 +237,7 @@
 				F4A24DC12998467F00CBDF56 /* InteractiveViews.swift */,
 				F4A24DC32999160A00CBDF56 /* AcademicWritingViews.swift */,
 				F4A24DD1299EC09200CBDF56 /* ContainerStyles.swift */,
+				F4744EC729CA694600DAC9EC /* InteractiveViews2.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -333,6 +342,8 @@
 				F478C63A28E889000090292F /* LoginView.swift in Sources */,
 				F49810E72916830200680568 /* Lesson1View.swift in Sources */,
 				F4A24DE629BF430700CBDF56 /* ConstantConvergenceExampleExpl1.swift in Sources */,
+				F4744EC629CA4B8400DAC9EC /* ContinuityDefExpl1.swift in Sources */,
+				F4744EC429C89E4E00DAC9EC /* Lesson4View.swift in Sources */,
 				F4A24DE429BE428100CBDF56 /* ConvergenceCalcExampleExpl1.swift in Sources */,
 				F4F04A28290913CD00DD05D9 /* QuizModel.swift in Sources */,
 				F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */,
@@ -340,6 +351,7 @@
 				F4A4ACD72919AD760012522F /* LessonSelectView.swift in Sources */,
 				F4F04A182906EC4200DD05D9 /* LectureNotesView.swift in Sources */,
 				F4A24DD2299EC09200CBDF56 /* ContainerStyles.swift in Sources */,
+				F4744EC829CA694600DAC9EC /* InteractiveViews2.swift in Sources */,
 				F4A24DC22998467F00CBDF56 /* InteractiveViews.swift in Sources */,
 				F4F04A23290894A000DD05D9 /* QuizView.swift in Sources */,
 				F4A24DE229BE11A000CBDF56 /* ConvergenceCalcView.swift in Sources */,

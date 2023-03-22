@@ -409,13 +409,6 @@ struct ConvergenceDefinitionQuestion1View: View{
                 VStack{
                     Spacer()
                     
-//                    HStack{
-//                        Text("Recall that")
-//                        TextView(string: $seq).frame(width: 80, height:30)
-//                        Text("is convergent if:")}
-//                    .padding(.top, 10.0)
-//                    TextView(string: $convergencedef).frame(width: 360.0, height: 30.0)
-//                    Spacer()
                     VStack{
                         HStack{
                             Text("For a sequence:").multilineTextAlignment(.center)
