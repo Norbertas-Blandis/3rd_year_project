@@ -17,13 +17,15 @@ struct Lesson1View: View {
             Text("Welcome to "+lessonManager.model.lessonModel[lessonId].title+"!")
                 .modifier(BlackTitleTextStyle())
             
-            NavigationLink(destination: SequenceDefinitionView().navigationBarTitle("Sequences").navigationBarHidden(false),label: {
+            NavigationLink(destination: SequenceDefinitionView(goNext: true).navigationBarTitle("Sequences").navigationBarHidden(false),label: {
                 Text("Start the lesson!").modifier(GreenButtonWhiteTextStyle())})
         }.offset(y: -90)
     }
 }
 
 struct SequenceDefinitionView: View {
+    
+    var goNext: Bool
     
     @State private var sequence : String = "[math]a_1,a_2,a_3,a_4,...[/math]"
     @State private var sequencedef : String = "[math](a_n)_{n∈ℕ}[/math]"
@@ -48,7 +50,7 @@ struct SequenceDefinitionView: View {
             }
             Spacer()
             
-            NavigationLink(destination: SequenceExampleView().navigationBarTitle("Sequences").navigationBarHidden(false),label: {
+            NavigationLink(destination: SequenceExampleView(goNext: goNext).navigationBarTitle("Sequences").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             
         }.modifier(BlackTitleAcademicTextStyle())
@@ -56,6 +58,8 @@ struct SequenceDefinitionView: View {
 }
 
 struct SequenceExampleView: View {
+    
+    var goNext: Bool
     
     @State private var sequence : String = "[math]a_1=1,a_2=2,a_3=3,...[/math]"
     @State private var sequenceformula : String = "[math]a_n=n[/math]"
@@ -81,9 +85,14 @@ struct SequenceExampleView: View {
             
             Spacer()
             
-            NavigationLink(destination: AnswerChecker1View().navigationBarTitle("Practice #1").navigationBarHidden(false),label: {
-                Text("Next!")
-                    .modifier(GreenButtonWhiteTextStyle())})
+            if goNext{
+                NavigationLink(destination: AnswerChecker1View(goNext: true).navigationBarTitle("Practice #1").navigationBarHidden(false),label: {
+                    Text("Next!")
+                        .modifier(GreenButtonWhiteTextStyle())})
+            } else{
+                NavigationLink(destination: LectureNotesView().navigationBarTitle("Convergence").navigationBarHidden(true).navigationBarBackButtonHidden(true),label: {
+                    Text("Great!").modifier(GreenButtonWhiteTextStyle())})
+            }
             
         }.modifier(BlackTitleAcademicTextStyle())
     }
@@ -92,6 +101,8 @@ struct SequenceExampleView: View {
 import CodeViewer
 
 struct AnswerChecker1View: View{
+    
+    var goNext: Bool
     
     @State private var question1 : String = "[math](a_{n})_{n∈N}[/math]"
     @State private var question2 : String = "[math]a_{n}=n^3[/math]"
@@ -118,12 +129,14 @@ struct AnswerChecker1View: View{
             }.modifier(GrayContainerStyle(opacity: 0.25)).padding(15)
             Spacer()
             
-            StringAnswerCheckerView(question: "", correctAnswer: "64", destinationView: AnyView(AnswerChecker2View()), destinationViewTitle: "Practise #2", explanationView: AnyView(SequenceIntroExp1()))
+            StringAnswerCheckerView(question: "", correctAnswer: "64", destinationView: AnyView(AnswerChecker2View(goNext: true)), destinationViewTitle: "Practise #2", explanationView: AnyView(SequenceIntroExp1()), goNext: goNext)
         }
     }
 }
 
 struct AnswerChecker2View: View{
+    
+    var goNext: Bool
     
     @State private var question1 : String = "[math](a_{n})_{n∈N}[/math]"
     @State private var question2 : String = "[math]a_{n}=1/(n^2)[/math]"
@@ -151,13 +164,15 @@ struct AnswerChecker2View: View{
             }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.25)).padding(15)
             Spacer()
             
-            StringAnswerCheckerView(question: "", correctAnswer: "5", destinationView: AnyView(SubsequenceDefinitionView()), destinationViewTitle: "Subsequences", explanationView: AnyView(SequenceIntroExp2()))
+            StringAnswerCheckerView(question: "", correctAnswer: "5", destinationView: AnyView(SubsequenceDefinitionView(goNext: true)), destinationViewTitle: "Subsequences", explanationView: AnyView(SequenceIntroExp2()), goNext: goNext)
             
         }
     }
 }
 
 struct SubsequenceDefinitionView: View{
+    
+    var goNext: Bool
     
     @State private var seqdefinition : String = "[math](a_{n})_{n∈N}[/math],"
     @State private var subdefinition: String = "[math](a_{n_{k}})_{k∈N}[/math]"
@@ -180,7 +195,7 @@ struct SubsequenceDefinitionView: View{
                 Spacer()
             }.modifier(BlackTitleAcademicTextStyle())
             
-            NavigationLink(destination: SubsequenceIntuitionView().navigationBarTitle("Subsequences").navigationBarHidden(false),label: {
+            NavigationLink(destination: SubsequenceIntuitionView(goNext: goNext).navigationBarTitle("Subsequences").navigationBarHidden(false),label: {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
             
@@ -189,6 +204,8 @@ struct SubsequenceDefinitionView: View{
 }
 
 struct SubsequenceIntuitionView: View{
+    
+    var goNext: Bool
     
     @State private var seqdefinition : String = "[math](a_{n})_{n∈N}[/math],"
     @State private var subdefinition: String = "[math](a_{n_{k}})_{k∈N}[/math]"
@@ -227,14 +244,22 @@ struct SubsequenceIntuitionView: View{
                 }
                 Spacer()
             }
-            NavigationLink(destination: ConvergenceIntuitionView().navigationBarTitle("Convergence intuition").navigationBarHidden(false),label: {
-                Text("Next!")
-                    .modifier(GreenButtonWhiteTextStyle())})
+            
+            if goNext{
+                NavigationLink(destination: ConvergenceIntuitionView(goNext: true).navigationBarTitle("Convergence intuition").navigationBarHidden(false),label: {
+                    Text("Next!")
+                        .modifier(GreenButtonWhiteTextStyle())})
+            } else{
+                NavigationLink(destination: LectureNotesView().navigationBarTitle("Convergence").navigationBarHidden(true).navigationBarBackButtonHidden(true),label: {
+                    Text("Great!").modifier(GreenButtonWhiteTextStyle())})
+            }
         }.modifier(BlackTitleAcademicTextStyle())
     }
 }
 
 struct ConvergenceIntuitionView: View{
+    
+    var goNext: Bool
     
     @State private var sliderValue: Double = 0.0
     
@@ -254,7 +279,7 @@ struct ConvergenceIntuitionView: View{
                 Spacer()
             }
             
-            NavigationLink(destination: ConvergenceExampleView().navigationBarTitle("Convergence intuition").navigationBarHidden(false),label: {
+            NavigationLink(destination: ConvergenceExampleView(goNext: goNext).navigationBarTitle("Convergence intuition").navigationBarHidden(false),label: {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
             
@@ -263,6 +288,8 @@ struct ConvergenceIntuitionView: View{
 }
 
 struct ConvergenceExampleView: View{
+    
+    var goNext: Bool
     
     @State private var seqdefinition : String = "[math](a_{n})_{n∈N}[/math]"
     @State private var seqdeclaration: String = "[math]a_{n}=1-1/n[/math]"
@@ -291,7 +318,7 @@ struct ConvergenceExampleView: View{
                 
             }
             
-            NavigationLink(destination: ConvergenceDefinitionView().navigationBarTitle("Convergence definition").navigationBarHidden(false),label: {
+            NavigationLink(destination: ConvergenceDefinitionView(goNext: goNext).navigationBarTitle("Convergence definition").navigationBarHidden(false),label: {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
             
@@ -300,6 +327,8 @@ struct ConvergenceExampleView: View{
 }
 
 struct ConvergenceDefinitionView: View{
+    
+    var goNext: Bool
     
     @State private var convergencedef: String = "[math]∀ε>0,∃N∈N,∀n≥N |a_{n}−r|<ε[/math]"
     @State private var epsilon: String = "[math]∀ε>0[/math]"
@@ -369,8 +398,13 @@ struct ConvergenceDefinitionView: View{
                 
                 if showNext{
                     Spacer()
-                    NavigationLink(destination: ConvergenceDefinitionQuestion1View().navigationBarTitle("Convergence practice").navigationBarHidden(false),label: {
-                        Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                    if goNext{
+                        NavigationLink(destination: ConvergenceDefinitionQuestion1View(goNext: true).navigationBarTitle("Convergence practice").navigationBarHidden(false),label: {
+                            Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                    } else{
+                        NavigationLink(destination: LectureNotesView().navigationBarTitle("Convergence").navigationBarHidden(true).navigationBarBackButtonHidden(true),label: {
+                            Text("Great!").modifier(GreenButtonWhiteTextStyle())})
+                    }
                 }
                 
             }
@@ -389,6 +423,8 @@ public let labelList = [AnyView(SubscriptString(main: "a",sub: "1")),
                        AnyView(Text("")),AnyView(Text("")),AnyView(Text(""))]
 
 struct ConvergenceDefinitionQuestion1View: View{
+    
+    var goNext: Bool
     
     @State private var seq: String = "[math](a_{n})_{n∈N}[/math]"
     @State private var convergencedef: String = "[math]∀ε>0,∃N∈N,∀n≥N |a_{n}−r|<ε[/math]"
@@ -415,7 +451,7 @@ struct ConvergenceDefinitionQuestion1View: View{
                         return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle())
                     Spacer()
         
-                    StringAnswerCheckerView(question: "", correctAnswer: "4", destinationView: AnyView(ConvergenceDefinitionQuestion2View()), destinationViewTitle: "Practise Convergence #2", explanationView: AnyView(ConvergenceDefExpl()))
+                    StringAnswerCheckerView(question: "", correctAnswer: "4", destinationView: AnyView(ConvergenceDefinitionQuestion2View(goNext: true)), destinationViewTitle: "Practise Convergence #2", explanationView: AnyView(ConvergenceDefExpl()), goNext: goNext)
                 
             }
         }.modifier(BlackDetailedAcademicTextStyle())
@@ -423,6 +459,8 @@ struct ConvergenceDefinitionQuestion1View: View{
 }
 
 struct ConvergenceDefinitionQuestion2View: View{
+    
+    var goNext: Bool
     
     @State private var seq: String = "[math](a_{n})_{n∈N}[/math]"
     @State private var convergencedef: String = "[math]∀ε>0,∃N∈N,∀n≥N |a_{n}−r|<ε[/math]"
@@ -449,7 +487,7 @@ struct ConvergenceDefinitionQuestion2View: View{
                         return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle())
         
                     Spacer()
-                    StringAnswerCheckerView(question: "", correctAnswer: "3", destinationView: AnyView(Lesson1Complete(lessonManager: LessonManager())), destinationViewTitle: "", explanationView: AnyView(ConvergenceDefExpl2()))
+                StringAnswerCheckerView(question: "", correctAnswer: "3", destinationView: AnyView(Lesson1Complete(lessonManager: LessonManager())), destinationViewTitle: "", explanationView: AnyView(ConvergenceDefExpl2()), goNext: goNext)
                 
             }
             
@@ -478,7 +516,7 @@ struct Lesson1Complete: View {
 
 struct Lesson1View_Previews: PreviewProvider {
     static var previews: some View {
-        ConvergenceDefinitionView()
+        ConvergenceDefinitionView(goNext: true)
         
     }
 }

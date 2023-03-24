@@ -13,54 +13,79 @@ struct ConvergenceQuizList: View {
     @State private var goToQuiz1 = false
     @State private var goToQuiz2 = false
     @State private var goToQuiz3 = false
+    @State private var goToQuiz4 = false
+    @State private var goToQuiz5 = false
     
     var body: some View {
         ScrollView{
             VStack{
 
-                //Sets quiz 1
+                //Sequences quiz 1
                 NavigationLink(
-                    destination: Lesson0_6(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Set excersices")),
+                    destination: AnswerChecker1View(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Sequence excersices")),
                     isActive: $goToQuiz0){
                         Button(action: { goToQuiz0.toggle() }) {
                             HStack {
-                                Text("Sets #1").padding()
+                                Text("Sequences #1").padding()
                             }.modifier(NotPulsatingButtonStyleFullFrame())
                         }.padding(.all, 5)
                 }
                 
-                //Sets quiz 2
+                //Sequences quiz 2
                 NavigationLink(
-                    destination: Lesson0_7(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Set excersices")),
+                    destination: AnswerChecker2View(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Sequence excersices")),
                     isActive: $goToQuiz1){
                         Button(action: { goToQuiz1.toggle() }) {
                             HStack {
-                                Text("Sets #2").padding()
+                                Text("Sequences #2").padding()
                             }.modifier(NotPulsatingButtonStyleFullFrame())
                         }.padding(.all, 5)
                 }
                 
-                //Quantifier quiz
+                //Convergence quiz 1
                 NavigationLink(
-                    destination: Lesson0_9(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Quantifier excersices")),
+                    destination: ConvergenceDefinitionQuestion1View(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Convergence excersices")),
                     isActive: $goToQuiz2){
                         Button(action: { goToQuiz2.toggle() }) {
                             HStack {
-                                Text("Quantifiers").padding()
+                                Text("Convergence #1").padding()
                             }.modifier(NotPulsatingButtonStyleFullFrame())
                         }.padding(.all, 5)
                 }
                 
-                //Function quiz
+                //Convergence quiz 2
                 NavigationLink(
-                    destination: Lesson0_14(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Function excersices")),
+                    destination: ConvergenceDefinitionQuestion2View(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Convergence excersices")),
                     isActive: $goToQuiz3){
                         Button(action: { goToQuiz3.toggle() }) {
                             HStack {
-                                Text("Functions").padding()
+                                Text("Convergence #2").padding()
                             }.modifier(NotPulsatingButtonStyleFullFrame())
                         }.padding(.all, 5)
                 }
+                
+                //Convergence quiz 3
+                NavigationLink(
+                    destination: ConvergenceDefinitionQuestion3View(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Convergence excersices")),
+                    isActive: $goToQuiz4){
+                        Button(action: { goToQuiz4.toggle() }) {
+                            HStack {
+                                Text("Convergence #3").padding()
+                            }.modifier(NotPulsatingButtonStyleFullFrame())
+                        }.padding(.all, 5)
+                }
+                
+                //Convergence quiz 4
+                NavigationLink(
+                    destination: ConvergenceDefinitionQuestion4View(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Convergence excersices")),
+                    isActive: $goToQuiz5){
+                        Button(action: { goToQuiz5.toggle() }) {
+                            HStack {
+                                Text("Convergence #4").padding()
+                            }.modifier(NotPulsatingButtonStyleFullFrame())
+                        }.padding(.all, 5)
+                }
+
                 
             }.padding(.all, 10)
         }.accentColor(Color(.label))

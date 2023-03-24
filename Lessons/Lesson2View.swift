@@ -14,17 +14,18 @@ struct Lesson2View: View {
     
     var body: some View {
         VStack{
-//            Text("Welcome to "+lessonManager.model.lessonModel[lessonId].title+"!")
             Text("Welcome to the Using convergence lesson!")
                 .modifier(BlackTitleTextStyle())
             
-            NavigationLink(destination: CalculatingConvergenceIntuitionView().navigationBarTitle("Convergence").navigationBarHidden(false),label: {
+            NavigationLink(destination: CalculatingConvergenceIntuitionView(goNext: true).navigationBarTitle("Convergence").navigationBarHidden(false),label: {
                 Text("Start the lesson!").modifier(GreenButtonWhiteTextStyle())})
         }.offset(y: -90)
     }
 }
 
 struct CalculatingConvergenceIntuitionView: View {
+    
+    var goNext: Bool
     
     @State private var ineq : String = "[math]|a_{n}-r|<ε[/math]"
     @State private var bigN: String = "[math]N(ε)[/math]"
@@ -93,8 +94,13 @@ struct CalculatingConvergenceIntuitionView: View {
                     Button(action: {withAnimation{whichExplanationShow = whichExplanationShow + 1}}, label: {
                         Text("Next").modifier(GreenButtonWhiteTextStyle())})
                 } else {
-                    NavigationLink(destination: ConvergenceDefinitionQuestion3View().navigationBarTitle("Practise Convergence #1").navigationBarHidden(false),label: {
-                        Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                    if goNext{
+                        NavigationLink(destination: ConvergenceDefinitionQuestion3View(goNext: true).navigationBarTitle("Practise Convergence #1").navigationBarHidden(false),label: {
+                            Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                    } else{
+                        NavigationLink(destination: LectureNotesView().navigationBarTitle("Convergence").navigationBarHidden(true).navigationBarBackButtonHidden(true),label: {
+                            Text("Great!").modifier(GreenButtonWhiteTextStyle())})
+                    }
                 }
             }
         }.modifier(BlackDetailedAcademicTextStyle())
@@ -104,6 +110,8 @@ struct CalculatingConvergenceIntuitionView: View {
 
 
 struct ConvergenceDefinitionQuestion3View: View{
+    
+    var goNext: Bool
     
     @State private var seq: String = "[math](a_{n})_{n∈N}[/math]"
     @State private var convergencedef: String = "[math]∀ε>0,∃N∈ℕ,∀n≥N |a_{n}−r|<ε[/math]"
@@ -185,12 +193,14 @@ struct ConvergenceDefinitionQuestion3View: View{
                     
                     Spacer()
                     Spacer()
-                    if whichExplanationShow<=4 {
+                    if whichExplanationShow<=3 {
                         Button(action: {withAnimation{whichExplanationShow = whichExplanationShow + 1}}, label: {
                             Text("Next").modifier(GreenButtonWhiteTextStyle())})
                     } else {
-                        NavigationLink(destination: ConvergenceDefinitionQuestion4View().navigationBarTitle("Practise Convergence #2").navigationBarHidden(false),label: {
-                            Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                        if goNext{
+                            NavigationLink(destination: ConvergenceDefinitionQuestion4View(goNext: true).navigationBarTitle("Practise Convergence #2").navigationBarHidden(false),label: {
+                                Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                        }
                     }
                 }
         }.modifier(BlackDetailedAcademicTextStyle())
@@ -198,6 +208,8 @@ struct ConvergenceDefinitionQuestion3View: View{
 }
 
 struct ConvergenceDefinitionQuestion4View: View{
+    
+    var goNext: Bool
     
     @State private var seq: String = "[math](a_{n})_{n∈N}[/math]"
     @State private var convergencedef: String = "[math]∀ε>0,∃N∈ℕ,∀n≥N |a_{n}−r|<ε[/math]"
@@ -281,12 +293,14 @@ struct ConvergenceDefinitionQuestion4View: View{
                 
                 Spacer()
                 Spacer()
-                if whichExplanationShow<=4 {
+                if whichExplanationShow<=3 {
                     Button(action: {withAnimation{whichExplanationShow = whichExplanationShow + 1}}, label: {
                         Text("Next").modifier(GreenButtonWhiteTextStyle())})
                 } else {
-                    NavigationLink(destination: Lesson2Complete(lessonManager: LessonManager()).navigationBarTitle("").navigationBarHidden(false),label: {
-                        Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                    if goNext{
+                        NavigationLink(destination: Lesson2Complete(lessonManager: LessonManager()).navigationBarTitle("").navigationBarHidden(false),label: {
+                            Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                    }
                 }
             }
         }.modifier(BlackDetailedAcademicTextStyle())
@@ -314,6 +328,6 @@ struct Lesson2Complete: View {
 
 struct Lesson2View_Previews: PreviewProvider {
     static var previews: some View {
-        ConvergenceDefinitionQuestion4View()
+        ConvergenceDefinitionQuestion4View(goNext: true)
     }
 }

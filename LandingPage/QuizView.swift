@@ -9,10 +9,6 @@ import SwiftUI
 
 struct QuizView: View {
     
-    @State private var isQuiz1Unlocked = true
-    @State private var isQuiz2Unlocked = false
-    @State private var isQuiz3Unlocked = false
-    
     @State private var goToQuiz0 = false
     @State private var goToQuiz1 = false
     @State private var goToQuiz2 = false
@@ -44,8 +40,8 @@ struct QuizView: View {
                 let convergenceLesson = LessonManager().model.lessonModel[1]
                 NavigationLink(
                     destination: ConvergenceQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Convergence excersices")),
-                    isActive: $goToQuiz0){
-                        Button(action: convergenceLesson.isUnlocked ? { goToQuiz0.toggle() } : {}) {
+                    isActive: $goToQuiz1){
+                        Button(action: convergenceLesson.isUnlocked ? { goToQuiz1.toggle() } : {}) {
                             HStack {
                                 Text(String(convergenceLesson.id + 1) + ". " + convergenceLesson.title).padding()
                                 Spacer()
@@ -53,6 +49,21 @@ struct QuizView: View {
                             }.modifier(NotPulsatingButtonStyleFullFrame())
                         }.padding(.all, 5)
                 }
+                
+                //Continuity excercises
+                let continuityLesson = LessonManager().model.lessonModel[4]
+                NavigationLink(
+                    destination: ContinuityQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Continuity excersices")),
+                    isActive: $goToQuiz2){
+                        Button(action: continuityLesson.isUnlocked ? { goToQuiz2.toggle() } : {}) {
+                            HStack {
+                                Text(String(continuityLesson.id + 1) + ". " + continuityLesson.title).padding()
+                                Spacer()
+                                Text(Image(systemName: continuityLesson.isUnlocked ? "lock.open" : "lock")).padding(.trailing)
+                            }.modifier(NotPulsatingButtonStyleFullFrame())
+                        }.padding(.all, 5)
+                }
+
                 
             }.padding(.all, 10)
             }.navigationTitle("Excercises")

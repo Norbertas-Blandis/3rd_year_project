@@ -17,7 +17,7 @@ struct Lesson0View: View {
             Text("Welcome to "+lessonManager.model.lessonModel[lessonId].title+"!")
                 .modifier(BlackTitleTextStyle())
             
-            NavigationLink(destination: Lesson0_1().navigationBarTitle("Sets").navigationBarHidden(false), label: {
+            NavigationLink(destination: Lesson0_1(isNotes: true).navigationBarTitle("Sets").navigationBarHidden(false), label: {
                 Text("Start the lesson!")
                 .modifier(GreenButtonWhiteTextStyle())})
             
@@ -26,6 +26,8 @@ struct Lesson0View: View {
 }
 
 struct Lesson0_1: View {
+    
+    var isNotes: Bool
 
     @State private var isPressedShort = false
     @State private var isPressedLong = false
@@ -58,7 +60,7 @@ struct Lesson0_1: View {
             
             Spacer()
             
-            NavigationLink(destination: Lesson0_2().navigationBarTitle("Sets").navigationBarHidden(false),label: {
+            NavigationLink(destination: Lesson0_2(isNotes: isNotes).navigationBarTitle("Sets").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             
         }.offset(y: -90).modifier(BlackTitleAcademicTextStyle())
@@ -66,6 +68,8 @@ struct Lesson0_1: View {
 }
 
 struct Lesson0_2: View {
+    
+    var isNotes: Bool
     
     @State private var isPressedShort = false
     @State private var isPressedLong = false
@@ -99,7 +103,7 @@ struct Lesson0_2: View {
             
             Spacer()
             
-            NavigationLink(destination: Lesson0_3().navigationBarTitle("Sets").navigationBarHidden(false),label: {
+            NavigationLink(destination: Lesson0_3(isNotes: isNotes).navigationBarTitle("Sets").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             
         }.offset(y: -90).modifier(BlackTitleAcademicTextStyle())
@@ -107,6 +111,8 @@ struct Lesson0_2: View {
 }
 
 struct Lesson0_3: View {
+    
+    var isNotes: Bool
     
     @State private var isPressedCShort = false
     @State private var isPressedCLong = false
@@ -201,7 +207,7 @@ struct Lesson0_3: View {
             
             Spacer()
             
-            NavigationLink(destination: Lesson0_4().navigationBarTitle("Sets").navigationBarHidden(false),label: {
+            NavigationLink(destination: Lesson0_4(isNotes: isNotes).navigationBarTitle("Sets").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             
         }.offset(y: -90).modifier(BlackTitleAcademicTextStyle())
@@ -209,6 +215,8 @@ struct Lesson0_3: View {
 }
 
 struct Lesson0_4: View {
+    
+    var isNotes: Bool
     
     @State private var isPressedShort = false
     @State private var isPressedLong = false
@@ -244,7 +252,7 @@ struct Lesson0_4: View {
             
             Spacer()
             
-            NavigationLink(destination: Lesson0_5().navigationBarTitle("Sets").navigationBarHidden(false),label: {
+            NavigationLink(destination: Lesson0_5(isNotes: isNotes).navigationBarTitle("Sets").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             
         }.offset(y: -90).modifier(BlackTitleAcademicTextStyle())
@@ -252,6 +260,8 @@ struct Lesson0_4: View {
 }
 
 struct Lesson0_5: View {
+    
+    var isNotes: Bool
     
     @State private var isPressedShort = false
     @State private var isPressedLong = false
@@ -287,8 +297,14 @@ struct Lesson0_5: View {
             
             Spacer()
             
-            NavigationLink(destination: Lesson0_6(goNext: true).navigationBarTitle("Practice sets").navigationBarHidden(false),label: {
-                Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+            if isNotes{
+                NavigationLink(destination: Lesson0_6(goNext: true).navigationBarTitle("Practice sets").navigationBarHidden(false),label: {
+                    Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+            } else{
+                NavigationLink(destination: LectureNotesView().navigationBarTitle("Prerequisites").navigationBarHidden(true).navigationBarBackButtonHidden(true),label: {
+                    Text("Great!").modifier(GreenButtonWhiteTextStyle())
+                })
+            }
             
         }.offset(y: -90).modifier(BlackTitleAcademicTextStyle())
     }
@@ -476,7 +492,7 @@ struct Lesson0_7: View {
             } else {
                 Text("Correct!").foregroundColor(Color.green)
                 if goNext{
-                    NavigationLink(destination: Lesson0_8().navigationBarTitle("Quantifiers").navigationBarHidden(false),label: {
+                    NavigationLink(destination: Lesson0_8(goNext: true).navigationBarTitle("Quantifiers").navigationBarHidden(false),label: {
                         Text("Next!").modifier(GreenButtonWhiteTextStyle())})
                 }
             }
@@ -486,6 +502,8 @@ struct Lesson0_7: View {
 }
 
 struct Lesson0_8: View {
+    
+    var goNext: Bool
     
     @State private var thereis: String = "[math]∃x∈A,p(x)[/math]"
     @State private var thereisstat: String = "[math]∃x∈ℕ,x<3[/math]"
@@ -552,8 +570,10 @@ struct Lesson0_8: View {
                     }.modifier(LightGreenButtonStyleFullFrame())}
                 Spacer()
             } else {
-                NavigationLink(destination: Lesson0_9(goNext: true).navigationBarTitle("Quantifiers practise").navigationBarHidden(false),label: {
-                    Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                if goNext{
+                    NavigationLink(destination: Lesson0_9(goNext: true).navigationBarTitle("Quantifiers practise").navigationBarHidden(false),label: {
+                        Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                }
                 Spacer()
             }
             
@@ -613,7 +633,7 @@ struct Lesson0_9: View {
             
             if showNext{
                 if goNext{
-                    NavigationLink(destination: Lesson0_10().navigationBarTitle("Functions").navigationBarHidden(false),label: {
+                    NavigationLink(destination: Lesson0_10(goNext: true).navigationBarTitle("Functions").navigationBarHidden(false),label: {
                         Text("Next!").modifier(GreenButtonWhiteTextStyle())})
                 }
             }
@@ -626,6 +646,8 @@ struct Lesson0_9: View {
 }
 
 struct Lesson0_10: View {
+    
+    var goNext: Bool
     
     @State private var functiondef : String = "[math]f:A → B[/math]"
     @State private var f : String = "[math]f[/math]"
@@ -699,7 +721,7 @@ struct Lesson0_10: View {
             }.modifier(GrayContainerStyle(opacity: 0.1))
             
             Spacer()
-            NavigationLink(destination: Lesson0_11().navigationBarTitle("Functions").navigationBarHidden(false),label: {
+            NavigationLink(destination: Lesson0_11(goNext: goNext).navigationBarTitle("Functions").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             Spacer()
         }.modifier(BlackDetailedAcademicTextStyle())
@@ -707,6 +729,8 @@ struct Lesson0_10: View {
 }
 
 struct Lesson0_11: View {
+    
+    var goNext: Bool
     
     @State private var functionexam : String = "[math]f(x)=x^2[/math]"
     @State private var functiondef : String = "[math]f:ℝ → ℝ[/math]"
@@ -768,7 +792,7 @@ struct Lesson0_11: View {
             }.modifier(GrayContainerStyle(opacity: 0.1))
             
             Spacer()
-            NavigationLink(destination: Lesson0_12().navigationBarTitle("Continuity intuition").navigationBarHidden(false),label: {
+            NavigationLink(destination: Lesson0_12(goNext: goNext).navigationBarTitle("Functions").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             Spacer()
         }.modifier(BlackDetailedAcademicTextStyle())
@@ -776,6 +800,8 @@ struct Lesson0_11: View {
 }
 
 struct Lesson0_12: View {
+    
+    var goNext: Bool
     
     @State private var functiondef : String = "[math]f:A → B[/math]"
     @State private var f : String = "[math]f[/math]"
@@ -853,7 +879,7 @@ struct Lesson0_12: View {
             }.modifier(GrayContainerStyle(opacity: 0.1))
             
             Spacer()
-            NavigationLink(destination: Lesson0_13().navigationBarTitle("Functions").navigationBarHidden(false),label: {
+            NavigationLink(destination: Lesson0_13(goNext: goNext).navigationBarTitle("Functions").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             Spacer()
         }.modifier(BlackDetailedAcademicTextStyle())
@@ -861,6 +887,8 @@ struct Lesson0_12: View {
 }
 
 struct Lesson0_13: View {
+    
+    var goNext: Bool
     
     @State private var functiondef : String = "[math]f:A → B[/math]"
     @State private var f : String = "[math]f[/math]"
@@ -935,8 +963,13 @@ struct Lesson0_13: View {
             }.modifier(GrayContainerStyle(opacity: 0.1))
             
             Spacer()
-            NavigationLink(destination: Lesson0_14(goNext: true).navigationBarTitle("Functions").navigationBarHidden(false),label: {
-                Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+            if goNext{
+                NavigationLink(destination: Lesson0_14(goNext: true).navigationBarTitle("Functions").navigationBarHidden(false),label: {
+                    Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+            } else{
+                NavigationLink(destination: LectureNotesView().navigationBarTitle("Prerequisites").navigationBarHidden(true).navigationBarBackButtonHidden(true),label: {
+                    Text("Great!").modifier(GreenButtonWhiteTextStyle())})
+            }
             Spacer()
         }.modifier(BlackDetailedAcademicTextStyle())
     }
@@ -1088,7 +1121,7 @@ struct Lesson0Complete: View {
 
 struct Lesson0View_Previews: PreviewProvider {
     static var previews: some View {
-        Lesson0_12()
+        Lesson0_12(goNext: true)
     }
 }
 

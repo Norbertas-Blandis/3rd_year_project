@@ -20,7 +20,7 @@ struct LandingPage: View {
                     Image(systemName: "house").foregroundColor(Color.black)
                 }
             
-            LectureNotesView(lessonManager: LessonManager())
+            LectureNotesView()
                 .tabItem {
                     Image(systemName: "book.closed.fill").foregroundColor(Color.black)
                 }

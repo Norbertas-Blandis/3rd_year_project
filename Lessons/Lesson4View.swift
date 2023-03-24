@@ -366,7 +366,7 @@ struct ContinuityDefinitionView: View{
             
             if showNext{
                 Spacer()
-                NavigationLink(destination: ContinuityQuestion1View().navigationBarTitle("Continuity practice").navigationBarHidden(false),label: {
+                NavigationLink(destination: ContinuityQuestion1View(goNext: true).navigationBarTitle("Continuity practice").navigationBarHidden(false),label: {
                     Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             }
             
@@ -377,6 +377,8 @@ struct ContinuityDefinitionView: View{
 }
 
 struct ContinuityQuestion1View: View{
+    
+    var goNext: Bool
     
     @State private var functiondef : String = "[math]f:ℝ → ℝ, f(x)=x^2[/math]"
     @State private var contpoint : String = "[math]x=0.5?[/math]"
@@ -528,8 +530,10 @@ struct ContinuityQuestion1View: View{
                     Text("If we could find an interval around x for all positive ε we would prove that the function is continuos at 0.5")
                     Text("Write this down yourself to convince yourself!").italic().padding()
                     
-                    NavigationLink(destination: ContinuityQuestion2View().navigationBarTitle("Continuity practice").navigationBarHidden(false),label: {
-                        Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                    if goNext{
+                        NavigationLink(destination: ContinuityQuestion2View(goNext: true).navigationBarTitle("Continuity practice").navigationBarHidden(false),label: {
+                            Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                    }
                 }
             }
             
@@ -540,6 +544,8 @@ struct ContinuityQuestion1View: View{
 }
 
 struct ContinuityQuestion2View: View{
+    
+    var goNext: Bool
     
     let myFunc = { (x: Double) -> Double in
         if x < 0 {
@@ -690,8 +696,10 @@ struct ContinuityQuestion2View: View{
                         TextView(string: $option33).frame(width: 300, height: 25.0)
                         Text("is not satisfied, so")
                         Text("f is not continuous at 0!").bold()
-                        NavigationLink(destination: Lesson4Complete(lessonManager: LessonManager()).navigationBarTitle("").navigationBarHidden(false),label: {
-                            Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                        if goNext{
+                            NavigationLink(destination: Lesson4Complete(lessonManager: LessonManager()).navigationBarTitle("").navigationBarHidden(false),label: {
+                                Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                        }
                     }.padding()
                 }
             }
@@ -723,6 +731,6 @@ struct Lesson4Complete: View {
 
 struct Lesson4View_Previews: PreviewProvider {
     static var previews: some View {
-        ContinuityQuestion2View()
+        ContinuityQuestion2View(goNext: true)
     }
 }

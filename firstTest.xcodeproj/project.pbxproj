@@ -15,6 +15,10 @@
 		F4744EC829CA694600DAC9EC /* InteractiveViews2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC729CA694600DAC9EC /* InteractiveViews2.swift */; };
 		F4744ECA29CDD1A700DAC9EC /* PrerequisitesQuizList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC929CDD1A700DAC9EC /* PrerequisitesQuizList.swift */; };
 		F4744ECC29CDD5DD00DAC9EC /* ConvergenceQuizList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744ECB29CDD5DD00DAC9EC /* ConvergenceQuizList.swift */; };
+		F4744ECE29CDDFD700DAC9EC /* ContinuityQuizList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744ECD29CDDFD700DAC9EC /* ContinuityQuizList.swift */; };
+		F4744ED029CDE6FB00DAC9EC /* PrerequisitesNotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744ECF29CDE6FB00DAC9EC /* PrerequisitesNotesList.swift */; };
+		F4744ED229CDEC1E00DAC9EC /* ConvergenceNotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744ED129CDEC1E00DAC9EC /* ConvergenceNotesList.swift */; };
+		F4744ED429CDF09F00DAC9EC /* ContinuityNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744ED329CDF09F00DAC9EC /* ContinuityNotesView.swift */; };
 		F478C63828E889000090292F /* firstTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63728E889000090292F /* firstTestApp.swift */; };
 		F478C63A28E889000090292F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63928E889000090292F /* LoginView.swift */; };
 		F478C63C28E889010090292F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F478C63B28E889010090292F /* Assets.xcassets */; };
@@ -63,6 +67,10 @@
 		F4744EC729CA694600DAC9EC /* InteractiveViews2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveViews2.swift; sourceTree = "<group>"; };
 		F4744EC929CDD1A700DAC9EC /* PrerequisitesQuizList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrerequisitesQuizList.swift; sourceTree = "<group>"; };
 		F4744ECB29CDD5DD00DAC9EC /* ConvergenceQuizList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvergenceQuizList.swift; sourceTree = "<group>"; };
+		F4744ECD29CDDFD700DAC9EC /* ContinuityQuizList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuityQuizList.swift; sourceTree = "<group>"; };
+		F4744ECF29CDE6FB00DAC9EC /* PrerequisitesNotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrerequisitesNotesList.swift; sourceTree = "<group>"; };
+		F4744ED129CDEC1E00DAC9EC /* ConvergenceNotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvergenceNotesList.swift; sourceTree = "<group>"; };
+		F4744ED329CDF09F00DAC9EC /* ContinuityNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuityNotesView.swift; sourceTree = "<group>"; };
 		F478C63428E889000090292F /* firstTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firstTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F478C63728E889000090292F /* firstTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstTestApp.swift; sourceTree = "<group>"; };
 		F478C63928E889000090292F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -179,6 +187,7 @@
 				F49810EC29168E1300680568 /* Quiz3View.swift */,
 				F4744EC929CDD1A700DAC9EC /* PrerequisitesQuizList.swift */,
 				F4744ECB29CDD5DD00DAC9EC /* ConvergenceQuizList.swift */,
+				F4744ECD29CDDFD700DAC9EC /* ContinuityQuizList.swift */,
 			);
 			path = Quizes;
 			sourceTree = "<group>";
@@ -200,6 +209,9 @@
 		F4A24DD6299FBBE700CBDF56 /* LectureNotes */ = {
 			isa = PBXGroup;
 			children = (
+				F4744ECF29CDE6FB00DAC9EC /* PrerequisitesNotesList.swift */,
+				F4744ED129CDEC1E00DAC9EC /* ConvergenceNotesList.swift */,
+				F4744ED329CDF09F00DAC9EC /* ContinuityNotesView.swift */,
 			);
 			path = LectureNotes;
 			sourceTree = "<group>";
@@ -334,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F49810EB29168DF100680568 /* Quiz2View.swift in Sources */,
+				F4744ECE29CDDFD700DAC9EC /* ContinuityQuizList.swift in Sources */,
 				F4A24DDE29ABE8F700CBDF56 /* Conv:DiffExplan.swift in Sources */,
 				F4744ECA29CDD1A700DAC9EC /* PrerequisitesQuizList.swift in Sources */,
 				F4A24DD0299D230C00CBDF56 /* SequenceIntroExp.swift in Sources */,
@@ -354,6 +367,8 @@
 				F4744EC429C89E4E00DAC9EC /* Lesson4View.swift in Sources */,
 				F4A24DE429BE428100CBDF56 /* ConvergenceCalcExampleExpl1.swift in Sources */,
 				F4F04A28290913CD00DD05D9 /* QuizModel.swift in Sources */,
+				F4744ED429CDF09F00DAC9EC /* ContinuityNotesView.swift in Sources */,
+				F4744ED229CDEC1E00DAC9EC /* ConvergenceNotesList.swift in Sources */,
 				F4A4ACD52919AB190012522F /* LessonManager.swift in Sources */,
 				F49810ED29168E1300680568 /* Quiz3View.swift in Sources */,
 				F4A4ACD72919AD760012522F /* LessonSelectView.swift in Sources */,
@@ -367,6 +382,7 @@
 				F4F04A2D290926E600DD05D9 /* QuizCompletedView.swift in Sources */,
 				F4F04A162906E84700DD05D9 /* LandingPage.swift in Sources */,
 				F478C63828E889000090292F /* firstTestApp.swift in Sources */,
+				F4744ED029CDE6FB00DAC9EC /* PrerequisitesNotesList.swift in Sources */,
 				F49EFBE4290B1BBB00B32086 /* Lesson0View.swift in Sources */,
 				F4A4ACD32919AAA20012522F /* LessonModel.swift in Sources */,
 			);

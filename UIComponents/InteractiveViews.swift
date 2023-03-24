@@ -55,6 +55,7 @@ struct StringAnswerCheckerView: View {
     var destinationView: AnyView
     var destinationViewTitle: String
     var explanationView: AnyView
+    var goNext: Bool
     
     @State private var input: String = ""
     @State private var showResult = false
@@ -89,9 +90,10 @@ struct StringAnswerCheckerView: View {
                 HStack{
                     
                     if isAnswerCorrect == true{
-                        
-                        NavigationLink(destination: destinationView.navigationBarTitle(destinationViewTitle).navigationBarHidden(false),label: {
-                            Text("Next!").modifier(GreenButtonWhiteTextStyleHalf())})
+                        if goNext{
+                            NavigationLink(destination: destinationView.navigationBarTitle(destinationViewTitle).navigationBarHidden(false),label: {
+                                Text("Next!").modifier(GreenButtonWhiteTextStyleHalf())})
+                        }
                     } else{
                         
                         Button(action: {
