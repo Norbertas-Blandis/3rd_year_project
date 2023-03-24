@@ -20,7 +20,7 @@ struct PrerequisitesQuizList: View {
 
                 //Sets quiz 1
                 NavigationLink(
-                    destination: Lesson0_6(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Set excersices")),
+                    destination: Lesson0_6(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Set excercises")),
                     isActive: $goToQuiz0){
                         Button(action: { goToQuiz0.toggle() }) {
                             HStack {
@@ -42,7 +42,7 @@ struct PrerequisitesQuizList: View {
                 
                 //Quantifier quiz
                 NavigationLink(
-                    destination: Lesson0_9(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Quantifier excersices")),
+                    destination: Lesson0_9(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Quantifier excercises")),
                     isActive: $goToQuiz2){
                         Button(action: { goToQuiz2.toggle() }) {
                             HStack {
@@ -53,7 +53,7 @@ struct PrerequisitesQuizList: View {
                 
                 //Function quiz
                 NavigationLink(
-                    destination: Lesson0_14(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Function excersices")),
+                    destination: Lesson0_14(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Function excercises")),
                     isActive: $goToQuiz3){
                         Button(action: { goToQuiz3.toggle() }) {
                             HStack {

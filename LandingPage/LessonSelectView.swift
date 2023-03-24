@@ -53,9 +53,9 @@ struct LessonSelectView: View {
                     ZStack {
                         Color.white
                         VStack {
-                            Text("Congratulations on completing the "+lessonManager.model.lessonModel[completedLessonId].title+"lesson!")
+                            Text("Congratulations on completing the "+lessonManager.model.lessonModel[completedLessonId].title+" lesson!")
                                 .font(.system(size: 20)).fontWeight(.bold).multilineTextAlignment(.center)
-                            Text("You have unlocked the  "+lessonManager.model.lessonModel[unlockedLessonId].title+"  lesson!")
+                            Text("You have unlocked the "+lessonManager.model.lessonModel[unlockedLessonId].title+" lesson!")
                                 .font(.system(size: 18)).multilineTextAlignment(.center).padding(5)
 
                             Button(action: {

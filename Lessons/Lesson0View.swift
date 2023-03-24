@@ -589,10 +589,21 @@ struct Lesson0_9: View {
     @State private var thereisstat2: String = "[math]∃x∈ℝ,x^2=-1[/math]"
     @State private var thereisstat3: String = "[math]∃x∈ℂ,x^2=-1[/math]"
     
+    @State private var thereisstat2hint: String = "[math]x^2=-1[/math]"
+    
     @State private var option1: String = "[math]∃x∈ℤ,x=0.5[/math]"
     @State private var option2: String = "[math]∀x∈ℤ,x^2>4[/math]"
     @State private var option3: String = "[math]∃x∈ℝ,x^2=-4[/math]"
     @State private var option4: String = "[math]∀x∈ℝ,x^2>-1[/math]"
+    
+    @State private var option2hint: String = "[math]x^2>4[/math]"
+    @State private var option3hint: String = "[math]x^2=-4[/math]"
+    @State private var option4hint: String = "[math]x^2>-1[/math]"
+    
+    @State private var showNumerical1: Bool = false
+    @State private var showNumerical2: Bool = false
+    @State private var showNumerical3: Bool = false
+    @State private var showNumerical4: Bool = false
     
     @State private var showSecond: Bool = false
     @State private var showThird: Bool = false
@@ -605,6 +616,8 @@ struct Lesson0_9: View {
         VStack{
             Spacer()
             
+            
+            //Questions
             VStack{
                 if !showSecond{
                     Text("is the following statement correct?").multilineTextAlignment(.center).padding()
@@ -631,15 +644,64 @@ struct Lesson0_9: View {
                 }
             }.modifier(GrayContainerStyle(opacity: 0.1))
             
+            //Hints
+            VStack{
+                if showNumerical1 && !showSecond{
+                    HStack{
+                        TextView(string: $thereisstat).frame(width: 140, height: 25.0)
+                        Text("means:")}.padding(.top)
+                    Text("'There exists an integer that is greater than one'").italic().multilineTextAlignment(.center).padding([.leading, .trailing, .bottom])
+                } else if showNumerical2 && !showThird{
+                    HStack{
+                        TextView(string: $thereisstat2).frame(width: 170, height: 25.0)
+                        Text("means:")}.padding(.top)
+                    Text("There exists a REAL number x, such that:").italic().padding([.leading, .trailing])
+                    TextView(string: $thereisstat2hint).frame(width: 120, height: 25.0).padding(.bottom)
+                } else if showNumerical3 && !showFourth{
+                    HStack{
+                        TextView(string: $thereisstat2).frame(width: 170, height: 25.0)
+                        Text("means:")}.padding(.top)
+                    Text("There exists a COMPLEX number x, such that:").italic().padding([.leading, .trailing])
+                    TextView(string: $thereisstat2hint).frame(width: 120, height: 25.0).padding(.bottom)
+                } else if showNumerical4 && !showFifth{
+                    Text("Each of the statements means:").padding()
+                    Text("There exists an integer that is equal to 0.5").italic().padding([.leading, .trailing])
+                    HStack{
+                        Text("For all integers x,").italic()
+                        TextView(string: $option2hint).frame(width: 120, height: 25.0)}
+                    HStack{
+                        Text("For all real numbers x,").italic()
+                        TextView(string: $option3hint).frame(width: 120, height: 25.0)}
+                    HStack{
+                        Text("For all real numbers x,").italic()
+                        TextView(string: $option4hint).frame(width: 120, height: 25.0)}.padding(.bottom)
+                }
+            }.modifier(LightGreenContainerStyle()).padding()
+            
+            //Next button
             if showNext{
                 if goNext{
                     NavigationLink(destination: Lesson0_10(goNext: true).navigationBarTitle("Functions").navigationBarHidden(false),label: {
                         Text("Next!").modifier(GreenButtonWhiteTextStyle())})
                 }
             }
-            Spacer()
             
             Spacer()
+            Spacer()
+            //Help button
+            if !showSecond{
+                Button(action: {withAnimation{showNumerical1.toggle()}}, label: {
+                    Text("Hint 1").modifier(GreenHelpButtonStyle(isActivated: showNumerical1))})
+            } else if !showThird{
+                Button(action: {withAnimation{showNumerical2.toggle()}}, label: {
+                    Text("Hint 2").modifier(GreenHelpButtonStyle(isActivated: showNumerical2))})
+            } else if !showFourth{
+                Button(action: {withAnimation{showNumerical3.toggle()}}, label: {
+                    Text("Hint 3").modifier(GreenHelpButtonStyle(isActivated: showNumerical3))})
+            } else if !showFifth{
+                Button(action: {withAnimation{showNumerical4.toggle()}}, label: {
+                    Text("Hint 4").modifier(GreenHelpButtonStyle(isActivated: showNumerical4))})
+            }
             
         }.modifier(BlackDetailedAcademicTextStyle())
     }
@@ -892,7 +954,7 @@ struct Lesson0_13: View {
     
     @State private var functiondef : String = "[math]f:A → B[/math]"
     @State private var f : String = "[math]f[/math]"
-    @State private var functionass : String = "[math]f(1)=a,f(1)=b,f(2=b),f(3)=c[/math]"
+    @State private var functionass : String = "[math]f(1)=a,f(1)=b,f(2)=b,f(3)=c[/math]"
     
     @State private var isPressedShortA = false
     @State private var isPressedLongA = false
@@ -958,7 +1020,7 @@ struct Lesson0_13: View {
                         }.padding(10)
                     }
                 }
-                TextView(string: $functionass).frame(width: 350, height: 30.0)
+                TextView(string: $functionass).frame(width: 370, height: 30.0)
                 Text("This is not a function as f(1) is assigned to both a and b, so 1 is not assigned to a unique element in B").italic().padding()
             }.modifier(GrayContainerStyle(opacity: 0.1))
             
@@ -1002,6 +1064,8 @@ struct Lesson0_14: View {
     @State private var showThird: Bool = false
     @State private var showFourth: Bool = false
     @State private var showFifth: Bool = false
+    
+    @State private var showNumerical: Bool = false
     
     var body: some View{
         
@@ -1069,6 +1133,7 @@ struct Lesson0_14: View {
                     TextView(string: $functionass2).frame(width: 200, height: 30.0)
                     Text("is this a function?").multilineTextAlignment(.center).padding()
                     QuestionView(question: "", correctAnswer: "No", incorrectAnswer: "Yes", showNextQuestion: $showThird, comesFirst: 1).padding()
+                //Question 3
                 } else if !showFourth{
                     Text("Which assignment DOES NOT give us a function?").padding()
                     MultipleQuestionView(
@@ -1082,14 +1147,28 @@ struct Lesson0_14: View {
                 }
             }.modifier(GrayContainerStyle(opacity: 0.1))
             
-            if showFifth{
-                if goNext{
-                    NavigationLink(destination: Lesson0Complete(lessonManager: LessonManager()).navigationBarTitle("Functions").navigationBarHidden(false),label: {
-                        Text("Next!").modifier(GreenButtonWhiteTextStyle())})
-                }
+            if showNumerical && !showFifth{
+                VStack{
+                    Text("Some things to look out for:").padding()
+                    Text("1. Is the function defined FOR ALL points in A?").italic().padding([.leading, .trailing])
+                    Text("2. Is every point in A assigned to a UNIQUE point in B?").italic().padding(.bottom)
+                }.modifier(LightGreenContainerStyle()).padding()
             }
             
             Spacer()
+            
+            //Help button
+            if !showFifth{
+                Button(action: {withAnimation{showNumerical.toggle()}}, label: {
+                    Text("Hint").modifier(GreenHelpButtonStyle(isActivated: showNumerical))}).padding()
+            }
+            
+            if showFifth{
+                if goNext{
+                    NavigationLink(destination: Lesson0Complete(lessonManager: LessonManager()).navigationBarTitle("Functions").navigationBarHidden(false),label: {
+                        Text("Next!").modifier(GreenButtonWhiteTextStyle())}).padding()
+                }
+            }
             
         }.modifier(BlackDetailedAcademicTextStyle())
     }
@@ -1121,7 +1200,7 @@ struct Lesson0Complete: View {
 
 struct Lesson0View_Previews: PreviewProvider {
     static var previews: some View {
-        Lesson0_12(goNext: true)
+        Lesson0_14(goNext: true)
     }
 }
 

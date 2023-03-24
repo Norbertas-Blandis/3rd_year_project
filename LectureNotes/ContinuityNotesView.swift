@@ -19,44 +19,11 @@ struct ContinuityNotesView: View {
 
                 //Sets quiz 1
                 NavigationLink(
-                    destination: SequenceDefinitionView(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Sequences")),
+                    destination: ContinuityIntuition1View(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Continuity")),
                     isActive: $goToQuiz0){
                         Button(action: { goToQuiz0.toggle() }) {
                             HStack {
-                                Text("Sequences").padding()
-                            }.modifier(NotPulsatingButtonStyleFullFrame())
-                        }.padding(.all, 5)
-                }
-                
-                //Sets quiz 2
-                NavigationLink(
-                    destination: SubsequenceDefinitionView(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Subsequences")),
-                    isActive: $goToQuiz1){
-                        Button(action: { goToQuiz1.toggle() }) {
-                            HStack {
-                                Text("Subsequences").padding()
-                            }.modifier(NotPulsatingButtonStyleFullFrame())
-                        }.padding(.all, 5)
-                }
-
-                //Quantifier quiz
-                NavigationLink(
-                    destination: ConvergenceIntuitionView(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Convergence")),
-                    isActive: $goToQuiz2){
-                        Button(action: { goToQuiz2.toggle() }) {
-                            HStack {
-                                Text("Convergence").padding()
-                            }.modifier(NotPulsatingButtonStyleFullFrame())
-                        }.padding(.all, 5)
-                }
-                
-                //Quantifier quiz
-                NavigationLink(
-                    destination: CalculatingConvergenceIntuitionView(goNext: false).navigationBarBackButtonHidden(false).navigationBarTitle(Text("Calculating convergence")),
-                    isActive: $goToQuiz3){
-                        Button(action: { goToQuiz3.toggle() }) {
-                            HStack {
-                                Text("Calculating convergence").padding()
+                                Text("Continuity").padding()
                             }.modifier(NotPulsatingButtonStyleFullFrame())
                         }.padding(.all, 5)
                 }

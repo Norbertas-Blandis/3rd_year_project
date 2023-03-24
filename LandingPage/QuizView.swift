@@ -25,7 +25,7 @@ struct QuizView: View {
                 //Prerequisite excercises
                 let prerequisitesLesson = LessonManager().model.lessonModel[0]
                 NavigationLink(
-                    destination: PrerequisitesQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Prerequisite excersices")),
+                    destination: PrerequisitesQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Prerequisite excercises")),
                     isActive: $goToQuiz0){
                         Button(action: prerequisitesLesson.isUnlocked ? { goToQuiz0.toggle() } : {}) {
                             HStack {
@@ -39,7 +39,7 @@ struct QuizView: View {
                 //Convergence excercises
                 let convergenceLesson = LessonManager().model.lessonModel[1]
                 NavigationLink(
-                    destination: ConvergenceQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Convergence excersices")),
+                    destination: ConvergenceQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Convergence excercises")),
                     isActive: $goToQuiz1){
                         Button(action: convergenceLesson.isUnlocked ? { goToQuiz1.toggle() } : {}) {
                             HStack {
@@ -53,7 +53,7 @@ struct QuizView: View {
                 //Continuity excercises
                 let continuityLesson = LessonManager().model.lessonModel[4]
                 NavigationLink(
-                    destination: ContinuityQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Continuity excersices")),
+                    destination: ContinuityQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Continuity excercises")),
                     isActive: $goToQuiz2){
                         Button(action: continuityLesson.isUnlocked ? { goToQuiz2.toggle() } : {}) {
                             HStack {

@@ -57,7 +57,7 @@ struct LectureNotesView: View {
                 //Continuity excercises
                 let continuityLesson = LessonManager().model.lessonModel[4]
                 NavigationLink(
-                    destination: ContinuityQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Continuity")),
+                    destination: ContinuityNotesView().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Continuity")),
                     isActive: $goToQuiz2){
                         Button(action: continuityLesson.isUnlocked ? { goToQuiz2.toggle() } : {}) {
                             HStack {

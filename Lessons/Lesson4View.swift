@@ -102,7 +102,7 @@ struct FunctionDefinitionView: View {
             NavigationLink(destination: FunctionExampleView().navigationBarTitle("More on functions").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             Spacer()
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 
@@ -168,14 +168,16 @@ struct FunctionExampleView: View {
             }.modifier(GrayContainerStyle(opacity: 0.1))
             
             Spacer()
-            NavigationLink(destination: ContinuityIntuition1View().navigationBarTitle("Continuity intuition").navigationBarHidden(false),label: {
+            NavigationLink(destination: ContinuityIntuition1View(goNext: true).navigationBarTitle("Continuity intuition").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             Spacer()
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 
 struct ContinuityIntuition1View: View {
+    
+    var goNext: Bool
     
     @State private var functiondef : String = "[math]f:ℝ → ℝ, f(x)=x^2[/math]"
     
@@ -206,14 +208,16 @@ struct ContinuityIntuition1View: View {
             }.modifier(GrayContainerStyle(opacity: 0.1))
             
             Spacer()
-            NavigationLink(destination: ContinuityIntuition2View().navigationBarTitle("Continuity intuition").navigationBarHidden(false),label: {
+            NavigationLink(destination: ContinuityIntuition2View(goNext: goNext).navigationBarTitle("Continuity intuition").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             Spacer()
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 
 struct ContinuityIntuition2View: View {
+    
+    var goNext: Bool
     
     @State private var functiondef : String = "[math]f:ℝ → ℝ, f(x)=[/math]"
     @State private var bracket : String = "{"
@@ -261,7 +265,7 @@ struct ContinuityIntuition2View: View {
                 }.modifier(GrayContainerStyle(opacity: 0.1))
                 
                 Spacer()
-                NavigationLink(destination: ContinuityIntuition3View().navigationBarTitle("Continuity intuition").navigationBarHidden(false),label: {
+                NavigationLink(destination: ContinuityIntuition3View(goNext: goNext).navigationBarTitle("Continuity intuition").navigationBarHidden(false),label: {
                     Text("Next!").modifier(GreenButtonWhiteTextStyle())})
                 Spacer()
             }.modifier(BlackDetailedAcademicTextStyle())
@@ -270,6 +274,8 @@ struct ContinuityIntuition2View: View {
 }
 
 struct ContinuityIntuition3View: View {
+    
+    var goNext: Bool
     
     @State private var functiondef : String = "[math]f:A → B[/math]"
     
@@ -285,7 +291,7 @@ struct ContinuityIntuition3View: View {
                 Text("How is continuity actually defined?").bold()
                 
                 Spacer()
-                NavigationLink(destination: ContinuityDefinitionView().navigationBarTitle("Continuity intuition").navigationBarHidden(false),label: {
+                NavigationLink(destination: ContinuityDefinitionView(goNext: goNext).navigationBarTitle("Continuity intuition").navigationBarHidden(false),label: {
                     Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             }.modifier(BlackDetailedAcademicTextStyle())
         }.padding(10)
@@ -293,6 +299,8 @@ struct ContinuityIntuition3View: View {
 }
 
 struct ContinuityDefinitionView: View{
+    
+    var goNext: Bool
     
     @State private var functiondef : String = "[math]f:A → B[/math]"
     
@@ -366,13 +374,18 @@ struct ContinuityDefinitionView: View{
             
             if showNext{
                 Spacer()
-                NavigationLink(destination: ContinuityQuestion1View(goNext: true).navigationBarTitle("Continuity practice").navigationBarHidden(false),label: {
-                    Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                if goNext{
+                    NavigationLink(destination: ContinuityQuestion1View(goNext: true).navigationBarTitle("Continuity practice").navigationBarHidden(false),label: {
+                        Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                } else{
+                    NavigationLink(destination: LectureNotesView().navigationBarTitle("Continuity").navigationBarHidden(true).navigationBarBackButtonHidden(true),label: {
+                        Text("Great!").modifier(GreenButtonWhiteTextStyle())})
+                }
             }
             
             Spacer()
             
-        }.padding(10)
+        }.padding(10).modifier(BlackDetailedAcademicTextStyle())
     }
 }
 
@@ -539,7 +552,7 @@ struct ContinuityQuestion1View: View{
             
             Spacer()
             
-        }.padding(10)
+        }.padding(10).modifier(BlackDetailedAcademicTextStyle())
     }
 }
 
@@ -706,7 +719,7 @@ struct ContinuityQuestion2View: View{
             
             Spacer()
             
-        }.padding(10)
+        }.padding(10).modifier(BlackDetailedAcademicTextStyle())
     }
 }
 

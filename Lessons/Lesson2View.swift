@@ -103,7 +103,7 @@ struct CalculatingConvergenceIntuitionView: View {
                     }
                 }
             }
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 
@@ -203,7 +203,7 @@ struct ConvergenceDefinitionQuestion3View: View{
                         }
                     }
                 }
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 
@@ -303,7 +303,7 @@ struct ConvergenceDefinitionQuestion4View: View{
                     }
                 }
             }
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 

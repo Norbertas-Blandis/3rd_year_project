@@ -53,7 +53,7 @@ struct SequenceDefinitionView: View {
             NavigationLink(destination: SequenceExampleView(goNext: goNext).navigationBarTitle("Sequences").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             
-        }.modifier(BlackTitleAcademicTextStyle())
+        }.modifier(BlackTitleAcademicTextStyle()).padding(10)
     }
 }
 
@@ -94,7 +94,7 @@ struct SequenceExampleView: View {
                     Text("Great!").modifier(GreenButtonWhiteTextStyle())})
             }
             
-        }.modifier(BlackTitleAcademicTextStyle())
+        }.modifier(BlackTitleAcademicTextStyle()).padding(10)
     }
 }
 
@@ -199,7 +199,7 @@ struct SubsequenceDefinitionView: View{
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
             
-        }.modifier(BlackTitleAcademicTextStyle())
+        }.modifier(BlackTitleAcademicTextStyle()).padding(10)
     }
 }
 
@@ -253,7 +253,7 @@ struct SubsequenceIntuitionView: View{
                 NavigationLink(destination: LectureNotesView().navigationBarTitle("Convergence").navigationBarHidden(true).navigationBarBackButtonHidden(true),label: {
                     Text("Great!").modifier(GreenButtonWhiteTextStyle())})
             }
-        }.modifier(BlackTitleAcademicTextStyle())
+        }.modifier(BlackTitleAcademicTextStyle()).padding(10)
     }
 }
 
@@ -283,7 +283,7 @@ struct ConvergenceIntuitionView: View{
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
             
-        }.modifier(BlackTitleAcademicTextStyle())
+        }.modifier(BlackTitleAcademicTextStyle()).padding(10)
     }
 }
 
@@ -322,7 +322,7 @@ struct ConvergenceExampleView: View{
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
             
-        }.modifier(BlackTitleAcademicTextStyle())
+        }.modifier(BlackTitleAcademicTextStyle()).padding(10)
     }
 }
 
@@ -409,7 +409,7 @@ struct ConvergenceDefinitionView: View{
                 
             }
             
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 
@@ -454,7 +454,7 @@ struct ConvergenceDefinitionQuestion1View: View{
                     StringAnswerCheckerView(question: "", correctAnswer: "4", destinationView: AnyView(ConvergenceDefinitionQuestion2View(goNext: true)), destinationViewTitle: "Practise Convergence #2", explanationView: AnyView(ConvergenceDefExpl()), goNext: goNext)
                 
             }
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 
@@ -491,7 +491,7 @@ struct ConvergenceDefinitionQuestion2View: View{
                 
             }
             
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 

@@ -50,7 +50,7 @@ struct LimitIntroductionView: View {
                 NavigationLink(destination: UniqueLimitTheoremView().navigationBarTitle("Unique limits").navigationBarHidden(false),label: {
                     Text("Next!").modifier(GreenButtonWhiteTextStyle())})
                 Spacer()
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 
@@ -100,7 +100,7 @@ struct UniqueLimitTheoremView: View{
             NavigationLink(destination: UniqueLimitTheoremProofView().navigationBarTitle("Unique limits  proof").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             Spacer()
-        }.modifier(BlackDetailedAcademicTextStyle())
+        }.modifier(BlackDetailedAcademicTextStyle()).padding(10)
     }
 }
 
