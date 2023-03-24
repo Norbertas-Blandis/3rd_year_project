@@ -15,40 +15,51 @@ struct SequenceIntroExp1: View {
     @State private var question3 : String = "[math]a_{4}[/math]"
     
     var body: some View {
-        ScrollView{
+        
+        VStack{
             Spacer()
+            
             VStack{
+                
+                //Question
                 HStack{
                     Text("Given a sequence")
                     TextView(string: $question2).frame(width: 100.0, height: 30.0)
                 }
                 HStack{
                     Text("To calculate ")
-                    TextView(string: $question3).frame(width: 100.0, height: 30.0)
+                    TextView(string: $question3).frame(width: 100.0, height: 25.0)
                 }
                 Text("We have to find the fourth element of a sequence:")
-                HStack{
-                    LineWithExpandingPoints(numOfPoints: 5, namesOfPoints: ["1","8","27","64","125"]).offset(x:-30)
-                    Text(" ... ").modifier(BlackTitleAcademicTextStyle()).offset(x: (CGFloat(4) * 50-125), y: -3)
-                }
-                HStack{
-                    Text("So, ")
-                    TextView(string: $answer).frame(width: 200.0, height: 30.0)
-                }
-            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.25)).padding(15)
+                
+                //Graph
+                let maxWidth = UIScreen.main.bounds.width*0.8
+                LineWithSlider(pointsCount: 6, labels: ["","","","","","","","","","", "", "","","","",""], xMax: 100.0, xMin: 0.0, maxWidth: maxWidth, roundFull: true, multiply: 100) { i, pointsCount in
+                    let x = Double(pow(CGFloat(i),3))/100.0 * maxWidth
+                    let y = 35.0
+                    return CGPoint(x: x, y: y)
+                }.modifier(LightGreenContainerStyle())
+                
+            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.2)).padding()
+            
             Spacer()
         }
     }
 }
 
 struct SequenceIntroExp2: View {
+    
     @State private var answer : String = "[math]a_{5} = 1/25[/math]"
     @State private var question2 : String = "[math]a_{n}=1/(n^2)[/math]"
     @State private var question3 : String = "[math]a_{x}=1/25[/math]"
     @State private var question4 : String = "[math]x=5[/math]"
+    
     var body: some View {
-        ScrollView{
+        
+        VStack{
+            
             Spacer()
+            
             VStack{
                 HStack{
                     Text("Given a sequence")
@@ -59,20 +70,18 @@ struct SequenceIntroExp2: View {
                     TextView(string: $question3).frame(width: 150.0, height: 30)
                 }
                 Text("We have to find WHICH element is 1/25:")
-                HStack{
-                    LineWithExpandingPoints(numOfPoints: 5, namesOfPoints: ["1","1/4","1/9","1/16","1/25"]).offset(x:-30)
-                    Text(" ... ").modifier(BlackTitleAcademicTextStyle()).offset(x: (CGFloat(4) * 50-125), y: -3)
-                }
-                HStack{
-                    Text("So, ")
-                    TextView(string: $answer).frame(width: 200.0, height: 30.0)
-                }
-                HStack{
-                    Text("We get that our answer")
-                    TextView(string: $question4).frame(width: 100.0, height: 25.0)
-                }
-            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.2)).padding(15)
+                //Graph
+                let maxWidth = UIScreen.main.bounds.width*0.8
+                LineWithSlider(pointsCount: 8, labels: ["","1/1","1/4","1/9","","...","","","","", "", "","","","",""], xMax: 1.0, xMin: 0.0, maxWidth: maxWidth, roundFull: false, multiply: 1) { i, pointsCount in
+                    let x = Double(1/pow(CGFloat(i),2)) * maxWidth
+                    let y = 35.0
+                    return CGPoint(x: x, y: y)
+                }.modifier(LightGreenContainerStyle())
+                
+            }.modifier(BlackTitleAcademicTextStyle()).modifier(GrayContainerStyle(opacity: 0.2)).padding()
+            
             Spacer()
+            
         }
     }
 }

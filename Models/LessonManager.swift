@@ -59,7 +59,7 @@ extension LessonManager{
          LessonModel(id: 5,
                      title: "Theorems on continuity",
                      duration: "20 min",
-                     isUnlocked: true,
+                     isUnlocked: false,
                      isCompleted: false,
                      goToLesson: false)]
     }

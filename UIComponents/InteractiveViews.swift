@@ -275,16 +275,24 @@ struct EllipseView: View {
 
 struct LineWithSlider: View {
     
-    @State private var sliderValue: Double = 0.0
+    @State private var sliderValue: Double = 1.0
     let pointsCount: Int
     let labels: [String]
+    let xMax: Double
+    let xMin: Double
     let maxWidth: CGFloat
+    let roundFull: Bool
+    let multiply: Double
     let pointPosition: (Int, Int) -> CGPoint // custom formula for point position
     
-    init(pointsCount: Int, labels: [String], maxWidth: CGFloat, pointPosition: @escaping (Int, Int) -> CGPoint) {
+    init(pointsCount: Int, labels: [String], xMax: Double, xMin: Double, maxWidth: CGFloat, roundFull: Bool, multiply: Double, pointPosition: @escaping (Int, Int) -> CGPoint) {
         self.pointsCount = pointsCount
         self.labels = labels
+        self.xMax = xMax
+        self.xMin = xMin
         self.maxWidth = maxWidth
+        self.roundFull = roundFull
+        self.multiply = multiply
         self.pointPosition = pointPosition
     }
     
@@ -298,6 +306,7 @@ struct LineWithSlider: View {
                 Spacer()
                 ZStack {
                     
+                    //The line
                     Path { path in
                         path.move(to: CGPoint(x: 0, y: geometry.size.height/2))
                         path.addLine(to: CGPoint(x: maxWidth, y: geometry.size.height/2))
@@ -318,15 +327,21 @@ struct LineWithSlider: View {
                     ForEach(0..<11) { i in
                         let tickPosition = CGPoint(x: Double(i) * Double(maxWidth/Double(10)), y: geometry.size.height/2)
                         
+                        // The ticks
                         Path { path in
                             path.move(to: tickPosition)
                             path.addLine(to: CGPoint(x: tickPosition.x, y: tickPosition.y + 5))
-                        }
-                        .stroke(lineWidth: 1)
+                        }.stroke(lineWidth: 1)
                         
-                        let value = Double(i) / Double(10)
-                        Text(String(format: "%.1f", value))
-                            .position(x: tickPosition.x, y: tickPosition.y + 20)
+                        //Tick value
+                        let tickStep = Double((xMax - xMin)/10.0)
+                        let value = Double(i) * tickStep
+                        if roundFull{
+                            Text(String(format: "%.0f", value)).position(x: tickPosition.x, y: tickPosition.y + 20)
+                        } else{
+                            Text(String(format: "%.1f", value))
+                                .position(x: tickPosition.x, y: tickPosition.y + 20)
+                        }
                     }
                 }
             }.frame(height: 70).padding(10)
@@ -334,7 +349,7 @@ struct LineWithSlider: View {
             HStack{
                 // Slider
                 VStack {
-                    Slider(value: $sliderValue, in: 0...Double(pointsCount - 1), step: 1)
+                    Slider(value: $sliderValue, in: 1...Double(pointsCount - 1), step: 1)
                         .frame(width: 100)
                     Text("n=\(Int(sliderValue))")
                 }.padding()
@@ -342,7 +357,7 @@ struct LineWithSlider: View {
                 // Box showing current point position
                 HStack{
                     TextView(string: $seq).frame(width: 50.0, height: 20.0)
-                    Text("\(pointPosition(Int(sliderValue), pointsCount).x / maxWidth)")
+                    Text("\(multiply * pointPosition(Int(sliderValue), pointsCount).x / maxWidth)")
                 }.padding().background(Color.gray.opacity(0.2)).cornerRadius(8)
             }
         }
@@ -810,37 +825,67 @@ struct QuestionView: View {
     let correctAnswer: String
     let incorrectAnswer: String
     @Binding var showNextQuestion: Bool
+    let comesFirst: Int
 
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
 
-            HStack{
-                Button(action: {selectedAnswer = correctAnswer}) {
-                    Text(correctAnswer)
-                        .font(.headline)
-                        .fontWeight(.medium)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity/2)
-                        .background(selectedAnswer == correctAnswer ? Color.gray : Color.gray.opacity(0.6))
-                        .cornerRadius(10)
-                }
+            if comesFirst == 0{
+                HStack{
+                    Button(action: {selectedAnswer = correctAnswer}) {
+                        Text(correctAnswer)
+                            .font(.headline)
+                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity/2)
+                            .background(selectedAnswer == correctAnswer ? Color.gray : Color.gray.opacity(0.6))
+                            .cornerRadius(10)
+                    }
 
-                Button(action: {selectedAnswer = incorrectAnswer}) {
-                    Text(incorrectAnswer)
-                        .font(.headline)
-                        .fontWeight(.medium)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity/2)
-                        .background(selectedAnswer == incorrectAnswer ? Color.gray : Color.gray.opacity(0.6))
-                        .cornerRadius(10)
+                    Button(action: {selectedAnswer = incorrectAnswer}) {
+                        Text(incorrectAnswer)
+                            .font(.headline)
+                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity/2)
+                            .background(selectedAnswer == incorrectAnswer ? Color.gray : Color.gray.opacity(0.6))
+                            .cornerRadius(10)
+                    }
+                }
+            } else {
+                HStack{
+                    Button(action: {selectedAnswer = incorrectAnswer}) {
+                        Text(incorrectAnswer)
+                            .font(.headline)
+                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity/2)
+                            .background(selectedAnswer == incorrectAnswer ? Color.gray : Color.gray.opacity(0.6))
+                            .cornerRadius(10)
+                    }
+                    
+                    Button(action: {selectedAnswer = correctAnswer}) {
+                        Text(correctAnswer)
+                            .font(.headline)
+                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity/2)
+                            .background(selectedAnswer == correctAnswer ? Color.gray : Color.gray.opacity(0.6))
+                            .cornerRadius(10)
+                    }
                 }
             }
 
             Button(action: {showAnswer = true
                 if selectedAnswer == correctAnswer{
-                    withAnimation{showNextQuestion=true}
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        withAnimation {showNextQuestion = true}
+                    }
+
                 }}) {
                 Text("Check Answer").modifier(GreenCheckAnswerButtonStyle())
             }

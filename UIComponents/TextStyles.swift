@@ -82,9 +82,9 @@ struct BlackTitleAcademicTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(Color.black)
-            .font(.custom("Arial", fixedSize: 20))
+            .font(.custom("Arial", fixedSize: 18))
             .multilineTextAlignment(.center)
-            .padding(3)
+            .padding(10)
     }
 }
 
@@ -92,9 +92,9 @@ struct BlackDetailedAcademicTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(Color.black)
-            .font(.custom("Arial", fixedSize: 18))
+            .font(.custom("Arial", fixedSize: 17))
             .multilineTextAlignment(.center)
-            .padding(20)
+            .padding(10)
     }
 }
 
@@ -215,6 +215,17 @@ struct NotPulsatingButtonCoverStyleFullFrame: ViewModifier {
                     Text("Understood")
                 }.padding()
             })
+    }
+}
+
+struct NotPulsatingButtonStyleFullFrame: ViewModifier {
+    
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity)
+            .padding(5)
+            .background(Color.green.opacity(0.1))
+            .cornerRadius(5)
     }
 }
 

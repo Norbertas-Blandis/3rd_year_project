@@ -319,7 +319,7 @@ struct FunctionPlotSliderEpsilonView: View {
     }
 }
 
-struct FunctionPlotSliderDeltaView: View {
+struct FunctionPlotSliderDeltaEpsilonView: View {
     let formula: (Double) -> Double // Function formula
     let xMin: Double // Minimum x value
     let xMax: Double // Maximum x value
@@ -332,6 +332,7 @@ struct FunctionPlotSliderDeltaView: View {
     let deletionStart: Double // x where deletion starts
     let deletionEnd: Double // x where deletion ends
     let aVal: Double //Point of continuity
+    let delta: Double //Delta
     let epsilon: Double //Epsilon
     
     @State private var xSliderValue: Double = -1.0
@@ -381,6 +382,47 @@ struct FunctionPlotSliderDeltaView: View {
                     }.stroke(Color.black, lineWidth: 3).frame(maxWidth: maxWidth, maxHeight: maxHeight)
                         .overlay(
                         ZStack{
+                            //The green line on x axis
+                            Path { path in
+                                path.move(to: CGPoint(x: aVal*maxHeight/2+maxHeight/2-delta*maxHeight/2, y: geometry.size.height/2))
+                                path.addLine(to: CGPoint(x: aVal*maxHeight/2+maxHeight/2+delta*maxHeight/2, y: geometry.size.height/2))
+                            }.stroke(Color.green, lineWidth: 3)
+                            //The green line on y axis
+                            Path { path in
+                                path.move(to: CGPoint(x: geometry.size.height/2, y: formula(aVal)*maxHeight/2+maxHeight/2-epsilon*maxHeight/2))
+                                path.addLine(to: CGPoint(x: geometry.size.height/2, y: formula(aVal)*maxHeight/2+maxHeight/2+epsilon*maxHeight/2))
+                            }.stroke(Color.green, lineWidth: 3)
+                            //The green line on formula graph
+                            Path { path in
+
+                                let xRange = xMax - xMin
+                                let yRange = yMax - yMin
+
+                                let xStep = xRange / Double(geometry.size.width)
+                                let yStep = yRange / Double(geometry.size.height)
+
+                                var startedFunction = false
+                                for i in 0..<Int(geometry.size.width) {
+                                    let x = xMin + Double(i) * xStep
+
+                                    if x > -0.001 && x < 0.01{
+                                        startedFunction = false
+                                    }
+                                    let y = formula(x)
+
+                                    let xPos = CGFloat(x - xMin) / CGFloat(xRange) * geometry.size.width
+                                    let yPos = CGFloat(y - yMin) / CGFloat(yRange) * geometry.size.height
+
+                                    if x > aVal-epsilon && x < aVal+epsilon{
+                                        if !startedFunction {
+                                            path.move(to: CGPoint(x: xPos, y: yPos))
+                                            startedFunction = true
+                                        } else{
+                                            path.addLine(to: CGPoint(x: xPos, y: yPos))
+                                        }
+                                    }
+                                }
+                            }.stroke(Color.green, lineWidth: 3)
                             //Selected a value
                             Circle()
                                 .fill(Color.red)
@@ -388,22 +430,17 @@ struct FunctionPlotSliderDeltaView: View {
                                 .position(CGPoint(x: aVal*maxWidth/2+maxWidth/2, y: formula(aVal)*maxHeight/2+maxHeight/2))
                             //Movable graph point
                             Circle()
-                                .fill(xSliderValue>(aVal-epsilon) && xSliderValue<(aVal+epsilon) ? Color.green : Color.black)
+                                .fill(xSliderValue>(aVal-delta) && xSliderValue<(aVal+delta) ? Color.green : Color.black)
                                 .frame(width: 10, height: 10)
                                 .position(CGPoint(x: xSliderValue*maxWidth/2+maxWidth/2, y: formula(xSliderValue)*maxHeight/2+maxHeight/2))
-                            //The green line
-                            Path { path in
-                                path.move(to: CGPoint(x: aVal*maxHeight/2+maxHeight/2-epsilon*maxHeight/2, y: geometry.size.height/2))
-                                path.addLine(to: CGPoint(x: aVal*maxHeight/2+maxHeight/2+epsilon*maxHeight/2, y: geometry.size.height/2))
-                            }.stroke(Color.green, lineWidth: 3)
                             Circle()
                                 .fill(Color.red)
-                                .frame(width: 10, height: 10)
+                                .frame(width: 8, height: 8)
                                 .position(CGPoint(x: aVal*maxHeight/2+maxHeight/2, y: geometry.size.height/2))
                             Circle()
-                                .fill(xSliderValue>(aVal-epsilon) && xSliderValue<(aVal+epsilon) ? Color.green : Color.black)
-                                .frame(width: 10, height: 10)
-                                .position(CGPoint(x: xSliderValue*maxHeight/2+maxHeight/2, y:geometry.size.height/2))
+                                .fill(Color.red)
+                                .frame(width: 8, height: 8)
+                                .position(CGPoint(x: geometry.size.height/2, y: formula(aVal)*maxHeight/2+maxHeight/2))
                         }
                     )
                     
@@ -424,10 +461,81 @@ struct FunctionPlotSliderDeltaView: View {
     }
 }
 
+struct MultipleAnswerView: View {
+    
+    let question: String
+    let answers: [String]
+    @State var selectedAnswer: Int?
+    @State var answerPosition: CGPoint?
+    @State var linePosition: CGPoint?
+    
+    var body: some View {
+        VStack {
+            Text(question)
+                .font(.title)
+                .padding()
+            Spacer()
+            VStack(spacing: 10) {
+                ForEach(0..<answers.count) { index in
+                    Button(action: {
+                        selectedAnswer = index
+                        answerPosition = getAnswerPosition(answerIndex: index)
+                        linePosition = getLinePosition(answerIndex: index)
+                    }, label: {
+                        Text(answers[index])
+                            .font(.headline)
+                            .padding()
+                            .background(selectedAnswer == index ? Color.blue : Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    })
+                    .animation(.spring())
+                    .offset(y: selectedAnswer == index ? answerPosition?.y ?? 0 : 0)
+                }
+                Rectangle()
+                    .fill(Color.gray)
+                    .frame(height: 5)
+                    .onTapGesture {
+                        linePosition = CGPoint(x: 0, y: 50)
+                        for index in 0..<answers.count {
+                            answerPosition = getLinePosition(answerIndex: index)
+                            selectedAnswer = nil
+                        }
+                    }
+                    .animation(.spring())
+                    .offset(y: linePosition?.y ?? 0)
+            }
+            Spacer()
+            if let selectedAnswer = selectedAnswer {
+                Text("The answer is: \(answers[selectedAnswer])")
+                    .font(.title2)
+                    .padding()
+            }
+            Spacer()
+        }
+    }
+    
+    private func getAnswerPosition(answerIndex: Int) -> CGPoint {
+        let buttonHeight: CGFloat = 50
+        let yOffset = (CGFloat(answerIndex) * (buttonHeight + 10)) + buttonHeight/2
+        return CGPoint(x: 0, y: yOffset)
+    }
+    
+    private func getLinePosition(answerIndex: Int) -> CGPoint {
+        let yOffset: CGFloat = 50
+        let xOffset = (CGFloat(answerIndex) - CGFloat(answers.count-1)/2) * 100
+        return CGPoint(x: xOffset, y: yOffset)
+    }
+}
+
 
 struct FunctionPlotSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        FunctionPlotSliderDeltaView(
+        
+//        MultipleAnswerView(question: "What is your favorite color?",
+//                             answers: ["Red", "Green", "Blue", "Yellow"])
+        
+        FunctionPlotSliderDeltaEpsilonView(
             formula: { x in -pow(x,2) },
             xMin: -1,
             xMax: 1,
@@ -440,6 +548,7 @@ struct FunctionPlotSliderView_Previews: PreviewProvider {
             deletionStart: -0.01,
             deletionEnd: 0.01,
             aVal: 0.5,
-            epsilon: 0.2)
+            delta: 0.15,
+            epsilon: 0.15)
     }
 }

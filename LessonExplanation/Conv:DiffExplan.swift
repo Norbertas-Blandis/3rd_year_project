@@ -76,7 +76,6 @@ struct ForAllNView: View {
             
             Spacer()
             HStack{
-                Text("Now ")
                 TextView(string: $forall).frame(width: 190, height: 30.0)
                 Text("means that")
             }.padding([.top, .leading, .trailing], 5.0)
@@ -105,7 +104,7 @@ struct ForAllNView: View {
                             let y = 35.0
                 return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle()).padding(.all, 15.0)
             
-            Text("Here ε = 0.4 is set, and notice that all sequence points from the third one are in the interval, so N = 3").multilineTextAlignment(.center).padding(.horizontal, 10.0)
+            Text("Here ε = 0.4 is set, and notice that all sequence points from the third one are in the interval, so N = 3").italic().multilineTextAlignment(.center).padding(.horizontal, 10.0)
             Spacer()
         }
     }
@@ -150,7 +149,7 @@ struct ThereExistNView: View {
                 let y = 35.0
                 return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle()).padding(.all, 15.0)
             
-            Text("Here ε = 0.3 is set, can you find a value of N, such that the inequality is satisfied? (all elements of the sequence indexed by N or larger are green)").multilineTextAlignment(.center).padding(.horizontal, 10.0)
+            Text("Here ε = 0.3 is set, can you find a value of N, such that the inequality is satisfied? (all elements of the sequence indexed by N or larger are green)").italic().multilineTextAlignment(.center).padding(.horizontal, 10.0)
             
             Spacer()
         }
@@ -185,7 +184,7 @@ struct ForAllEpsilonView: View {
                 let y = 35.0
                 return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle()).padding(.all, 15.0)
             
-            Text("Try decreasing ε value and notice that no matter how small it gets, we can still find N, such that all sequence elements indexed by N or greater are coloured green - so the sequence is convergent").multilineTextAlignment(.center).padding(.horizontal, 10.0)
+            Text("Try decreasing ε value and notice that no matter how small it gets, we can still find N, such that all sequence elements indexed by N or greater are coloured green - so the sequence is convergent").italic().multilineTextAlignment(.center).padding(.horizontal, 10.0)
             
             Spacer()
         }

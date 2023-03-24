@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LessonSelectView: View {
     
@@ -26,11 +27,11 @@ struct LessonSelectView: View {
         let lesson2: LessonModel = lessonManager.model.lessonModel[num2]
         
         let currTempLesson = LessonModel(id: lesson1.id,
-                                          title: lesson1.title,
-                                          duration: lesson1.duration,
-                                          isUnlocked: lesson1.isUnlocked,
-                                          isCompleted: true,
-                                          goToLesson: lesson1.goToLesson)
+                                         title: lesson1.title,
+                                         duration: lesson1.duration,
+                                         isUnlocked: lesson1.isUnlocked,
+                                         isCompleted: true,
+                                         goToLesson: lesson1.goToLesson)
         let nextTempLesson = LessonModel(id: lesson2.id,
                                          title: lesson2.title,
                                          duration: lesson2.duration,
@@ -42,9 +43,11 @@ struct LessonSelectView: View {
     }
     
     var body: some View {
+        
+        
         NavigationView{
             ScrollView{
-                
+
                 //Lesson completed congratulations view
                 if isCompleted{
                     ZStack {
@@ -52,7 +55,7 @@ struct LessonSelectView: View {
                         VStack {
                             Text("Congratulations on completing the "+lessonManager.model.lessonModel[completedLessonId].title+"lesson!")
                                 .font(.system(size: 20)).fontWeight(.bold).multilineTextAlignment(.center)
-                            Text("You have unlocked the  "+lessonManager.model.lessonModel[unlockedLessonId].title+" lesson!")
+                            Text("You have unlocked the  "+lessonManager.model.lessonModel[unlockedLessonId].title+"  lesson!")
                                 .font(.system(size: 18)).multilineTextAlignment(.center).padding(5)
 
                             Button(action: {
@@ -72,25 +75,22 @@ struct LessonSelectView: View {
                         }
                     }.frame(width: .infinity, height: 200).cornerRadius(20).shadow(radius: 10).padding(15)
                 }
-                
+
                 VStack{
                     ForEach(lessonManager.model.lessonModel){ lesson in
-                        
+
                         if String(lesson.id) == "0"{
                             NavigationLink(
                                 destination: Lesson0View(lessonId: lesson.id, lessonManager: LessonManager()).navigationBarBackButtonHidden(false).navigationBarTitle(Text("")),
                                 isActive: $goToLesson0){
                                     Button(action: lesson.isUnlocked ? { goToLesson0.toggle() } : {}) {
                                         HStack {
+                                            Text(String(lesson.id + 1) + ". " + lesson.title).padding(.leading)
                                             Spacer()
-                                            Text(String(lesson.id + 1) + ". " + lesson.title)
-                                            Spacer()
-                                            Text(lesson.duration)
-                                            Spacer()
-                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock"))
-                                            Spacer()
-                                        }.modifier(LessonSelectButtonStyle())
-                                    }.padding(.all, 10)
+                                            Text(lesson.duration).padding()
+                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock")).padding(.trailing)
+                                        }.modifier(NotPulsatingButtonStyleFullFrame())
+                                    }.padding(.all, 5)
 
                             }
                         } else if String(lesson.id) == "1"{
@@ -99,15 +99,12 @@ struct LessonSelectView: View {
                                 isActive: $goToLesson1){
                                     Button(action: lesson.isUnlocked ? { goToLesson1.toggle() } : {}) {
                                         HStack {
+                                            Text(String(lesson.id + 1) + ". " + lesson.title).padding(.leading)
                                             Spacer()
-                                            Text(String(lesson.id + 1) + ". " + lesson.title)
-                                            Spacer()
-                                            Text(lesson.duration)
-                                            Spacer()
-                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock"))
-                                            Spacer()
-                                        }.modifier(LessonSelectButtonStyle())
-                                    }.padding(.all, 10)
+                                            Text(lesson.duration).padding()
+                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock")).padding(.trailing)
+                                        }.modifier(NotPulsatingButtonStyleFullFrame())
+                                    }.padding(.all, 5)
                             }
                         } else if String(lesson.id) == "2"{
                             NavigationLink(
@@ -115,15 +112,12 @@ struct LessonSelectView: View {
                                 isActive: $goToLesson2){
                                     Button(action: lesson.isUnlocked ? { goToLesson2.toggle() } : {}) {
                                         HStack {
+                                            Text(String(lesson.id + 1) + ". " + lesson.title).padding(.leading)
                                             Spacer()
-                                            Text(String(lesson.id + 1) + ". " + lesson.title)
-                                            Spacer()
-                                            Text(lesson.duration)
-                                            Spacer()
-                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock"))
-                                            Spacer()
-                                        }.modifier(LessonSelectButtonStyle())
-                                    }.padding(.all, 10)
+                                            Text(lesson.duration).padding()
+                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock")).padding(.trailing)
+                                        }.modifier(NotPulsatingButtonStyleFullFrame())
+                                    }.padding(.all, 5)
                             }
                         }else if String(lesson.id) == "3"{
                             NavigationLink(
@@ -131,15 +125,12 @@ struct LessonSelectView: View {
                                 isActive: $goToLesson3){
                                     Button(action: lesson.isUnlocked ? { goToLesson3.toggle() } : {}) {
                                         HStack {
+                                            Text(String(lesson.id + 1) + ". " + lesson.title).padding(.leading)
                                             Spacer()
-                                            Text(String(lesson.id + 1) + ". " + lesson.title)
-                                            Spacer()
-                                            Text(lesson.duration)
-                                            Spacer()
-                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock"))
-                                            Spacer()
-                                        }.modifier(LessonSelectButtonStyle())
-                                    }.padding(.all, 10)
+                                            Text(lesson.duration).padding()
+                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock")).padding(.trailing)
+                                        }.modifier(NotPulsatingButtonStyleFullFrame())
+                                    }.padding(.all, 5)
                             }
                         } else if String(lesson.id) == "4"{
                             NavigationLink(
@@ -147,15 +138,12 @@ struct LessonSelectView: View {
                                 isActive: $goToLesson4){
                                     Button(action: lesson.isUnlocked ? { goToLesson4.toggle() } : {}) {
                                         HStack {
+                                            Text(String(lesson.id + 1) + ". " + lesson.title).padding(.leading)
                                             Spacer()
-                                            Text(String(lesson.id + 1) + ". " + lesson.title)
-                                            Spacer()
-                                            Text(lesson.duration)
-                                            Spacer()
-                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock"))
-                                            Spacer()
-                                        }.modifier(LessonSelectButtonStyle())
-                                    }.padding(.all, 10)
+                                            Text(lesson.duration).padding()
+                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock")).padding(.trailing)
+                                        }.modifier(NotPulsatingButtonStyleFullFrame())
+                                    }.padding(.all, 5)
                             }
                         }else{
                             NavigationLink(
@@ -163,15 +151,12 @@ struct LessonSelectView: View {
                                 isActive: $goToLesson2){
                                     Button(action: lesson.isUnlocked ? { goToLesson2.toggle() } : {}) {
                                         HStack {
+                                            Text(String(lesson.id + 1) + ". " + lesson.title).padding(.leading)
                                             Spacer()
-                                            Text(String(lesson.id + 1) + ". " + lesson.title)
-                                            Spacer()
-                                            Text(lesson.duration)
-                                            Spacer()
-                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock"))
-                                            Spacer()
-                                        }.modifier(LessonSelectButtonStyle())
-                                    }.padding(.all, 10)
+                                            Text(lesson.duration).padding()
+                                            Text(Image(systemName: lesson.isUnlocked ? "lock.open" : "lock")).padding(.trailing)
+                                        }.modifier(NotPulsatingButtonStyleFullFrame())
+                                    }.padding(.all, 5)
                             }
                         }
                     }

@@ -29,11 +29,7 @@ struct CalculatingConvergenceIntuitionView: View {
     @State private var ineq : String = "[math]|a_{n}-r|<ε[/math]"
     @State private var bigN: String = "[math]N(ε)[/math]"
     
-    @State private var showStep1Explanation = false
-    @State private var showStep2Explanation = false
-    @State private var showStep3Explanation = false
-    
-    @State private var isPulsating = 0
+    @State private var whichExplanationShow = 0
     
     var body: some View {
         VStack{
@@ -42,87 +38,66 @@ struct CalculatingConvergenceIntuitionView: View {
                 Spacer()
                 Text("We know the definition of convergence and have some intuition of what it means, in this lesson we will learn").multilineTextAlignment(.center).padding()
                 Text("How can we rigorously prove a sequence is convergent").bold().multilineTextAlignment(.center)
-                Spacer()
                 
                 VStack{
-                    
-                    //Step 1 pulsating view
-                    if isPulsating == 1{
-                        HStack{
-                            Text("Step 1:").bold().padding(.leading)
-                            Text("Find value r we are appraching")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConvergenceCalcView())))
-                    } else {
-                        HStack{
-                            Text("Step 1:").bold().padding(.leading)
-                            Text("Find value r we are appraching")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcView())))
+                    //Step 1
+                    if whichExplanationShow >= 0 {
+                        Button(action: {withAnimation{whichExplanationShow=whichExplanationShow+1}}){
+                            HStack{
+                                Text("Step 1:").bold().padding(.leading)
+                                Text("Find value r we are approaching")
+                                .padding([.top, .bottom, .trailing])}
+                            .modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(Conv_DiffExplan())))
+                        }
                     }
                     
-                    //Step 2 pulsating view
-                    if isPulsating == 2{
-                        HStack{
-                            Text("Step 2:").bold().padding(.leading)
-                            Text("Solve")
-                            TextView(string: $ineq).frame(width: 125.0, height: 30.0)
-                            Text("for n").padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConvergenceCalcView2())))
-                    } else {
-                        HStack{
-                            Text("Step 2:").bold().padding(.leading)
-                            Text("Solve")
-                            TextView(string: $ineq).frame(width: 125.0, height: 30.0)
-                            Text("for n").padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcView2())))
+                    //Step 2
+                    if whichExplanationShow >= 1 {
+                        Button(action: {whichExplanationShow=whichExplanationShow+1}){
+                            HStack{
+                                Text("Step 2:").bold().padding(.leading)
+                                Text("Solve")
+                                TextView(string: $ineq).frame(width: 125.0, height: 30.0)
+                                Text("for n").padding([.top, .bottom, .trailing])
+                            }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ForAllNView())))
+                        }
                     }
-                    
-                    //Step 3 pulsating view
-                    if isPulsating == 3{
-                        HStack{
-                            Text("Step 3:").bold().padding(.leading)
-                            Text("Find an expression for ")
-                            TextView(string: $bigN).frame(width: 50.0, height: 30.0)
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConvergenceCalcView3())))
-                    } else {
-                        HStack{
-                            Text("Step 3:").bold().padding(.leading)
-                            Text("Find an expression for ")
-                            TextView(string: $bigN).frame(width: 50.0, height: 30.0)
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcView3())))
+
+                    //Step 3
+                    if whichExplanationShow >= 2 {
+                        Button(action: {whichExplanationShow += 1}){
+                            HStack{
+                                Text("Step 3:").bold().padding(.leading)
+                                Text("Find an expression for ")
+                                TextView(string: $bigN).frame(width: 50.0, height: 30.0)
+                                    .padding([.top, .bottom, .trailing])
+                            }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ThereExistNView())))
+                        }
                     }
-                    
-                    //Step 4 pulsating view
-                    if isPulsating == 4{
-                        HStack{
-                            Text("Step 4:").bold().padding(.leading)
-                            Text("Check it all makes sense")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConvergenceCalcView4())))
-                    } else {
-                        HStack{
-                            Text("Step 4:").bold().padding(.leading)
-                            Text("Check it all makes sense")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcView4())))
+
+                    //Step 4
+                    if whichExplanationShow >= 3 {
+                        Button(action: {whichExplanationShow += 1}){
+                            HStack{
+                                Text("Step 4:").bold().padding(.leading)
+                                Text("Check it all makes sense")
+                                    .padding([.top, .bottom, .trailing])
+                            }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ForAllEpsilonView())))
+                        }
                     }
                 }
                 
                 Spacer()
-                if isPulsating<5 {
-                    Button(action: {isPulsating = isPulsating + 1}, label: {
+                Spacer()
+                if whichExplanationShow<=4 {
+                    Button(action: {withAnimation{whichExplanationShow = whichExplanationShow + 1}}, label: {
                         Text("Next").modifier(GreenButtonWhiteTextStyle())})
                 } else {
                     NavigationLink(destination: ConvergenceDefinitionQuestion3View().navigationBarTitle("Practise Convergence #1").navigationBarHidden(false),label: {
                         Text("Next!").modifier(GreenButtonWhiteTextStyle())})
                 }
-                Spacer()
-                
             }
-        }.padding(15)
+        }.modifier(BlackDetailedAcademicTextStyle())
     }
 }
 
@@ -145,7 +120,7 @@ struct ConvergenceDefinitionQuestion3View: View{
     @State private var openVisual: Bool = false
     @State private var openNumerical: Bool = false
     
-    @State private var isPulsating: Int = 0
+    @State private var whichExplanationShow = 0
 
     var body: some View{
         VStack{
@@ -158,83 +133,67 @@ struct ConvergenceDefinitionQuestion3View: View{
                             Text("Given a sequence:").multilineTextAlignment(.center)
                             TextView(string: $question1).frame(width: 100.0, height: 30.0)}
                         Text("Follow the four steps to prove that it is convergent")
-                    }.modifier(GrayContainerStyle(opacity: 0.25))
+                    }.modifier(GrayContainerStyle(opacity: 0.25)).padding(.bottom)
                     
-                    //Step 1 pulsating view
-                    if isPulsating == 1{
-                        HStack{
-                            Text("Step 1:").bold().padding(.leading)
-                            Text("Find value r we are appraching")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConvergenceCalcExampleExpl1())))
-                    } else {
-                        HStack{
-                            Text("Step 1:").bold().padding(.leading)
-                            Text("Find value r we are appraching")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcExampleExpl1())))
-                    }
-                    
-                    //Step 2 pulsating view
-                    if isPulsating == 2{
-                        HStack{
-                            Text("Step 2:").bold().padding(.leading)
-                            Text("Solve")
-                            TextView(string: $ineq).frame(width: 125.0, height: 30.0)
-                            Text("for n").padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConvergenceCalcExampleExpl2())))
-                    } else {
-                        HStack{
-                            Text("Step 2:").bold().padding(.leading)
-                            Text("Solve")
-                            TextView(string: $ineq).frame(width: 125.0, height: 30.0)
-                            Text("for n").padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcExampleExpl2())))
-                    }
-                    
-                    //Step 3 pulsating view
-                    if isPulsating == 3{
-                        HStack{
-                            Text("Step 3:").bold().padding(.leading)
-                            Text("Find an expression for ")
-                            TextView(string: $bigN).frame(width: 50.0, height: 30.0)
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConvergenceCalcExampleExpl3())))
-                    } else {
-                        HStack{
-                            Text("Step 3:").bold().padding(.leading)
-                            Text("Find an expression for ")
-                            TextView(string: $bigN).frame(width: 50.0, height: 30.0)
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcExampleExpl3())))
-                    }
-                    
-                    //Step 4 pulsating view
-                    if isPulsating == 4{
-                        HStack{
-                            Text("Step 4:").bold().padding(.leading)
-                            Text("Check it all makes sense")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConvergenceCalcExampleExpl4())))
-                    } else {
-                        HStack{
-                            Text("Step 4:").bold().padding(.leading)
-                            Text("Check it all makes sense")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcExampleExpl4())))
+                    VStack{
+                        //Step 1
+                        if whichExplanationShow >= 0 {
+                            Button(action: {withAnimation{whichExplanationShow=whichExplanationShow+1}}){
+                                HStack{
+                                    Text("Step 1:").bold().padding(.leading)
+                                    Text("Find value r we are appraching")
+                                        .padding([.top, .bottom, .trailing])
+                                }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcExampleExpl1())))
+                            }
+                        }
+                        
+                        //Step 2
+                        if whichExplanationShow >= 1 {
+                            Button(action: {whichExplanationShow=whichExplanationShow+1}){
+                                HStack{
+                                    Text("Step 2:").bold().padding(.leading)
+                                    Text("Solve")
+                                    TextView(string: $ineq).frame(width: 125.0, height: 30.0)
+                                    Text("for n").padding([.top, .bottom, .trailing])
+                                }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcExampleExpl2())))
+                            }
+                        }
+
+                        //Step 3
+                        if whichExplanationShow >= 2 {
+                            Button(action: {whichExplanationShow += 1}){
+                                HStack{
+                                    Text("Step 3:").bold().padding(.leading)
+                                    Text("Find an expression for ")
+                                    TextView(string: $bigN).frame(width: 50.0, height: 30.0)
+                                        .padding([.top, .bottom, .trailing])
+                                }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcExampleExpl3())))
+                            }
+                        }
+
+                        //Step 4
+                        if whichExplanationShow >= 3 {
+                            Button(action: {whichExplanationShow += 1}){
+                                HStack{
+                                    Text("Step 4:").bold().padding(.leading)
+                                    Text("Check it all makes sense")
+                                        .padding([.top, .bottom, .trailing])
+                                }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConvergenceCalcExampleExpl4())))
+                            }
+                        }
                     }
                     
                     Spacer()
-                    if isPulsating<5 {
-                        Button(action: {isPulsating = isPulsating + 1}, label: {
+                    Spacer()
+                    if whichExplanationShow<=4 {
+                        Button(action: {withAnimation{whichExplanationShow = whichExplanationShow + 1}}, label: {
                             Text("Next").modifier(GreenButtonWhiteTextStyle())})
                     } else {
                         NavigationLink(destination: ConvergenceDefinitionQuestion4View().navigationBarTitle("Practise Convergence #2").navigationBarHidden(false),label: {
                             Text("Next!").modifier(GreenButtonWhiteTextStyle())})
                     }
-                    Spacer()
-                }.modifier(BlackDetailedAcademicTextStyle())
-        }.padding(10)
+                }
+        }.modifier(BlackDetailedAcademicTextStyle())
     }
 }
 
@@ -257,96 +216,80 @@ struct ConvergenceDefinitionQuestion4View: View{
     @State private var openVisual: Bool = false
     @State private var openNumerical: Bool = false
     
-    @State private var isPulsating: Int = 0
+    @State private var whichExplanationShow = 0
 
     var body: some View{
         VStack{
+            VStack{
+                Spacer()
+                
+                //Question
                 VStack{
-                    Spacer()
-                    
-                    //Question
-                    VStack{
-                        HStack{
-                            Text("Given a constant sequence:").multilineTextAlignment(.center)
-                            TextView(string: $question1).frame(width: 100.0, height: 30.0)}
-                        Text("Follow the four steps to prove that it is convergent")
-                    }.modifier(GrayContainerStyle(opacity: 0.25))
-                    
-                    //Step 1 pulsating view
-                    if isPulsating == 1{
-                        HStack{
-                            Text("Step 1:").bold().padding(.leading)
-                            Text("Find value r we are appraching")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConstantConvergenceExampleExpl1())))
-                    } else {
-                        HStack{
-                            Text("Step 1:").bold().padding(.leading)
-                            Text("Find value r we are appraching")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConstantConvergenceExampleExpl1())))
-                    }
-
-                    //Step 2 pulsating view
-                    if isPulsating == 2{
-                        HStack{
-                            Text("Step 2:").bold().padding(.leading)
-                            Text("Solve")
-                            TextView(string: $ineq).frame(width: 125.0, height: 30.0)
-                            Text("for n").padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConstantConvergenceExampleExpl2())))
-                    } else {
-                        HStack{
-                            Text("Step 2:").bold().padding(.leading)
-                            Text("Solve")
-                            TextView(string: $ineq).frame(width: 125.0, height: 30.0)
-                            Text("for n").padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConstantConvergenceExampleExpl2())))
-                    }
-
-                    //Step 3 pulsating view
-                    if isPulsating == 3{
-                        HStack{
-                            Text("Step 3:").bold().padding(.leading)
-                            Text("Find an expression for ")
-                            TextView(string: $bigN).frame(width: 50.0, height: 30.0)
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConstantConvergenceExampleExpl3())))
-                    } else {
-                        HStack{
-                            Text("Step 3:").bold().padding(.leading)
-                            Text("Find an expression for ")
-                            TextView(string: $bigN).frame(width: 50.0, height: 30.0)
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConstantConvergenceExampleExpl3())))
-                    }
-
-                    //Step 4 pulsating view
-                    if isPulsating == 4{
-                        HStack{
-                            Text("Step 4:").bold().padding(.leading)
-                            Text("Check it all makes sense")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(PulsatingButtonCoverStyleFullFrame(isPulsating: true, explanationView: AnyView(ConstantConvergenceExampleExpl4())))
-                    } else {
-                        HStack{
-                            Text("Step 4:").bold().padding(.leading)
-                            Text("Check it all makes sense")
-                                .padding([.top, .bottom, .trailing])
-                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConstantConvergenceExampleExpl4())))
+                    HStack{
+                        Text("Given a constant sequence:").multilineTextAlignment(.center)
+                        TextView(string: $question1).frame(width: 100.0, height: 30.0)}
+                    Text("Follow the four steps to prove that it is convergent")
+                }.modifier(GrayContainerStyle(opacity: 0.25)).padding(.bottom)
+                
+                VStack{
+                    //Step 1
+                    if whichExplanationShow >= 0 {
+                        Button(action: {withAnimation{whichExplanationShow=whichExplanationShow+1}}){
+                            HStack{
+                                Text("Step 1:").bold().padding(.leading)
+                                Text("Find value r we are appraching")
+                                    .padding([.top, .bottom, .trailing])
+                            }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConstantConvergenceExampleExpl1())))
+                        }
                     }
                     
-                    Spacer()
-                    if isPulsating<5 {
-                        Button(action: {isPulsating = isPulsating + 1}, label: {
-                            Text("Next").modifier(GreenButtonWhiteTextStyle())})
-                    } else {
-                        NavigationLink(destination: Lesson2Complete(lessonManager: LessonManager()).navigationBarTitle("").navigationBarHidden(false),label: {
-                            Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                    //Step 2
+                    if whichExplanationShow >= 1 {
+                        Button(action: {whichExplanationShow=whichExplanationShow+1}){
+                            HStack{
+                                Text("Step 2:").bold().padding(.leading)
+                                Text("Solve")
+                                TextView(string: $ineq).frame(width: 125.0, height: 30.0)
+                                Text("for n").padding([.top, .bottom, .trailing])
+                            }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConstantConvergenceExampleExpl2())))
+                        }
                     }
-                    Spacer()
-                }.modifier(BlackDetailedAcademicTextStyle())
-        }.padding(10)
+
+                    //Step 3
+                    if whichExplanationShow >= 2 {
+                        Button(action: {whichExplanationShow += 1}){
+                            HStack{
+                                Text("Step 3:").bold().padding(.leading)
+                                Text("Find an expression for ")
+                                TextView(string: $bigN).frame(width: 50.0, height: 30.0)
+                                    .padding([.top, .bottom, .trailing])
+                            }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConstantConvergenceExampleExpl3())))
+                        }
+                    }
+
+                    //Step 4
+                    if whichExplanationShow >= 3 {
+                        Button(action: {whichExplanationShow += 1}){
+                            HStack{
+                                Text("Step 4:").bold().padding(.leading)
+                                Text("Check it all makes sense")
+                                    .padding([.top, .bottom, .trailing])
+                            }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ConstantConvergenceExampleExpl4())))
+                        }
+                    }
+                }
+                
+                Spacer()
+                Spacer()
+                if whichExplanationShow<=4 {
+                    Button(action: {withAnimation{whichExplanationShow = whichExplanationShow + 1}}, label: {
+                        Text("Next").modifier(GreenButtonWhiteTextStyle())})
+                } else {
+                    NavigationLink(destination: Lesson2Complete(lessonManager: LessonManager()).navigationBarTitle("").navigationBarHidden(false),label: {
+                        Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                }
+            }
+        }.modifier(BlackDetailedAcademicTextStyle())
     }
 }
 
@@ -359,7 +302,7 @@ struct Lesson2Complete: View {
         
         VStack{
             Spacer()
-            Text("Congratulations! You have completed the more on Convergence lesson!").modifier(BlackTitleTextStyle())
+            Text("Congratulations! You have completed the Using convergence lesson!").modifier(BlackTitleTextStyle())
             Spacer()
             
             NavigationLink(destination: LessonSelectView(lessonManager: LessonManager(), isCompleted: true, completedLessonId: 1, unlockedLessonId: 2).navigationBarTitle("").navigationBarHidden(true),label: {
@@ -371,6 +314,6 @@ struct Lesson2Complete: View {
 
 struct Lesson2View_Previews: PreviewProvider {
     static var previews: some View {
-        Lesson2Complete(lessonManager: LessonManager())
+        ConvergenceDefinitionQuestion4View()
     }
 }

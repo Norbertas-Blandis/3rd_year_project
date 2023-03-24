@@ -17,43 +17,49 @@ struct Lesson1View: View {
             Text("Welcome to "+lessonManager.model.lessonModel[lessonId].title+"!")
                 .modifier(BlackTitleTextStyle())
             
-            NavigationLink(destination: SequenceDefinitionView().navigationBarTitle("").navigationBarHidden(false),label: {
+            NavigationLink(destination: SequenceDefinitionView().navigationBarTitle("Sequences").navigationBarHidden(false),label: {
                 Text("Start the lesson!").modifier(GreenButtonWhiteTextStyle())})
         }.offset(y: -90)
     }
 }
 
 struct SequenceDefinitionView: View {
+    
+    @State private var sequence : String = "[math]a_1,a_2,a_3,a_4,...[/math]"
+    @State private var sequencedef : String = "[math](a_n)_{n∈ℕ}[/math]"
+    @State private var an : String = "[math]a_n[/math]"
+    
     var body: some View {
         VStack{
             
             Spacer()
-            Text("A sequence is a list of real numbers: indexed by natural numbers:")
-                .modifier(BlackTitleAcademicTextStyle())
-            HStack{
-                SubscriptString(main: "a",sub: "1")
-                SubscriptString(main: ", a",sub: "2")
-                SubscriptString(main: ", a",sub: "3")
-                SubscriptString(main: ", a",sub: "4")
-            }.modifier(BlackTitleAcademicTextStyle())
-            
-            Text("A sequence is usually denoted by:")
-                .modifier(BlackTitleAcademicTextStyle())
-            
-            MainSequenceDefinitionView().modifier(BlackTitleAcademicTextStyle())
-
-            (Text("Where n is called the index and ")+Text("a")+Text("n").baselineOffset(-10).font(.system(size: 15))+Text(" is the value of the nth element"))
-                .modifier(BlackTitleAcademicTextStyle())
+            //Sequence definition
+            VStack{
+                Text("A sequence is a list of real numbers: indexed by natural numbers:")
+                    .modifier(BlackTitleAcademicTextStyle())
+                TextView(string: $sequence).frame(width: 150, height: 30)
+                Text("A sequence is usually denoted by:")
+                    .modifier(BlackTitleAcademicTextStyle())
+                TextView(string: $sequence).frame(width: 150, height: 30)
+                HStack{
+                    Text("Where n is called the index and")
+                    TextView(string: $an).frame(width: 20, height: 20)}
+                Text("is the value of the nth element")
+            }
             Spacer()
             
-            NavigationLink(destination: SequenceExampleView().navigationBarTitle("").navigationBarHidden(false),label: {
-                Text("Next!")
-                    .modifier(GreenButtonWhiteTextStyle())})
-        }.offset(y: -90).padding(10)
+            NavigationLink(destination: SequenceExampleView().navigationBarTitle("Sequences").navigationBarHidden(false),label: {
+                Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+            
+        }.modifier(BlackTitleAcademicTextStyle())
     }
 }
 
 struct SequenceExampleView: View {
+    
+    @State private var sequence : String = "[math]a_1=1,a_2=2,a_3=3,...[/math]"
+    @State private var sequenceformula : String = "[math]a_n=n[/math]"
+    
     var body: some View {
         VStack{
             
@@ -61,22 +67,17 @@ struct SequenceExampleView: View {
             Text("A simple example of a sequence is the natural numbers N:")
                 .modifier(BlackTitleAcademicTextStyle())
             
-            HStack{
-                LineWithExpandingPoints(numOfPoints: 4, namesOfPoints: ["1", "2", "3", "4"])
-                Text(" ... ").modifier(BlackTitleAcademicTextStyle()).offset(x: (CGFloat(4) * 50-125), y: -3)
-            }
+            let maxWidth = UIScreen.main.bounds.width*0.8
+            LineWithSlider(pointsCount: 15, labels: ["","","","","","","","","","", "", "","","","",""], xMax: 10.0, xMin: 0.0, maxWidth: maxWidth, roundFull: true, multiply: 10) { i, pointsCount in
+                let x = Double(i)/10.0 * maxWidth
+                let y = 35.0
+                return CGPoint(x: x, y: y)
+            }.modifier(LightGreenContainerStyle()).padding()
             
             Text("Here we have:")
-                .modifier(BlackTitleAcademicTextStyle())
-            
-            HStack{
-                SubscriptString(main: "a",sub: "1")
-                Text("= 1, ")
-                SubscriptString(main: "a",sub: "2")
-                Text("= 2, ")
-                SubscriptString(main: "a",sub: "3")
-                Text("= 3, ...")
-            }.modifier(BlackTitleAcademicTextStyle())
+            TextView(string: $sequence).frame(width: 280, height: 30)
+            Text("So we may write a formula:")
+            TextView(string: $sequenceformula).frame(width: 100, height: 30)
             
             Spacer()
             
@@ -84,7 +85,7 @@ struct SequenceExampleView: View {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
             
-        }.offset(y: -90).padding(10)
+        }.modifier(BlackTitleAcademicTextStyle())
     }
 }
 
@@ -182,7 +183,8 @@ struct SubsequenceDefinitionView: View{
             NavigationLink(destination: SubsequenceIntuitionView().navigationBarTitle("Subsequences").navigationBarHidden(false),label: {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
-        }.offset(y: -90).padding(10)
+            
+        }.modifier(BlackTitleAcademicTextStyle())
     }
 }
 
@@ -225,10 +227,10 @@ struct SubsequenceIntuitionView: View{
                 }
                 Spacer()
             }
-            NavigationLink(destination: ConvergenceIntuitionView().navigationBarTitle("Convergence").navigationBarHidden(false),label: {
+            NavigationLink(destination: ConvergenceIntuitionView().navigationBarTitle("Convergence intuition").navigationBarHidden(false),label: {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
-        }.offset(y: -90).padding(10)
+        }.modifier(BlackTitleAcademicTextStyle())
     }
 }
 
@@ -244,20 +246,19 @@ struct ConvergenceIntuitionView: View{
                 
                 Text("Here is a convergent sequence, can you guess which number does it converge to?").modifier(BlackDetailedAcademicTextStyle())
                 
-                let maxWidth = UIScreen.main.bounds.width*0.8
-                LineWithSlider(pointsCount: 15, labels: ["0","1/2","2/3","3/4","","...","","","","", "", "","","","",""], maxWidth: maxWidth) { i, pointsCount in
-                    let x = Double(1 - 1/Double(i+1)) * maxWidth
-                    let y = 35.0
-                    return CGPoint(x: x, y: y)
-                }.modifier(LightGreenContainerStyle()).padding()
+                let maxWidth = UIScreen.main.bounds.width * 0.8
+                LineWithSliderNValue(pointsCount: 12, labels: [], labelViews: labelList, rvalue: 2, epsilon: 0.1, maxWidth: maxWidth) { i, pointsCount in
+                                let x = Double(1 - 1/Double(i+1)) * maxWidth
+                                let y = 35.0
+                    return CGPoint(x: x, y: y)}.modifier(LightGreenContainerStyle()).padding(.all, 15.0)
                 Spacer()
             }
             
-            NavigationLink(destination: ConvergenceExampleView().navigationBarTitle("Convergence").navigationBarHidden(false),label: {
+            NavigationLink(destination: ConvergenceExampleView().navigationBarTitle("Convergence intuition").navigationBarHidden(false),label: {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
             
-        }.offset(y: -90).padding(10)
+        }.modifier(BlackTitleAcademicTextStyle())
     }
 }
 
@@ -270,22 +271,17 @@ struct ConvergenceExampleView: View{
     
     var body: some View{
         VStack{
+            
+            //Explanation
             VStack{
-                
                 Spacer()
-//                HStack{
-//                    Text("Consider a sequence ")
-//                    TextView(string: $seqdefinition).frame(width: 100.0, height: 30.0)
-//                }
+                Text("Consider a sequence given by: ").multilineTextAlignment(.center)
+                TextView(string: $seqdeclaration).frame(width: 150.0, height: 30.0)
                 
-                HStack{
-                    Text("Consider a sequence given by: ").multilineTextAlignment(.center)
-                    TextView(string: $seqdeclaration).frame(width: 150.0, height: 30.0)
-                }
-                
+                //Graph
                 let maxWidth = UIScreen.main.bounds.width*0.8
-                LineWithSlider(pointsCount: 15, labels: ["","","","","","","","","","", "", "","","","",""], maxWidth: maxWidth) { i, pointsCount in
-                    let x = Double(1 - 1/Double(i+1)) * maxWidth
+                LineWithSlider(pointsCount: 15, labels: ["","","","","","","","","","", "", "","","","",""], xMax: 1.0, xMin: 0.0, maxWidth: maxWidth, roundFull: false, multiply: 1) { i, pointsCount in
+                    let x = Double(1 - 1/Double(i)) * maxWidth
                     let y = 35.0
                     return CGPoint(x: x, y: y)
                 }.modifier(LightGreenContainerStyle()).padding()
@@ -295,11 +291,11 @@ struct ConvergenceExampleView: View{
                 
             }
             
-            NavigationLink(destination: ConvergenceDefinitionView().navigationBarTitle("Subsequences").navigationBarHidden(false),label: {
+            NavigationLink(destination: ConvergenceDefinitionView().navigationBarTitle("Convergence definition").navigationBarHidden(false),label: {
                 Text("Next!")
                     .modifier(GreenButtonWhiteTextStyle())})
             
-        }.offset(y: -90).padding(10)
+        }.modifier(BlackTitleAcademicTextStyle())
     }
 }
 
@@ -313,6 +309,9 @@ struct ConvergenceDefinitionView: View{
     @State private var seq: String = "[math]a_{n}[/math]"
     @State private var rvalue: String = "[math]r[/math]"
     
+    @State private var showExplanation = false
+    @State private var showNext = false
+    
     @State private var showCover = false
     @State private var isPulsating = 0
     @State private var scaleFactor: CGFloat = 1.2
@@ -323,67 +322,60 @@ struct ConvergenceDefinitionView: View{
                 Spacer()
                 
                 Text("A formal definition of convergence is as follows:")
-                TextView(string: $convergencedef).frame(width: 360.0, height: 30.0).background(Color.gray.opacity(0.2)).cornerRadius(5).padding(15)
-                Text("Let's break this down:")
+                TextView(string: $convergencedef).frame(width: 360.0, height: 30.0).modifier(GrayContainerStyle(opacity: 0.2)).padding(.bottom)
                 
-                //for all epsilon view
-                if isPulsating == 4{
-                    HStack{
-                        TextView(string: $epsilon).frame(width: 75, height: 20.0)
-                        Text(" - for all positive ε,")}.modifier(PulsatingButtonCoverStyle(isPulsating: true, explanationView: AnyView(ForAllEpsilonView())))
-                } else {
-                    HStack{
-                        TextView(string: $epsilon).frame(width: 75, height: 20.0)
-                        Text(" - for all positive ε,")}.padding()
-                }
-                
-                //there is N view
-                if isPulsating == 3{
-                    HStack{
-                        TextView(string: $bigN).frame(width: 75, height: 20.0)
-                        Text(" - there is a natural number N,")}.modifier(PulsatingButtonCoverStyle(isPulsating: true, explanationView: AnyView(ThereExistNView())))
-                } else {
-                    HStack{
-                        TextView(string: $bigN).frame(width: 75, height: 20.0)
-                        Text(" - there is a natural number N,")}.padding()
-                }
-                
-                //for all greater than N view
-                if isPulsating == 2{
-                    HStack{
-                        TextView(string: $smallN).frame(width: 75, height: 20.0)
-                        Text(" - such that for all values n greater or equal to N,")}.modifier(PulsatingButtonCoverStyle(isPulsating: true, explanationView: AnyView(ForAllNView())))
-                } else {
-                    HStack{
-                        TextView(string: $smallN).frame(width: 75, height: 20.0)
-                        Text(" - such that for all values n greater or equal to N,")}.padding()
-                }
-                
-                //Modulus inequality view
-                if isPulsating == 1{
-                    HStack{
-                        Text("we have")
-                        TextView(string: $diff).frame(width: 125, height: 30.0)
-                    }.modifier(PulsatingButtonCoverStyle(isPulsating: true, explanationView: AnyView(Conv_DiffExplan())))
-                } else {
-                    HStack{
-                        Text("we have")
-                        TextView(string: $diff).frame(width: 125, height: 30.0)
-                    }.padding()
+                //Lets break this down button
+                if !showExplanation{
+                    Button(action: { withAnimation{self.showExplanation = true }}) {
+                        HStack{
+                            Text("Let's break this down!").foregroundColor(Color.black).bold().padding()
+                        }.modifier(LightGreenButtonStyleFullFrame())}
+                //Actual explanation
+                } else{
+                    VStack{
+                        //Step 1
+                        HStack{
+                            Text("1. Understanding:").bold().padding(.leading)
+                            TextView(string: $diff).frame(width: 125, height: 30.0)
+                                .padding([.top, .bottom, .trailing])
+                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(Conv_DiffExplan())))
+                        
+                        //Step 2
+                        HStack{
+                            Text("2. Understanding:").bold().padding(.leading)
+                            TextView(string: $smallN).frame(width: 75, height: 20.0)
+                                .padding([.top, .bottom, .trailing])
+                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ForAllNView())))
+
+                        //Step 3
+                        HStack{
+                            Text("3. Understanding:").bold().padding(.leading)
+                            TextView(string: $bigN).frame(width: 75, height: 20.0)
+                                .padding([.top, .bottom, .trailing])
+                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ThereExistNView())))
+
+                        //Step 4
+                        HStack{
+                            Text("4. Understanding:").bold().padding(.leading)
+                            TextView(string: $epsilon).frame(width: 75, height: 20.0)
+                                .padding([.top, .bottom, .trailing])
+                        }.modifier(NotPulsatingButtonCoverStyleFullFrame(explanationView: AnyView(ForAllEpsilonView())))
+                        
+                        Button("Back") {withAnimation {showExplanation = false; showNext = true}}
+                    }
                 }
                 
                 Spacer()
-            }.modifier(BlackDetailedAcademicTextStyle())
-            
-            if isPulsating<5 {
-                Button(action: {isPulsating = isPulsating + 1}, label: {
-                    Text("Ok?!").modifier(GreenButtonWhiteTextStyle())})
-            } else {
-                NavigationLink(destination: ConvergenceDefinitionQuestion1View().navigationBarTitle("Practise Convergence #1").navigationBarHidden(false),label: {
-                    Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                
+                if showNext{
+                    Spacer()
+                    NavigationLink(destination: ConvergenceDefinitionQuestion1View().navigationBarTitle("Convergence practice").navigationBarHidden(false),label: {
+                        Text("Next!").modifier(GreenButtonWhiteTextStyle())})
+                }
+                
             }
             
-        }.offset(y: -90).padding(10)
+        }.modifier(BlackDetailedAcademicTextStyle())
     }
 }
 
@@ -406,7 +398,6 @@ struct ConvergenceDefinitionQuestion1View: View{
     var body: some View{
         VStack{
             VStack{
-                VStack{
                     Spacer()
                     
                     VStack{
@@ -425,11 +416,9 @@ struct ConvergenceDefinitionQuestion1View: View{
                     Spacer()
         
                     StringAnswerCheckerView(question: "", correctAnswer: "4", destinationView: AnyView(ConvergenceDefinitionQuestion2View()), destinationViewTitle: "Practise Convergence #2", explanationView: AnyView(ConvergenceDefExpl()))
-                }
                 
-            }.modifier(BlackDetailedAcademicTextStyle())
-            
-        }.padding(10)
+            }
+        }.modifier(BlackDetailedAcademicTextStyle())
     }
 }
 
@@ -443,7 +432,6 @@ struct ConvergenceDefinitionQuestion2View: View{
     var body: some View{
         VStack{
             VStack{
-                VStack{
                     Spacer()
                     
                     VStack{
@@ -462,11 +450,10 @@ struct ConvergenceDefinitionQuestion2View: View{
         
                     Spacer()
                     StringAnswerCheckerView(question: "", correctAnswer: "3", destinationView: AnyView(Lesson1Complete(lessonManager: LessonManager())), destinationViewTitle: "", explanationView: AnyView(ConvergenceDefExpl2()))
-                }
                 
-            }.modifier(BlackDetailedAcademicTextStyle())
+            }
             
-        }.padding(10)
+        }.modifier(BlackDetailedAcademicTextStyle())
     }
 }
 
@@ -479,7 +466,7 @@ struct Lesson1Complete: View {
         
         VStack{
             Spacer()
-            Text("Congratulations! You have completed the introduction to sequences and convergence!").modifier(BlackTitleTextStyle())
+            Text("Congratulations! You have completed the Sequences and convergence!").modifier(BlackTitleTextStyle())
             Spacer()
             
             NavigationLink(destination: LessonSelectView(lessonManager: LessonManager(), isCompleted: true, completedLessonId: 1, unlockedLessonId: 2).navigationBarTitle("").navigationBarHidden(true),label: {
@@ -491,7 +478,7 @@ struct Lesson1Complete: View {
 
 struct Lesson1View_Previews: PreviewProvider {
     static var previews: some View {
-        ConvergenceIntuitionView()
+        ConvergenceDefinitionView()
         
     }
 }

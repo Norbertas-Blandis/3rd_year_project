@@ -13,6 +13,8 @@
 		F4744EC429C89E4E00DAC9EC /* Lesson4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC329C89E4E00DAC9EC /* Lesson4View.swift */; };
 		F4744EC629CA4B8400DAC9EC /* ContinuityDefExpl1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC529CA4B8400DAC9EC /* ContinuityDefExpl1.swift */; };
 		F4744EC829CA694600DAC9EC /* InteractiveViews2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC729CA694600DAC9EC /* InteractiveViews2.swift */; };
+		F4744ECA29CDD1A700DAC9EC /* PrerequisitesQuizList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744EC929CDD1A700DAC9EC /* PrerequisitesQuizList.swift */; };
+		F4744ECC29CDD5DD00DAC9EC /* ConvergenceQuizList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4744ECB29CDD5DD00DAC9EC /* ConvergenceQuizList.swift */; };
 		F478C63828E889000090292F /* firstTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63728E889000090292F /* firstTestApp.swift */; };
 		F478C63A28E889000090292F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F478C63928E889000090292F /* LoginView.swift */; };
 		F478C63C28E889010090292F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F478C63B28E889010090292F /* Assets.xcassets */; };
@@ -59,6 +61,8 @@
 		F4744EC329C89E4E00DAC9EC /* Lesson4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson4View.swift; sourceTree = "<group>"; };
 		F4744EC529CA4B8400DAC9EC /* ContinuityDefExpl1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinuityDefExpl1.swift; sourceTree = "<group>"; };
 		F4744EC729CA694600DAC9EC /* InteractiveViews2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveViews2.swift; sourceTree = "<group>"; };
+		F4744EC929CDD1A700DAC9EC /* PrerequisitesQuizList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrerequisitesQuizList.swift; sourceTree = "<group>"; };
+		F4744ECB29CDD5DD00DAC9EC /* ConvergenceQuizList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvergenceQuizList.swift; sourceTree = "<group>"; };
 		F478C63428E889000090292F /* firstTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firstTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F478C63728E889000090292F /* firstTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstTestApp.swift; sourceTree = "<group>"; };
 		F478C63928E889000090292F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 				F49EFBE6290B352A00B32086 /* Quiz0View.swift */,
 				F49810EA29168DF100680568 /* Quiz2View.swift */,
 				F49810EC29168E1300680568 /* Quiz3View.swift */,
+				F4744EC929CDD1A700DAC9EC /* PrerequisitesQuizList.swift */,
+				F4744ECB29CDD5DD00DAC9EC /* ConvergenceQuizList.swift */,
 			);
 			path = Quizes;
 			sourceTree = "<group>";
@@ -329,7 +335,9 @@
 			files = (
 				F49810EB29168DF100680568 /* Quiz2View.swift in Sources */,
 				F4A24DDE29ABE8F700CBDF56 /* Conv:DiffExplan.swift in Sources */,
+				F4744ECA29CDD1A700DAC9EC /* PrerequisitesQuizList.swift in Sources */,
 				F4A24DD0299D230C00CBDF56 /* SequenceIntroExp.swift in Sources */,
+				F4744ECC29CDD5DD00DAC9EC /* ConvergenceQuizList.swift in Sources */,
 				F49EFBE7290B352A00B32086 /* Quiz0View.swift in Sources */,
 				F4744EC229C7957700DAC9EC /* UniqueLimitEasyProofExpl1.swift in Sources */,
 				F4744EC029C75DAB00DAC9EC /* Lesson3View.swift in Sources */,

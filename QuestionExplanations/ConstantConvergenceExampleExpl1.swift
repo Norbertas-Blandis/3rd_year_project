@@ -79,8 +79,8 @@ struct ConstantConvergenceExampleExpl2: View {
     
     @State private var option1: String = "[math]ε>0[/math]"
     @State private var option2: String = "[math]ε<0[/math]"
-    @State private var option3: String = "[math]n>1/ε[/math]"
-    @State private var option4: String = "[math]n<1/ε[/math]"
+    @State private var option3: String = "[math]n∈ℕ[/math]"
+    @State private var option4: String = "[math]n∈ℝ[/math]"
     
     @State private var showNumerical: Bool = false
     @State private var showNextQuestion = false
@@ -91,31 +91,39 @@ struct ConstantConvergenceExampleExpl2: View {
             
             Spacer()
             
-            HStack{
-                Text("We know that the sequence").multilineTextAlignment(.center)
-                TextView(string: $question1).frame(width: 100.0, height: 30.0)
+            VStack{
+                HStack{
+                    Text("We know that the sequence").multilineTextAlignment(.center)
+                    TextView(string: $question1).frame(width: 100.0, height: 30.0)
+                }
+                Text("is approaching 0.5, so we need to solve")
+                HStack{
+                    TextView(string: $ineqfull).frame(width: 150.0, height: 30.0)
+                    Text("for n")
+                }
+                
+                Text("Which one is the correct derivation?").padding(.top)
+                MultipleQuestionView(
+                    optionA: TextView(string: $option1).frame(width: 90, height: 25.0),
+                    optionB: TextView(string: $option2).frame(width: 90, height: 25.0),
+                    optionC: TextView(string: $option3).frame(width: 90, height: 25.0),
+                    optionD: TextView(string: $option4).frame(width: 90, height: 25.0),
+                    correctAnswerIndex:2, alignment: "h", showNextQuestion: $showNextQuestion).padding(.leading)
             }
-            Text("is approaching 0.5, so we need to solve")
-            HStack{
-                TextView(string: $ineqfull).frame(width: 150.0, height: 30.0)
-                Text("for n")
-            }
-            
-            Text("Which one is the correct derivation?").padding(.top)
-            MultipleQuestionView(
-                optionA: TextView(string: $option1).frame(width: 70, height: 20.0),
-                optionB: TextView(string: $option2).frame(width: 90, height: 25.0),
-                optionC: TextView(string: $option3).frame(width: 70, height: 20.0),
-                optionD: TextView(string: $option4).frame(width: 90, height: 25.0),
-                correctAnswerIndex: 0, alignment: "h", showNextQuestion: $showNextQuestion)
             
             //Numerical explanation
             if showNumerical{
                 VStack{
                     TextView(string: $answer1).frame(width: 150.0, height: 30.0)
                     TextView(string: $answer2).frame(width: 100.0, height: 30.0)
+                    HStack{
+                        Text("Which is a true statement as")
+                        TextView(string: $answer2).frame(width: 100.0, height: 25.0)}
+                    Text("by assumption, so we may choose any natural n").padding(.bottom)
                 }.padding(.top, 10.0).frame(maxWidth: .infinity).modifier(LightGreenContainerStyle())
             }
+            
+            Spacer()
             
             //Help button
             Button(action: {showNumerical=true}, label: {
@@ -187,7 +195,7 @@ struct ConstantConvergenceExampleExpl3: View {
                         Spacer()
                         Text("ε = \(String(format: "%.2f", epsilon))")
                         Spacer()
-                        Stepper("", value: $epsilon, in: 0.01...Double.infinity, step: 0.05).labelsHidden()
+                        Stepper("", value: $epsilon, in: 0.01...Double.infinity, step: 0.05).labelsHidden().padding(5)
                         Spacer()
                     }.background(Color.gray.opacity(0.2)).cornerRadius(8).padding(10)
                     
@@ -261,8 +269,7 @@ struct ConstantConvergenceExampleExpl4: View {
                     Spacer()
                     Text("ε = \(String(format: "%.2f", epsilon))")
                     Spacer()
-                    Stepper("", value: $epsilon, in: 0.01...Double.infinity, step: 0.05).labelsHidden()
-                    Spacer()
+                    Stepper("", value: $epsilon, in: 0.01...Double.infinity, step: 0.05).labelsHidden().padding(5)
                     Spacer()
                 }.background(Color.gray.opacity(0.2)).cornerRadius(8).padding(10)
                 
@@ -270,7 +277,7 @@ struct ConstantConvergenceExampleExpl4: View {
                                 let maxWidth = UIScreen.main.bounds.width
                                 let x = Double(0.5) * (maxWidth*0.8)
                                 let y = 35.0
-                    return CGPoint(x: x, y: y)}
+                    return CGPoint(x: x, y: y)}.padding(.leading)
             }.modifier(LightGreenContainerStyle())
             
             Spacer()

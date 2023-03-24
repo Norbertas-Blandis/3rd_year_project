@@ -95,23 +95,25 @@ struct ConvergenceCalcExampleExpl2: View {
             
             Spacer()
             
-            HStack{
-                Text("We know that the sequence").multilineTextAlignment(.center)
-                TextView(string: $question1).frame(width: 100.0, height: 30.0)
-            }
-            Text("is approaching 0, so we need to solve")
-            HStack{
-                TextView(string: $ineqfull).frame(width: 150.0, height: 30.0)
-                Text("for n")
-            }
-            
-            Text("Which one is the correct derivation?").padding(.top)
-            MultipleQuestionView(
-                optionA: TextView(string: $option1).frame(width: 70, height: 20.0),
-                optionB: TextView(string: $option2).frame(width: 90, height: 25.0),
-                optionC: TextView(string: $option3).frame(width: 70, height: 20.0),
-                optionD: TextView(string: $option4).frame(width: 90, height: 25.0),
-                correctAnswerIndex: 3, alignment: "h", showNextQuestion: $showNextQuestion)
+            VStack{
+                HStack{
+                    Text("We know that the sequence").multilineTextAlignment(.center)
+                    TextView(string: $question1).frame(width: 100.0, height: 30.0)
+                }
+                Text("is approaching 0, so we need to solve")
+                HStack{
+                    TextView(string: $ineqfull).frame(width: 150.0, height: 30.0)
+                    Text("for n")
+                }
+                
+                Text("Which one is the correct derivation?").padding(.top)
+                MultipleQuestionView(
+                    optionA: TextView(string: $option1).frame(width: 70, height: 20.0),
+                    optionB: TextView(string: $option2).frame(width: 90, height: 25.0),
+                    optionC: TextView(string: $option3).frame(width: 70, height: 20.0),
+                    optionD: TextView(string: $option4).frame(width: 90, height: 25.0),
+                    correctAnswerIndex: 3, alignment: "h", showNextQuestion: $showNextQuestion).padding()
+            }.padding()
             
             //Numerical explanation
             if showNumerical{
@@ -121,6 +123,8 @@ struct ConvergenceCalcExampleExpl2: View {
                     TextView(string: $answer3).frame(width: 90.0, height: 30.0)
                 }.padding(.top, 10.0).frame(maxWidth: .infinity).modifier(LightGreenContainerStyle())
             }
+            
+            Spacer()
             
             //Help button
             Button(action: {showNumerical=true}, label: {
@@ -194,7 +198,7 @@ struct ConvergenceCalcExampleExpl3: View {
                         Spacer()
                         Text("ε = \(String(format: "%.2f", epsilon))")
                         Spacer()
-                        Stepper("", value: $epsilon, in: 0.01...Double.infinity, step: 0.05).labelsHidden()
+                        Stepper("", value: $epsilon, in: 0.01...Double.infinity, step: 0.05).labelsHidden().padding(5)
                         Spacer()
                     }.background(Color.gray.opacity(0.2)).cornerRadius(8).padding(10)
                     
@@ -255,7 +259,7 @@ struct ConvergenceCalcExampleExpl4: View {
                 Text("so by choosing")
                 TextView(string: $answer3).frame(width: 200.0, height: 30.0)
             }
-            Text("Which actualy proves:")
+            Text("we actualy prove:")
             TextView(string: $convergencedef).frame(width: 360.0, height: 30.0)
             
             //Numerical explanation
@@ -268,7 +272,7 @@ struct ConvergenceCalcExampleExpl4: View {
                     Spacer()
                     Text("ε = \(String(format: "%.2f", epsilon))")
                     Spacer()
-                    Stepper("", value: $epsilon, in: 0.01...Double.infinity, step: 0.05).labelsHidden()
+                    Stepper("", value: $epsilon, in: 0.01...Double.infinity, step: 0.05).labelsHidden().padding(5)
                     Spacer()
                     Text("N(\(String(format: "%.2f", epsilon))) = \(String(format: "%.0f", 1/epsilon+1))")
                     Spacer()
@@ -278,7 +282,7 @@ struct ConvergenceCalcExampleExpl4: View {
                                 let maxWidth = UIScreen.main.bounds.width
                                 let x = Double(1/Double(i+1)) * (maxWidth*0.8)
                                 let y = 35.0
-                    return CGPoint(x: x, y: y)}
+                    return CGPoint(x: x, y: y)}.padding(.leading)
             }.modifier(LightGreenContainerStyle())
             
             Spacer()

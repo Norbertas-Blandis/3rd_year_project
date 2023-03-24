@@ -9,85 +9,54 @@ import SwiftUI
 
 struct QuizView: View {
     
-    @State private var goToQuiz1 = false
-    @State private var goToQuiz2 = false
-    @State private var goToQuiz3 = false
-    
     @State private var isQuiz1Unlocked = true
     @State private var isQuiz2Unlocked = false
     @State private var isQuiz3Unlocked = false
+    
+    @State private var goToQuiz0 = false
+    @State private var goToQuiz1 = false
+    @State private var goToQuiz2 = false
+    @State private var goToQuiz3 = false
+    @State private var goToQuiz4 = false
     
     var body: some View {
         
         NavigationView{
             ScrollView{
                 
-                VStack{
-                    
-                    NavigationLink(
-                        destination: Quiz0View(quizManager: QuizManager()),
-                        isActive: $goToQuiz1){
-                            Button(action: isQuiz1Unlocked ? {goToQuiz1.toggle()} : {}) {
-                                HStack{
-                                    Text("1. Prerequisites")
-                                        .foregroundColor(Color.black)
-                                        .font(.system(size: 18, weight: .bold))
-                                        .multilineTextAlignment(.center)
-                                        .padding()
-                                    Spacer()
-                                    Text("10 min").padding()
-                                    Spacer()
-                                    Image(systemName:isQuiz1Unlocked ? "lock.open" : "lock").padding()
-                                }.padding(8)
-                                .border(Color.black, width: 2)
-                                .cornerRadius(10)
-                            }
-                    }
-                    
-                    NavigationLink(
-                        destination: Quiz2View(quizManager: QuizManager()),
-                        isActive: $goToQuiz2){
-                            Button(action: isQuiz2Unlocked ? {goToQuiz2.toggle()} : {}) {
-                                HStack{
-                                    Text("2. Basic sequences")
-                                        .foregroundColor(Color.black)
-                                        .font(.system(size: 18, weight: .bold))
-                                        .multilineTextAlignment(.center)
-                                        .padding()
-                                    Spacer()
-                                    Text("10 min").padding()
-                                    Spacer()
-                                    Image(systemName:isQuiz2Unlocked ? "lock.open" : "lock").padding()
-                                }.padding(8)
-                                .border(Color.black, width: 2)
-                                .cornerRadius(10)
-                            }
-                    }
-                    
-                    NavigationLink(
-                        destination: Quiz3View(quizManager: QuizManager()),
-                        isActive: $goToQuiz3){
-                            Button(action: isQuiz3Unlocked ? {goToQuiz3.toggle()} : {}) {
-                                HStack{
-                                    Text("3. Sequence examples")
-                                        .foregroundColor(Color.black)
-                                        .font(.system(size: 18, weight: .bold))
-                                        .multilineTextAlignment(.center)
-                                        .padding()
-                                    Spacer()
-                                    Text("10 min").padding()
-                                    Spacer()
-                                    Image(systemName:isQuiz3Unlocked ? "lock.open" : "lock").padding()
-                                }.padding(8)
-                                .border(Color.black, width: 2)
-                                .cornerRadius(10)
-                            }
-                    }
-                    
-                }.padding(10)
+            VStack{
                 
+                //Prerequisite excercises
+                let prerequisitesLesson = LessonManager().model.lessonModel[0]
+                NavigationLink(
+                    destination: PrerequisitesQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Prerequisite excersices")),
+                    isActive: $goToQuiz0){
+                        Button(action: prerequisitesLesson.isUnlocked ? { goToQuiz0.toggle() } : {}) {
+                            HStack {
+                                Text(String(prerequisitesLesson.id + 1) + ". " + prerequisitesLesson.title).padding()
+                                Spacer()
+                                Text(Image(systemName: prerequisitesLesson.isUnlocked ? "lock.open" : "lock")).padding(.trailing)
+                            }.modifier(NotPulsatingButtonStyleFullFrame())
+                        }.padding(.all, 5)
+                }
+                
+                //Convergence excercises
+                let convergenceLesson = LessonManager().model.lessonModel[1]
+                NavigationLink(
+                    destination: ConvergenceQuizList().navigationBarBackButtonHidden(false).navigationBarTitle(Text("Convergence excersices")),
+                    isActive: $goToQuiz0){
+                        Button(action: convergenceLesson.isUnlocked ? { goToQuiz0.toggle() } : {}) {
+                            HStack {
+                                Text(String(convergenceLesson.id + 1) + ". " + convergenceLesson.title).padding()
+                                Spacer()
+                                Text(Image(systemName: convergenceLesson.isUnlocked ? "lock.open" : "lock")).padding(.trailing)
+                            }.modifier(NotPulsatingButtonStyleFullFrame())
+                        }.padding(.all, 5)
+                }
+                
+            }.padding(.all, 10)
             }.navigationTitle("Excercises")
-        }
+        }.accentColor(Color(.label))
     }
 }
 

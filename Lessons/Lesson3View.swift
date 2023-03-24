@@ -32,7 +32,6 @@ struct LimitIntroductionView: View {
     
     var body: some View {
         VStack{
-            VStack{
                 
                 //Limit introduction
                 Spacer()
@@ -51,8 +50,7 @@ struct LimitIntroductionView: View {
                 NavigationLink(destination: UniqueLimitTheoremView().navigationBarTitle("Unique limits").navigationBarHidden(false),label: {
                     Text("Next!").modifier(GreenButtonWhiteTextStyle())})
                 Spacer()
-            }.modifier(BlackDetailedAcademicTextStyle())
-        }.padding(10)
+        }.modifier(BlackDetailedAcademicTextStyle())
     }
 }
 
@@ -102,7 +100,7 @@ struct UniqueLimitTheoremView: View{
             NavigationLink(destination: UniqueLimitTheoremProofView().navigationBarTitle("Unique limits  proof").navigationBarHidden(false),label: {
                 Text("Next!").modifier(GreenButtonWhiteTextStyle())})
             Spacer()
-        }.padding(10)
+        }.modifier(BlackDetailedAcademicTextStyle())
     }
 }
 
@@ -268,7 +266,7 @@ struct Lesson3Complete: View {
         
         VStack{
             Spacer()
-            Text("Congratulations! You have completed the theorems on Convergence lesson!").modifier(BlackTitleTextStyle())
+            Text("Congratulations! You have completed the Theorems on Convergence lesson!").modifier(BlackTitleTextStyle())
             Spacer()
             
             NavigationLink(destination: LessonSelectView(lessonManager: LessonManager(), isCompleted: true, completedLessonId: 2, unlockedLessonId: 3).navigationBarTitle("").navigationBarHidden(true),label: {
